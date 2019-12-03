@@ -10,7 +10,7 @@ export class Header extends React.Component {
                 MenuStateChange={this.props.MenuStateChange} 
                 isMenuActive={this.props.isMenuActive} 
                 isRedirected={this.props.isRedirected} 
-                RedirectFromPage={this.props.RedirectFromPage} />
+                redirectFromPage={this.props.redirectFromPage} />
 
             <UserMenu isMenuActive={this.props.isMenuActive} />
         </React.Fragment>

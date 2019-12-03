@@ -7,15 +7,14 @@ export class HeaderBar extends React.Component {
     }
 
     proceduresClick = () => {
-        this.props.RedirectFromPage(true)
+        this.props.redirectFromPage(true)
     }
 
     componentWillUnmount() {
-        this.props.RedirectFromPage(false)
+        this.props.redirectFromPage(false)
     }
 
     render() {
-        console.log(this.props.isRedirected)
         if (this.props.isRedirected) {
             return <Redirect push to="/procedures" />;
             }

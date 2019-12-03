@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import { store } from './store/configureStore'
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { Provider } from 'react-redux'
-import MainPage from './containers/MainPage'
+import App from './containers/App'
+import Procedures from './containers/Procedures'
 import Error404 from './containers/Error404' 
 
 import registerServiceWorker from './registerServiceWorker'
@@ -17,12 +17,12 @@ const routing = (
     <Switch>
         <Route exact path="/">
         <Provider store={store}>
-        <MainPage />
+        <App />
               </Provider>
         </Route>
         <Route exact path="/procedures">
         <Provider store={store}>
-        <MainPage />
+        <Procedures />
               </Provider>
         </Route>
         <Route path="*">

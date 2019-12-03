@@ -4,17 +4,16 @@ import { Header } from '../components/Header';
 import { menuStateChange, redirectFromPage } from '../action/HeaderActions';
 import './App.css'
 
-class MainPage extends Component {
+class App extends Component {
   render() {
     const isMenuActive = this.props.header.isUserMenuActivated,
     isRedirected = this.props.header.isRedirected;
-
     return (
         <Header 
-          MenuStateChange={this.props.MenuStateChange} 
+          MenuStateChange={this.props.menuStateChange} 
           isMenuActive={isMenuActive} 
           isRedirected={isRedirected} 
-          RedirectFromPage={this.props.RedirectFromPage} />
+          redirectFromPage={this.props.redirectFromPage} />
     )
   }
 }
@@ -32,4 +31,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
