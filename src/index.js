@@ -1,36 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { store } from './store/configureStore'
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { store } from './store'
+import { IntlProvider } from 'react-intl';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import locale from './i18n/';
+import AuthHoc from './auth/AuthHoc';
 import { Provider } from 'react-redux'
-import App from './containers/App'
-import Procedures from './containers/Procedures'
-import Error404 from './containers/Error404' 
 
 import registerServiceWorker from './registerServiceWorker'
 
 import './index.css'
 
+const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+        fontFamily: ['Open Sans', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+    },
+    spacing: {
+        unit: 16,
+    },
+});
+
 const routing = (
-  <Router>
-    <div>
-    <Switch>
-        <Route exact path="/">
-        <Provider store={store}>
-        <App />
-              </Provider>
-        </Route>
-        <Route exact path="/procedures">
-        <Provider store={store}>
-        <Procedures />
-              </Provider>
-        </Route>
-        <Route path="*">
-          <Error404 />
-        </Route>
-      </Switch>
-    </div>
-  </Router>
+  <MuiThemeProvider theme={theme}>
+  <Provider store={store} key="provider">
+      <IntlProvider
+          locale={'ru'}
+          messages={locale.localeWording}
+      >
+          <AuthHoc />
+      </IntlProvider>
+  </Provider>
+</MuiThemeProvider>
 );
 
 ReactDOM.render(routing, document.getElementById('root'))

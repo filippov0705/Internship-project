@@ -1,31 +1,22 @@
 import React from 'react'
-import { Redirect } from "react-router-dom"
+import { Link } from 'react-router-dom'
+import { mainPath, ProceduresPath } from '../utils/BuildPaths';
+import { FormattedMessage } from 'react-intl';
 
 export class HeaderBar extends React.Component {
     btnClick = () => {
-        this.props.MenuStateChange(!this.props.isMenuActive)
+        this.props.menuStateChange(!this.props.isUserMenuActive)
     }
 
-    proceduresClick = () => {
-        this.props.redirectFromPage(true)
-    }
-
-    componentWillUnmount() {
-        this.props.redirectFromPage(false)
-    }
-
-    render() {
-        if (this.props.isRedirected) {
-            return <Redirect push to="/procedures" />;
-            }
-
+    render() {          
         return (
             <header className='header'>
-            <div>
+            <div className='header__leftbar'>
                 <div className='header__logo'></div>
                 <input className='header__search'></input>
-                <span>Главная</span>
-                <span onClick={this.proceduresClick}>Процедуры</span>
+                <Link to={mainPath()}><span><FormattedMessage id="navigation.mainPage" /></span></Link>
+                <Link to={ProceduresPath()}><span><FormattedMessage id="navigation.procedures" /></span></Link>
+
             </div>
             <div>
                 <button className='header__menuBtn' onClick={this.btnClick}>Btn</button>

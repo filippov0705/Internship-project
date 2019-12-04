@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom"
 import { connect } from 'react-redux';
 import { Header } from '../components/Header';
-import { menuStateChange, redirectFromPage } from '../action/HeaderActions';
+import { Main } from '../components/Main';
 import './App.css'
 
 class App extends Component {
+
   render() {
-    const isMenuActive = this.props.header.isUserMenuActivated,
-    isRedirected = this.props.header.isRedirected;
+
+
     return (
-        <Header 
-          MenuStateChange={this.props.menuStateChange} 
-          isMenuActive={isMenuActive} 
-          isRedirected={isRedirected} 
-          redirectFromPage={this.props.redirectFromPage} />
+      <React.Fragment>
+
+          <Main />
+
+          </React.Fragment>
     )
   }
 }
 
 const mapStateToProps = store => {
   return {
-    header: store.header,
+    app: store.app,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    menuStateChange: state => dispatch(menuStateChange(state)),
-    redirectFromPage: state => dispatch(redirectFromPage(state))
+
   }
 }
 

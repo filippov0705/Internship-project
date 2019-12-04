@@ -1,19 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { UserMenu } from './UserMenu';
 import { HeaderBar } from './HeaderBar';
+import { menuStateChange, redirectFromPage } from '../action/HeaderActions';
 
-export class Header extends React.Component {
+class Header extends Component {
   render() {
       return (
         <React.Fragment>
             <HeaderBar 
-                MenuStateChange={this.props.MenuStateChange} 
-                isMenuActive={this.props.isMenuActive} 
-                isRedirected={this.props.isRedirected} 
-                redirectFromPage={this.props.redirectFromPage} />
+                menuStateChange={this.props.menuStateChange} 
+                isUserMenuActive={this.props.header.isUserMenuActive} 
+                navBarActive={this.props.navBarActive} />
 
-            <UserMenu isMenuActive={this.props.isMenuActive} />
+            <UserMenu isUserMenuActive={this.props.header.isUserMenuActive} />
         </React.Fragment>
       )
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    header: store.header,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    menuStateChange: state => dispatch(menuStateChange(state))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
