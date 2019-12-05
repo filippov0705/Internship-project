@@ -1,5 +1,8 @@
 #root {
     width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     flex-grow: 2;
 }
 
@@ -78,7 +81,6 @@
 
   .main {
     width: 100%;
-    min-height: 82vh;
     flex-grow: 3;
   }
 
@@ -86,7 +88,6 @@
 
   .footer {
       width: 100%;
-      height: 179px;
-      flex-grow: 1;
+      height: 150px;
       background-color: #24292e;
   }

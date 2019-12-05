@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { UserMenu } from './UserMenu';
 import { HeaderBar } from './HeaderBar';
-import { menuStateChange, redirectFromPage } from '../action/HeaderActions';
+import { menuStateChange } from '../action/HeaderActions';
 
 class Header extends Component {
   render() {
@@ -12,10 +12,9 @@ class Header extends Component {
                 menuStateChange={this.props.menuStateChange} 
                 isUserMenuActive={this.props.header.isUserMenuActive} 
                 navBarActive={this.props.navBarActive} />
-
             <UserMenu isUserMenuActive={this.props.header.isUserMenuActive} />
         </React.Fragment>
-      )
+      );
   }
 }
 

@@ -7,16 +7,9 @@ import './App.css'
 class Procedures extends Component {
 
     render() {
-        const isMenuActive = this.props.procedures.isUserMenuActivated,
-        isRedirected = this.props.procedures.isRedirected,
-        navBarActive = this.props.procedures.navBarActive;
-
-        if (isRedirected) {
-            this.props.redirectFromPage(false);
-            return <Redirect push to="/" />;
-            }
-
-        return <p>aas</p>
+        const {isMenuActive, isRedirected, navBarActive} = this.props.procedures;
+        //TODO: add content of the procedures page
+        return null
     }
 }
 
