@@ -25,7 +25,7 @@ const routing = (
   <MuiThemeProvider theme={theme}>
   <Provider store={store} key="provider">
       <IntlProvider
-          locale={'ru'}
+          locale={locale.currentLocale}
           messages={locale.localeWording}
       >
           <AuthHoc />

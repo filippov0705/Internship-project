@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 
-const Application = props => (
+const PageTemplate = props => (
     <React.Fragment>
         <Header />
         {props.children}
@@ -10,4 +10,4 @@ const Application = props => (
     </React.Fragment>
 );
 
-export default Application;
+export default PageTemplate;

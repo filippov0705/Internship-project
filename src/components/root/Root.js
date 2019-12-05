@@ -2,11 +2,11 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import App from '../../containers/App';
 import Procedures from '../../containers/Procedures';
-import Application from './Application';
+import PageTemplate from './PageTemplate';
 import { mainPath, ProceduresPath } from '../../utils/BuildPaths';
 
 const Root = props => (
-    <Application>
+    <PageTemplate>
         <Switch>
             <Route
                 path={ProceduresPath()}
@@ -21,7 +21,7 @@ const Root = props => (
             />
             <Route name={'App'} component={App} />
         </Switch>
-    </Application>
+    </PageTemplate>
 );
 
 export default withRouter(Root);
