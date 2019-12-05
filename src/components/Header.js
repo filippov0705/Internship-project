@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { UserMenu } from './UserMenu';
 import { HeaderBar } from './HeaderBar';
 import { menuStateChange } from '../action/HeaderActions';
+import { SearchAppBar } from './SearchAppBar'
 
 class Header extends Component {
   render() {
       return (
         <React.Fragment>
+          <SearchAppBar />
             <HeaderBar 
                 menuStateChange={this.props.menuStateChange} 
                 isUserMenuActive={this.props.header.isUserMenuActive} 
