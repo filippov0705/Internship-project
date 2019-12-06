@@ -11,7 +11,7 @@ class SimpleMenu extends Component {
 constructor() {
     super();
     this.state = {
-        anchorEl: false
+        anchorEl: null
     };
 }
 handleClick = event => {
@@ -22,7 +22,7 @@ handleClick = event => {
 
 handleClose = () => {
     this.setState({
-        anchorEl: false
+        anchorEl: null
     });
 };
 
@@ -32,7 +32,7 @@ render() {
   return (
     <div>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
-        Open Menu
+        Menu
       </Button>
       <Menu
         id="simple-menu"
@@ -41,8 +41,8 @@ render() {
         open={Boolean(anchorEl)}
         onClose={this.handleClose}
       >
-        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleClose}>My account</MenuItem>
+        <MenuItem onClick={this.handleClose}>Your profile</MenuItem>
+        <MenuItem onClick={this.handleClose}>Help</MenuItem>
         <MenuItem onClick={this.handleClose}>Logout</MenuItem>
       </Menu>
     </div>

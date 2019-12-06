@@ -79,8 +79,8 @@ class SearchAppBar extends Component {
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
+        <SimpleMenu />
         <Typography className={classes.root}>
-          <SimpleMenu />
           </Typography>
           <Typography className={classes.title} variant="h6" noWrap>
             Some Logo
