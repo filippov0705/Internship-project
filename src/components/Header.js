@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { menuStateChange } from '../action/HeaderActions';
-// import SearchAppBar from './SearchAppBar'
 import PrimarySearchAppBar from './PrimarySearchAppBar'
 
 class Header extends Component {

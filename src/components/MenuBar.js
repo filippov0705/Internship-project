@@ -3,11 +3,17 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from '@material-ui/core/Avatar';
+import { deepPurple } from '@material-ui/core/colors';
+import { FormattedMessage } from 'react-intl';
 
 const styles = theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  purple: {
+    color: '#fff',
+    backgroundColor: deepPurple[500],
   },
 });
 
@@ -46,7 +52,7 @@ render() {
             aria-haspopup="true"
             onClick={this.handleClick}
           >
-            <MenuIcon />
+           <Avatar className={classes.purple}>OP</Avatar>
           </IconButton>
       <Menu
         id="simple-menu"
@@ -55,9 +61,9 @@ render() {
         open={Boolean(anchorEl)}
         onClose={this.handleClose}
       >
-        <MenuItem onClick={this.handleClose}>Your profile</MenuItem>
-        <MenuItem onClick={this.handleClose}>Help</MenuItem>
-        <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+        <MenuItem onClick={this.handleClose}><FormattedMessage id="userMenu.yourProfile" /></MenuItem>
+        <MenuItem onClick={this.handleClose}><FormattedMessage id="userMenu.help" /></MenuItem>
+        <MenuItem onClick={this.handleClose}><FormattedMessage id="userMenu.signOut" /></MenuItem>
       </Menu>
     </div>
   );

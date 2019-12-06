@@ -24,7 +24,7 @@ export default class Footer extends React.Component {
                   }} >
                     <Grid container>
                       <Grid item xs={3}  style={{backgroundColor: 'green'}}>
-                        
+                     
                       </Grid>
                       <Grid item xs={3}  style={{backgroundColor: 'green'}}>asdasd</Grid>
                       <Grid item xs={3}  style={{backgroundColor: 'green'}}>asdasd</Grid>
