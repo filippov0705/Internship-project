@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from "react-router-dom"
 import { menuStateChange, redirectFromPage } from '../action/HeaderActions';
 import './App.css'
 
 class Procedures extends Component {
 
     render() {
-        const {isMenuActive, isRedirected, navBarActive} = this.props.procedures;
         //TODO: add content of the procedures page
         return null
     }

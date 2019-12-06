@@ -8,10 +8,17 @@ import { fade } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { Link } from 'react-router-dom';
+import { mainPath, ProceduresPath } from '../utils/BuildPaths';
+import { FormattedMessage } from 'react-intl';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -63,6 +70,7 @@ const styles = theme => ({
 });
 
 class SearchAppBar extends Component {
+  preventDefault = event => event.preventDefault()
 
  render() {
   const { classes } = this.props;
@@ -79,7 +87,19 @@ class SearchAppBar extends Component {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Some Logo
+          </Typography>
+          <Typography className={classes.root}>
+            <Link to={mainPath()} >
+            <Button variant="contained">
+              <FormattedMessage id="navigation.mainPage" />
+            </Button>
+            </Link>
+            <Link to={ProceduresPath()}>
+            <Button variant="contained">
+              <FormattedMessage id="navigation.procedures" />
+            </Button>
+            </Link>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

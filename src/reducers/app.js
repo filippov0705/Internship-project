@@ -1,5 +1,3 @@
-import { MENU_SATE_CHANGE, REDIRECT_FROM_PAGE } from '../action/HeaderActions'
-
 const initialState = () => {
     return {
 //TODO: add states of App page
