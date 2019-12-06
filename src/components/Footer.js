@@ -9,10 +9,28 @@ export default class Footer extends React.Component {
         return (
             <React.Fragment>
             <CssBaseline />
-            <Container maxWidth="xl" style={{ backgroundColor: '#24292e', height: '130px' }}>
-              <Typography component="div">
-                <Grid></Grid>
-              </Typography>
+            <Container 
+              maxWidth="xl" 
+              style={{ 
+                backgroundColor: '#24292e', 
+                height: '130px' }}>
+                <Typography 
+                  component="div" 
+                  style={{width: '100%', 
+                  maxWidth: '1200px', 
+                  height: '130px',
+                  display: 'flex',
+                  alignItems: 'center'
+                  }} >
+                    <Grid container>
+                      <Grid item xs={3}  style={{backgroundColor: 'green'}}>
+                        
+                      </Grid>
+                      <Grid item xs={3}  style={{backgroundColor: 'green'}}>asdasd</Grid>
+                      <Grid item xs={3}  style={{backgroundColor: 'green'}}>asdasd</Grid>
+                      <Grid item xs={3}  style={{backgroundColor: 'green'}}>asdasd</Grid>
+                    </Grid>
+                </Typography>
             </Container>
           </React.Fragment>
         );

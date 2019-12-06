@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
-
+const styles = theme => ({
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+});
 
 class SimpleMenu extends Component {
 
@@ -28,12 +33,21 @@ handleClose = () => {
 
 render() {
    const { anchorEl } = this.state;
-
+   const { classes } = this.props;
+   
   return (
     <div>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
-        Menu
-      </Button>
+      <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={this.handleClick}
+          >
+            <MenuIcon />
+          </IconButton>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -50,4 +64,4 @@ render() {
 }
 }
 
-export default SimpleMenu;
+export default withStyles(styles)(SimpleMenu);
