@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { mainPath, ProceduresPath } from '../utils/BuildPaths';
 import { FormattedMessage } from 'react-intl';
 import Button from '@material-ui/core/Button';
+import MenuPopupState from './MenuBar';
 
 const styles = theme => ({
   root: {
@@ -76,16 +77,11 @@ class SearchAppBar extends Component {
   const { classes } = this.props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+        <Typography className={classes.root}>
+          <MenuPopupState />
+          </Typography>
           <Typography className={classes.title} variant="h6" noWrap>
             Some Logo
           </Typography>
