@@ -83,7 +83,7 @@ class SearchAppBar extends Component {
         <Typography className={classes.root}>
           </Typography>
           <Typography className={classes.title} variant="h6" noWrap>
-            Some Logo
+            Logo
           </Typography>
           <Typography className={classes.root}>
             <Link to={mainPath()} >
