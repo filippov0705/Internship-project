@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ProceduresAndTasksBar from '../components/ProceduresAndTasksBar'
 import './App.css'
 
 const styles = theme => ({
@@ -73,9 +74,7 @@ class Procedures extends Component {
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid container style={{}}>
-
-                </Grid>
+                <ProceduresAndTasksBar />
               </Typography>
             </Container>
           </React.Fragment>
