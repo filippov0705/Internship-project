@@ -1,10 +1,8 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
-import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
-import EditRoundedIcon from '@material-ui/icons/EditRounded';
-import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import PlayCircleFilledWhiteRoundedIcon from '@material-ui/icons/PlayCircleFilledWhiteRounded';
 import withStyles from '@material-ui/core/styles/withStyles';
+import TransitionsModal from './PopUpWindow'
 
 const styles = theme => ({
     grid: {
@@ -30,13 +28,13 @@ const ProcedureTask = props => {
                 <span className={classes.gridSpan}>Procedure 1</span>
             </Grid>
             <Grid 
-                item 
-                xs={3} 
-                className={classes.grid} 
-                style={{justifyContent: 'space-around'}}>
-                <ScheduleRoundedIcon />
-                <EditRoundedIcon />
-                <MoreHorizRoundedIcon />
+             item 
+             xs={3} 
+             className={classes.grid} 
+             style={{justifyContent: 'space-around'}}>
+                <TransitionsModal data={'Schedule'} />
+                <TransitionsModal data={'Edit'} />
+                <TransitionsModal data={'More'} />
                 <PlayCircleFilledWhiteRoundedIcon />
             </Grid>
         </Grid>

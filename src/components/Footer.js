@@ -25,15 +25,15 @@ const Footer = props => {
               maxWidth="xl" 
               style={{ 
                 backgroundColor: '#24292e', 
-                height: '130px' }}>
+                minHeight: '130px' }}>
                 <Typography 
                   component="div" 
-                  style={{width: '100%', 
-                  maxWidth: '1200px', 
-                  height: '130px',
-                  display: 'flex',
-                  alignItems: 'center'
-                  }} >
+                  style={{
+                    width: '100%', 
+                    maxWidth: '1200px', 
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'}} >
                     <Grid container>
                       <Grid item xs={4}   className={classes.columnGrid}>
                         <img src={FooterLogo} alt="logo" style={{width: '150px'}} />
