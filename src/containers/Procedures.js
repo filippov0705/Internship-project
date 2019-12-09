@@ -47,7 +47,6 @@ class Procedures extends Component {
               <Typography 
                 component="div" 
                 style={{ 
-                  marginTop: '64px',
                   backgroundColor: '#cfe8fc', 
                   height: '78vh', 
                   width: '100%',
@@ -73,6 +72,9 @@ class Procedures extends Component {
                           ADD
                         </Button>
                     </Grid>
+                </Grid>
+                <Grid container style={{}}>
+
                 </Grid>
               </Typography>
             </Container>
