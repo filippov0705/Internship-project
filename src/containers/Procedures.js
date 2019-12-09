@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { menuStateChange, redirectFromPage } from '../action/HeaderActions';
+import {  } from '../action/HeaderActions';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -22,6 +22,13 @@ const styles = theme => ({
     height: '80px',
     backgroundColor: '#252a3048',
     borderRadius: '5px',
+    [theme.breakpoints.up('xs')]: {
+      height: '140px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      height: '80px'
+    },
 },
 container: {
   display: 'flex',
@@ -30,17 +37,20 @@ container: {
 textField: {
   marginLeft: theme.spacing(1),
   marginRight: theme.spacing(1),
-  width: 200,
   backgroundColor: 'white',
   borderRadius: '5px',
 },
+button: {
+  marginRight: '15px',
+  marginLeft: '15px'
+}
 });
 
 
 class Procedures extends Component {
 
   componentDidMount() {
-
+    //TODO: Add logic
   }
 
     render() {
@@ -55,8 +65,7 @@ class Procedures extends Component {
               <Typography 
                 component="div" 
                 style={{ 
-                  backgroundColor: '#cfe8fc', 
-                  height: '78vh', 
+                  backgroundColor: '#cfe8fc',
                   width: '100%',
                   borderTopRightRadius: '5px',
                   borderTopLeftRadius: '5px',
@@ -66,7 +75,7 @@ class Procedures extends Component {
                   className={classes.rootDiv}
                   justify="space-between"
                   alignItems="center">
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6} style={{}}>
                           <TextField
                             id="outlined-search"
                             label="Filter"
@@ -76,7 +85,7 @@ class Procedures extends Component {
                             variant="outlined"/>
                         </Grid>
                         <Grid item>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" className={classes.button}>
                           ADD
                         </Button>
                     </Grid>
