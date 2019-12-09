@@ -17,16 +17,8 @@ const styles = theme => ({
 const ProcedureTask = props => {
     const { classes } = props;
 
-    return (
-        <Grid container 
-        style={{
-            width: '100%',
-            height: '40px',
-            borderBottom: '1px solid rgba(94, 92, 92, 0.225)',
-        }}>
-            <Grid item xs={9} className={classes.grid}>
-                <span className={classes.gridSpan}>Procedure 1</span>
-            </Grid>
+    function getProcedureContent() {
+        return (
             <Grid 
              item 
              xs={3} 
@@ -37,6 +29,47 @@ const ProcedureTask = props => {
                 <TransitionsModal data={'More'} />
                 <PlayCircleFilledWhiteRoundedIcon />
             </Grid>
+        )
+    }
+
+    function getTaskContent() {
+        return (
+            <Grid 
+             item 
+             xs={3} 
+             className={classes.grid} 
+             style={{justifyContent: 'space-around'}}>
+                {/* <TransitionsModal data={'Schedule'} />
+                <TransitionsModal data={'Edit'} />
+                <TransitionsModal data={'More'} />
+                <PlayCircleFilledWhiteRoundedIcon /> */}
+                
+            </Grid>
+        )
+    }
+
+    return (
+        <Grid container 
+        style={{
+            width: '100%',
+            height: '40px',
+            borderBottom: '1px solid rgba(94, 92, 92, 0.225)',
+        }}>
+            <Grid item xs={9} className={classes.grid}>
+                <span className={classes.gridSpan}>{props.data} 1</span>
+            </Grid>
+            {(props.data === 'Procedure') ? getProcedureContent() : getTaskContent()}
+
+            {/* <Grid 
+             item 
+             xs={3} 
+             className={classes.grid} 
+             style={{justifyContent: 'space-around'}}>
+                <TransitionsModal data={'Schedule'} />
+                <TransitionsModal data={'Edit'} />
+                <TransitionsModal data={'More'} />
+                <PlayCircleFilledWhiteRoundedIcon />
+            </Grid> */}
         </Grid>
 )
                 }

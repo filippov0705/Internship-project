@@ -6,7 +6,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
-import PlayCircleFilledWhiteRoundedIcon from '@material-ui/icons/PlayCircleFilledWhiteRounded';
+import { FormattedMessage } from 'react-intl';
+import MenuItem from '@material-ui/core/MenuItem';
+import ProceduresAndTasksBar from '../components/ProceduresAndTasksBar';
 
 const styles = theme => ({
   modal: {
@@ -28,11 +30,12 @@ class TransitionsModal extends Component {
     constructor() {
         super();
         this.state = {
-            open: false
+            open: false,
+            popupContent: null
         }
     }
 
-    handleOpen = () => {
+    handleOpen = event => {
         this.setState({
             open: true
         });
@@ -44,20 +47,46 @@ class TransitionsModal extends Component {
         });
     }
 
+    menuItemClick = () => {
+      this.handleOpen();
+      this.props.action();
+    }
+
+    scheduleClick = () => {
+      this.handleOpen();
+      //TODO: add logic for popup content creation
+    }
+
+    editClick = () => {
+      this.handleOpen();
+      //TODO: add logic for popup content creation
+    }
+
+    moreClick = () => {
+      this.handleOpen();
+      this.setState({
+        popupContent: <ProceduresAndTasksBar data={'More'} />
+      })
+    }
+
     getIcon = () => {
         switch (this.props.data) {
             case 'Schedule': 
-                return <ScheduleRoundedIcon onClick={this.handleOpen} />
+                return <ScheduleRoundedIcon onClick={this.scheduleClick} />
 
             case 'Edit':
-                return <EditRoundedIcon onClick={this.handleOpen} />
+                return <EditRoundedIcon onClick={this.editClick} />
 
             case 'More':
-                return <MoreHorizRoundedIcon onClick={this.handleOpen} />
-
-            case 'Play': 
-                return <PlayCircleFilledWhiteRoundedIcon onClick={this.handleOpen} />
-            default: 
+                return <MoreHorizRoundedIcon onClick={this.moreClick} />
+            
+            case 'YourProfile':
+              return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.yourProfile" /></MenuItem>
+                
+            case 'Help':
+              return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.help" /></MenuItem>
+              
+              default: 
                 return null
         }
     }
@@ -82,9 +111,10 @@ const { classes, data } = this.props,
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+          <div 
+           className={classes.paper}
+           style={{width: '500px'}}>
+            {this.state.popupContent}
           </div>
         </Fade>
       </Modal>

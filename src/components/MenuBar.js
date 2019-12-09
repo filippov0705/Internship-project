@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import { deepPurple } from '@material-ui/core/colors';
 import { FormattedMessage } from 'react-intl';
+import TransitionsModal from './PopUpWindow'
 
 const styles = theme => ({
   menuButton: {
@@ -44,27 +45,25 @@ render() {
   return (
     <div>
       <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={this.handleClick}
-          >
-           <Avatar className={classes.purple}>OP</Avatar>
-          </IconButton>
-      <Menu
+       edge="start"
+       className={classes.menuButton}
+       color="inherit"
+       aria-label="open drawer"
+       aria-controls="simple-menu"
+       aria-haspopup="true"
+       onClick={this.handleClick}>
+        <Avatar className={classes.purple}>OP</Avatar>
+      </IconButton>
+        <Menu
         id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={this.handleClose}
-      >
-        <MenuItem onClick={this.handleClose}><FormattedMessage id="userMenu.yourProfile" /></MenuItem>
-        <MenuItem onClick={this.handleClose}><FormattedMessage id="userMenu.help" /></MenuItem>
-        <MenuItem onClick={this.handleClose}><FormattedMessage id="userMenu.signOut" /></MenuItem>
-      </Menu>
+        onClose={this.handleClose}>
+          <TransitionsModal data={'YourProfile'} action={this.handleClose}/>
+          <TransitionsModal data={'Help'} action={this.handleClose}/>
+          <MenuItem onClick={this.handleClose}><FormattedMessage id="userMenu.signOut" /></MenuItem>
+        </Menu>
     </div>
   );
 }

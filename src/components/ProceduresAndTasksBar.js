@@ -11,7 +11,7 @@ const ProceduresAndTasksBar = props => (
     margin: '20px',
     border: '1px solid gray',
     borderRadius: '7px'}}>
-        <ProcedureTask />
+        <ProcedureTask data={props.data} />
 </Grid>
 )
 

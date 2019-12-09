@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Main } from '../components/Main';
-import './App.css'
+import './App.css';
 
 class App extends Component {
 

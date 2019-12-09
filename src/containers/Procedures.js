@@ -8,8 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ProceduresAndTasksBar from '../components/ProceduresAndTasksBar'
-import './App.css'
+import ProceduresAndTasksBar from '../components/ProceduresAndTasksBar';
+import './App.css';
+import fakeData from './fakeData.json';
 
 const styles = theme => ({
   root: {
@@ -40,6 +41,8 @@ class Procedures extends Component {
 
     render() {
       const { classes } = this.props;
+      console.log(fakeData[0].name)
+
 
         return (
           <React.Fragment>
@@ -74,7 +77,7 @@ class Procedures extends Component {
                         </Button>
                     </Grid>
                 </Grid>
-                <ProceduresAndTasksBar />
+                <ProceduresAndTasksBar data={'Procedure'} />
               </Typography>
             </Container>
           </React.Fragment>
