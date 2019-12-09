@@ -39,6 +39,10 @@ textField: {
 
 class Procedures extends Component {
 
+  componentDidMount() {
+
+  }
+
     render() {
       const { classes } = this.props;
       console.log(fakeData[0].name)
@@ -93,8 +97,7 @@ const mapStateToProps = store => {
   
   const mapDispatchToProps = dispatch => {
     return {
-        menuStateChange: state => dispatch(menuStateChange(state)),
-        redirectFromPage: state => dispatch(redirectFromPage(state))
+      // getUserData: data => dispatch(getUserData(data)),
     }
   }
   

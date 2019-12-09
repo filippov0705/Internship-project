@@ -1,6 +1,6 @@
 const initialState = () => {
     return {
-        //TODO: add Procedures page states
+        userData: {}
     }
 }
 

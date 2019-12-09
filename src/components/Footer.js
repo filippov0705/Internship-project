@@ -10,8 +10,49 @@ const styles = theme => ({
   columnGrid: {
     display: 'flex', 
     flexDirection: 'column',
+    justifyContent: 'center',
     fontSize: '14px',
+    color: 'white',
+  },
+  text: {
     color: 'white'
+  },
+  logo: {
+    width: '150px',
+    [theme.breakpoints.up('xs')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'flex',
+    },
+  },
+  footerRight: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  footerContainer: {
+    [theme.breakpoints.up('xs')]: {
+      flexDirection: 'column-reverse',
+      alignItems: 'center'
+    },
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'column-reverse',
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'flex',
+    },
   }
 })
 
@@ -30,27 +71,27 @@ const Footer = props => {
                   component="div" 
                   style={{
                     width: '100%', 
-                    maxWidth: '1200px', 
+                    maxWidth: '1200px',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'}} >
-                    <Grid container>
-                      <Grid item xs={4}   className={classes.columnGrid}>
-                        <img src={FooterLogo} alt="logo" style={{width: '150px'}} />
-                        <span>&#169; 2019 :iTechArt All Rights Reserved.</span>
+                    alignItems: 'center',
+                    paddingTop: '10px'}} >
+                    <Grid container className={classes.footerContainer}>
+                      <Grid item xs={12} md={4}  className={classes.columnGrid}>
+                        <img src={FooterLogo} alt="logo" className={classes.logo}/>
+                        <span className={classes.text}>&#169; 2019 :iTechArt All Rights Reserved.</span>
                       </Grid>
-                      <Grid item xs={4} className={classes.columnGrid}>
+                      <Grid item xs={12} md={8} className={classes.footerRight}>
+                      <Grid item xs={6} className={classes.columnGrid}>
                         <span>Телефоны:</span>
                         <span>+375 33 38 76 163</span>
                         <span>+375 29 15 71 703</span>
                       </Grid>
-                      <Grid item xs={4} className={classes.columnGrid}>
-                        <span>E-mail:</span>
-                        <a href="mailto:careers@itechart-group.com">careers@itechart-group.com</a>
-                        <span>Старт карьеры:</span>
-                        <a href="mailto:st.lab@itechart-group.com">st.lab@itechart-group.com</a>
-                        <span>Сотрудничество:</span>
-                        <a href="mailto:pr@itechart-group.com">pr@itechart-group.com</a>
+                      <Grid item xs={6} className={classes.columnGrid}>
+                        <span>E-mail: <a className={classes.text} href="mailto:careers@itechart-group.com">careers@itechart-group.com</a></span>
+                        <span>Старт карьеры: <a className={classes.text} href="mailto:st.lab@itechart-group.com">st.lab@itechart-group.com</a></span>
+                        <span>Сотрудничество: <a className={classes.text} href="mailto:pr@itechart-group.com">pr@itechart-group.com</a></span>
+                      </Grid>
                       </Grid>
                     </Grid>
                 </Typography>

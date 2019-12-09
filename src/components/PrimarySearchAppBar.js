@@ -174,7 +174,7 @@ render() {
         <Toolbar>
           <HeaderUserMenu />
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            ITechArt
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -191,12 +191,12 @@ render() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link to={mainPath()} >
+            <Link to={mainPath()} style={{textDecoration: 'none'}} >
             <Button variant="contained" style={{marginRight: '5px'}}>
               <FormattedMessage id="navigation.mainPage" />
             </Button>
             </Link>
-            <Link to={ProceduresPath()}>
+            <Link to={ProceduresPath()} style={{textDecoration: 'none'}}>
             <Button variant="contained">
               <FormattedMessage id="navigation.procedures" />
             </Button>
@@ -218,8 +218,7 @@ render() {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={this.handleMobileMenuOpen}
-              color="inherit"
-            >
+              color="inherit">
               <MoreIcon />
             </IconButton>
           </div>

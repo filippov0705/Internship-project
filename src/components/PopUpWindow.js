@@ -114,6 +114,9 @@ const { classes, data } = this.props,
           <div 
            className={classes.paper}
            style={{width: '500px'}}>
+             <h2>
+             {this.props.data}
+             </h2>
             {this.state.popupContent}
           </div>
         </Fade>
