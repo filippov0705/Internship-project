@@ -1,6 +1,6 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
-import withStyles from '@material-ui/core/styles/withStyles';
+import ProcedureTask from './ProcedureTask'
 
 const ProceduresAndTasksBar = props => (
 <Grid 
@@ -11,6 +11,7 @@ const ProceduresAndTasksBar = props => (
     margin: '20px',
     border: '1px solid gray',
     borderRadius: '7px'}}>
+        <ProcedureTask />
 </Grid>
 )
 
