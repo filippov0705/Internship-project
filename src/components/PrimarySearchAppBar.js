@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import withStyles from '@material-ui/core/styles/withStyles';
-import SimpleMenu from './MenuBar';
+import HeaderUserMenu from './MenuBar';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { mainPath, ProceduresPath } from '../utils/BuildPaths';
@@ -172,7 +172,7 @@ render() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <SimpleMenu />
+          <HeaderUserMenu />
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
           </Typography>

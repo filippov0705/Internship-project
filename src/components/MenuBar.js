@@ -17,7 +17,7 @@ const styles = theme => ({
   },
 });
 
-class SimpleMenu extends Component {
+class HeaderUserMenu extends Component {
 
 constructor() {
     super();
@@ -70,4 +70,4 @@ render() {
 }
 }
 
-export default withStyles(styles)(SimpleMenu);
+export default withStyles(styles)(HeaderUserMenu);
