@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { procedureInfoUrl } from '../utils/BuildPaths';
+import { procedureInfoUrl } from '../../utils/BuildPaths';
 import { Redirect } from "react-router-dom";
-import GetProcedureContent from './ProcedureContent';
-import TaskContent from './TaskContent';
+import ProcedureContent from '../ProcedureContent';
+import TaskContent from '../TaskContent';
 
 
 
@@ -47,7 +47,7 @@ class Item extends Component {
                 {this.renderRedirect()}
                 <span className={classes.gridSpan}>{this.props.name}</span>
             </Grid>
-            {(this.props.data === 'Procedure') ? <GetProcedureContent id={this.props.id} /> : <TaskContent spec={this.props.spec}  /> }
+            {(this.props.data === 'Procedure') ? <ProcedureContent id={this.props.id} /> : <TaskContent spec={this.props.spec}  /> }
         </Grid>
         )
     }

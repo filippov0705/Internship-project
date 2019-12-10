@@ -27,7 +27,7 @@ const styles = theme => ({
     }
   })
 
-const GetProcedureContent = props => {
+const ProcedureContent = props => {
     const { classes } = props;  
 
     return (
@@ -65,4 +65,4 @@ const GetProcedureContent = props => {
     )
 }
 
-export default withStyles(styles)(GetProcedureContent);
+export default withStyles(styles)(ProcedureContent);

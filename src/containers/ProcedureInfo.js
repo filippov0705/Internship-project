@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fakeData from '../mockData/fakeData.json';
-import List from '../components/List';
+import List from '../components/common/List';
 
 class ProcedureInfo extends Component {
 

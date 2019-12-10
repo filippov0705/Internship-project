@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import Item from './Item';
 import withStyles from '@material-ui/core/styles/withStyles';
-import fakeData from '../mockData/fakeData.json';
+import fakeData from '../../mockData/fakeData.json';
 
 const styles = theme => ({
   list: {
