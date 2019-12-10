@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import Item from './Item';
 import withStyles from '@material-ui/core/styles/withStyles';
+import fakeData from '../../mockData/fakeData.json';
 
 const styles = theme => ({
   list: {
@@ -17,9 +18,17 @@ const styles = theme => ({
 const List = props => {
 const {classes} = props;
 
+function itemCreation(data) {
+  return data.map((item, i) => {
+    return (
+      <Item data={props.data} name={item.name} spec={props.spec || null} id={item.id} key={i}/>
+    )
+  });
+}
+
   return (
     <Grid item className={classes.list}>
-      <Item data={props.data} />
+      {itemCreation(props.content)}
     </Grid>
   );
  }

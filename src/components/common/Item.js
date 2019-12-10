@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { procedureInfoUrl } from '../utils/BuildPaths';
+import { procedureInfoUrl } from '../../utils/BuildPaths';
 import { Redirect } from "react-router-dom";
-import GetProcedureContent from './ProcedureContent';
-import GetTaskContent from './TaskContent';
+import ProcedureContent from '../ProcedureContent';
+import TaskContent from '../TaskContent';
 
 
 
@@ -45,20 +45,9 @@ class Item extends Component {
         <Grid container className={classes.item_border}>
             <Grid item xs={12} sm={8} md={9} className={classes.grid} onClick={this.redirect}>
                 {this.renderRedirect()}
-                <span className={classes.gridSpan}>{this.props.data} 1</span>
+                <span className={classes.gridSpan}>{this.props.name}</span>
             </Grid>
-            {(this.props.data === 'Procedure') ? <GetProcedureContent /> : <getTaskContent />}
-
-            {/* <Grid 
-             item 
-             xs={3} 
-             className={classes.grid} 
-             style={{justifyContent: 'space-around'}}>
-                <TransitionsModal data={'Schedule'} />
-                <TransitionsModal data={'Edit'} />
-                <TransitionsModal data={'More'} />
-                <PlayCircleFilledWhiteRoundedIcon />
-            </Grid> */}
+            {(this.props.data === 'Procedure') ? <ProcedureContent id={this.props.id} /> : <TaskContent spec={this.props.spec}  /> }
         </Grid>
         )
     }

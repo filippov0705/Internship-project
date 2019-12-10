@@ -8,9 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import List from '../components/List';
-import './App.css';
+import List from '../components/common/List';
 import fakeData from '../mockData/fakeData.json';
+import './App.css';
 
 const styles = theme => ({
   root: {
@@ -89,7 +89,7 @@ class Procedures extends Component {
                   </Button>
                 </Grid>
               </Grid>
-              <List data={'Procedure'} />
+              <List data={'Procedure'} content={fakeData} />
             </Typography>
           </Container>
         </React.Fragment>
