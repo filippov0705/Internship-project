@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ProceduresAndTasksBar from '../components/ProceduresAndTasksBar';
+import List from '../components/List';
 import './App.css';
 import fakeData from '../mockData/fakeData.json';
 
@@ -43,6 +43,12 @@ textField: {
 button: {
   marginRight: '15px',
   marginLeft: '15px'
+},
+proceduresWrapper: {
+  backgroundColor: '#cfe8fc',
+  width: '100%',
+  borderTopRightRadius: '5px',
+  borderTopLeftRadius: '5px',
 }
 });
 
@@ -56,42 +62,37 @@ class Procedures extends Component {
     render() {
       const { classes } = this.props;
 
-        return (
-          <React.Fragment>
-            <CssBaseline />
-            <Container maxWidth="lg" >
-              <Typography 
-                component="div" 
-                style={{ 
-                  backgroundColor: '#cfe8fc',
-                  width: '100%',
-                  borderTopRightRadius: '5px',
-                  borderTopLeftRadius: '5px',
-                  }} >
-                <Grid 
-                  container
-                  className={classes.rootDiv}
-                  justify="space-between"
-                  alignItems="center">
-                        <Grid item xs={12} sm={6} style={{}}>
-                          <TextField
-                            id="outlined-search"
-                            label="Filter"
-                            type="search"
-                            className={classes.textField}
-                            margin="normal"
-                            variant="outlined"/>
-                        </Grid>
-                        <Grid item>
-                        <Button variant="contained" color="primary" className={classes.button}>
-                          ADD
-                        </Button>
-                    </Grid>
+      return (
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="lg" >
+            <Typography 
+             component="div" 
+             className={classes.proceduresWrapper} >
+              <Grid 
+               container
+               className={classes.rootDiv}
+               justify="space-between"
+               alignItems="center">
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                   id="outlined-search"
+                   label="Filter"
+                   type="search"
+                   className={classes.textField}
+                   margin="normal"
+                   variant="outlined"/>
                 </Grid>
-                <ProceduresAndTasksBar data={'Procedure'} />
-              </Typography>
-            </Container>
-          </React.Fragment>
+                <Grid item>
+                  <Button variant="contained" color="primary" className={classes.button}>
+                    ADD
+                  </Button>
+                </Grid>
+              </Grid>
+              <List data={'Procedure'} />
+            </Typography>
+          </Container>
+        </React.Fragment>
         )
     }
 }

@@ -5,6 +5,9 @@ const translations = {
     'userMenu.yourProfile': 'Your Profile',
     'userMenu.help': 'Help',
     'userMenu.signOut': 'Sign out',
+    'footer.telephones': 'Telephones',
+    'footer.careerStart': 'Career start',
+    'footer.cooperation': 'Cooperation'
 };
 
 export default translations;

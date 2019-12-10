@@ -18,7 +18,7 @@ const styles = theme => ({
   },
 });
 
-class HeaderUserMenu extends Component {
+class UserMenu extends Component {
 
 constructor() {
     super();
@@ -69,4 +69,4 @@ render() {
 }
 }
 
-export default withStyles(styles)(HeaderUserMenu);
+export default withStyles(styles)(UserMenu);
