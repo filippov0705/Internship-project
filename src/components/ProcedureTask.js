@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import PlayCircleFilledWhiteRoundedIcon from '@material-ui/icons/PlayCircleFilledWhiteRounded';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TransitionsModal from './PopUpWindow';
 import Tooltip from '@material-ui/core/Tooltip';
+import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
+import { Link } from 'react-router-dom';
+import { procedureScheduleUrl, editProcedureUrl, procedureInfoUrl } from '../utils/BuildPaths';
+import { Redirect } from "react-router-dom";
 
 
 const styles = theme => ({
@@ -17,13 +21,19 @@ const styles = theme => ({
     btn: {
         backgroundColor: 'white',
         border: 'none',
+    },
+    link: {
+        cursole: 'none'
     }
   })
 
-const ProcedureTask = props => {
-    const { classes } = props;
+class ProcedureTask extends Component {
+    state = {
+        redirect: false
+    }
 
-    function getProcedureContent() {
+    getProcedureContent = () => {
+        const { classes } = this.props;  
         return (
             <Grid 
              item 
@@ -31,19 +41,25 @@ const ProcedureTask = props => {
              className={classes.grid} 
              style={{justifyContent: 'space-around'}}>
                 <Tooltip title="Schedule">
-                    <button className={classes.btn}>
-                        <TransitionsModal data={'Schedule'} />
-                    </button>
+                    <Link to={procedureScheduleUrl('4879')} className={classes.link}>
+                        <button className={classes.btn}>
+                            <ScheduleRoundedIcon />
+                        </button>
+                    </Link>
                 </Tooltip>
                 <Tooltip title="Edit">
-                    <button className={classes.btn}>
-                        <TransitionsModal data={'Edit'} />
-                    </button>
+                    <Link to={editProcedureUrl('4879')} className={classes.link}>
+                        <button className={classes.btn}>
+                            <TransitionsModal data={'Edit'} />
+                        </button>
+                    </Link>
                 </Tooltip>
                 <Tooltip title="More">
-                    <button className={classes.btn}>
-                        <TransitionsModal data={'More'} />
-                    </button>
+                    <Link to={procedureInfoUrl('4879')} className={classes.link}>
+                        <button className={classes.btn}>
+                            <TransitionsModal data={'More'} />
+                        </button>
+                    </Link>
                 </Tooltip>
                 <Tooltip title="Run">
                     <button className={classes.btn}>
@@ -54,11 +70,12 @@ const ProcedureTask = props => {
         )
     }
 
-    function getTaskContent() {
+    getTaskContent = () => {
+        const { classes } = this.props;  
         return (
             <Grid 
              item 
-             xs={6} sm={3}
+             xs={7} sm={4} md={3}
              className={classes.grid} 
              style={{justifyContent: 'space-around'}}>
                 {/* <TransitionsModal data={'Schedule'} />
@@ -70,6 +87,21 @@ const ProcedureTask = props => {
         )
     }
 
+    redirect = () => {
+        this.setState({
+            redirect: true
+        });
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect push to={procedureInfoUrl('4879')} />
+          }
+    }
+
+    render() {
+    const { classes } = this.props;  
+
     return (
         <Grid container 
         style={{
@@ -77,10 +109,11 @@ const ProcedureTask = props => {
             height: '40px',
             borderBottom: '1px solid rgba(94, 92, 92, 0.225)',
         }}>
-            <Grid item xs={6} sm={9} className={classes.grid}>
-                <span className={classes.gridSpan}>{props.data} 1</span>
+            <Grid item xs={5} sm={8} md={9} className={classes.grid} onClick={this.redirect}>
+                {this.renderRedirect()}
+                <span className={classes.gridSpan}>{this.props.data} 1</span>
             </Grid>
-            {(props.data === 'Procedure') ? getProcedureContent() : getTaskContent()}
+            {(this.props.data === 'Procedure') ? this.getProcedureContent() : this.getTaskContent()}
 
             {/* <Grid 
              item 
@@ -93,7 +126,8 @@ const ProcedureTask = props => {
                 <PlayCircleFilledWhiteRoundedIcon />
             </Grid> */}
         </Grid>
-)
-                }
+        )
+    }
+}
 
 export default withStyles(styles)(ProcedureTask);
