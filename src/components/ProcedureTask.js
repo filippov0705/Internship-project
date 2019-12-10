@@ -37,7 +37,7 @@ class ProcedureTask extends Component {
         return (
             <Grid 
              item 
-             xs={6} sm={3}
+             xs={12} sm={3}
              className={classes.grid} 
              style={{justifyContent: 'space-around'}}>
                 <Tooltip title="Schedule">
@@ -75,7 +75,7 @@ class ProcedureTask extends Component {
         return (
             <Grid 
              item 
-             xs={7} sm={4} md={3}
+             xs={12} sm={4} md={3}
              className={classes.grid} 
              style={{justifyContent: 'space-around'}}>
                 {/* <TransitionsModal data={'Schedule'} />
@@ -106,10 +106,9 @@ class ProcedureTask extends Component {
         <Grid container 
         style={{
             width: '100%',
-            height: '40px',
             borderBottom: '1px solid rgba(94, 92, 92, 0.225)',
         }}>
-            <Grid item xs={5} sm={8} md={9} className={classes.grid} onClick={this.redirect}>
+            <Grid item xs={12} sm={8} md={9} className={classes.grid} onClick={this.redirect}>
                 {this.renderRedirect()}
                 <span className={classes.gridSpan}>{this.props.data} 1</span>
             </Grid>

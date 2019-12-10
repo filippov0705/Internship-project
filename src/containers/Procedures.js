@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ProceduresAndTasksBar from '../components/ProceduresAndTasksBar';
 import './App.css';
-import fakeData from './fakeData.json';
+import fakeData from '../mockData/fakeData.json';
 
 const styles = theme => ({
   root: {
@@ -55,8 +55,6 @@ class Procedures extends Component {
 
     render() {
       const { classes } = this.props;
-      console.log(fakeData[0].name)
-
 
         return (
           <React.Fragment>
