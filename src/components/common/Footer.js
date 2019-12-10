@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import FooterLogo from '../styles/img/footer-logo.svg';
+import FooterLogo from '../../styles/img/footer-logo.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { FormattedMessage } from 'react-intl';
 

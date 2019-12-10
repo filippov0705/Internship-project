@@ -47,7 +47,7 @@ class Item extends Component {
                 {this.renderRedirect()}
                 <span className={classes.gridSpan}>{this.props.name}</span>
             </Grid>
-            {(this.props.data === 'Procedure') ? <ProcedureContent id={this.props.id} /> : <TaskContent spec={this.props.spec}  /> }
+            {(this.props.info === 'Procedure') ? <ProcedureContent id={this.props.id} /> : <TaskContent spec={this.props.spec}  /> }
         </Grid>
         )
     }

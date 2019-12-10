@@ -11,10 +11,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import withStyles from '@material-ui/core/styles/withStyles';
-import UserMenu from './MenuBar';
+import UserMenu from './UserMenu';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { mainPath, ProceduresPath } from '../utils/BuildPaths';
+import { mainPath, ProceduresPath } from '../../utils/BuildPaths';
 import { FormattedMessage } from 'react-intl';
 
 const styles = theme => ({

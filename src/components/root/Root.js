@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import App from '../../containers/App';
-import Procedures from '../../containers/Procedures';
-import ProcedureInfo from '../../containers/ProcedureInfo';
+import Main from '../page/Main';
+import Procedures from '../page/procedure/Procedures';
+import ProcedureInfo from '../page/task/ProcedureInfo';
 import PageTemplate from './PageTemplate';
 import { mainPath, 
     ProceduresPath, 
@@ -23,8 +23,8 @@ const Root = props => (
             <Route
                 exact
                 path={mainPath()}
-                name={'App'}
-                component={App}
+                name={'Main'}
+                component={Main}
             />
             <Route
                 path={editProcedurePath()}
@@ -41,7 +41,7 @@ const Root = props => (
                 name={'ProcedureInfo'}
                 component={ProcedureInfo}
             />
-            <Route name={'App'} component={App} />
+            <Route name={'Main'} component={Main} />
         </Switch>
     </PageTemplate>
 );
