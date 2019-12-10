@@ -1,2 +1,2 @@
 export const MAIN = '/';
-export const Procedures = 'Procedures/';
+export const PROCEDURES = 'Procedures/';

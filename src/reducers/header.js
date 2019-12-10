@@ -1,4 +1,4 @@
-import { MENU_SATE_CHANGE, REDIRECT_FROM_PAGE } from '../action/HeaderActions'
+import { MENU_SATE_CHANGE } from '../action/HeaderActions'
 
 const initialState = () => {
     return {

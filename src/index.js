@@ -16,21 +16,19 @@ const theme = createMuiTheme({
         useNextVariants: true,
         fontFamily: ['Open Sans', 'Helvetica', 'Arial', 'sans-serif'].join(','),
     },
-    spacing: {
-        unit: 16,
-    },
+    spacing: 16,//TODO You should check it
 });
 
 const routing = (
   <MuiThemeProvider theme={theme}>
-  <Provider store={store} key="provider">
-      <IntlProvider
-          locale={locale.currentLocale}
-          messages={locale.localeWording}
-      >
-          <AuthHoc />
-      </IntlProvider>
-  </Provider>
+    <Provider store={store} key="provider">
+        <IntlProvider
+            locale={locale.currentLocale}
+            messages={locale.localeWording}
+        >
+            <AuthHoc />
+        </IntlProvider>
+    </Provider>
 </MuiThemeProvider>
 );
 

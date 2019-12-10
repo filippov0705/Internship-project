@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { UserMenu } from './UserMenu';
-import { HeaderBar } from './HeaderBar';
 import { menuStateChange } from '../action/HeaderActions';
+import PrimarySearchAppBar from './PrimarySearchAppBar'
 
 class Header extends Component {
   render() {
-      return (
-        <React.Fragment>
-            <HeaderBar 
-                menuStateChange={this.props.menuStateChange} 
-                isUserMenuActive={this.props.header.isUserMenuActive} 
-                navBarActive={this.props.navBarActive} />
-            <UserMenu isUserMenuActive={this.props.header.isUserMenuActive} />
-        </React.Fragment>
-      );
+      return <PrimarySearchAppBar />
   }
 }
 
