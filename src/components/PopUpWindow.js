@@ -8,7 +8,7 @@ import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import { FormattedMessage } from 'react-intl';
 import MenuItem from '@material-ui/core/MenuItem';
-import ProceduresAndTasksBar from '../components/ProceduresAndTasksBar';
+import List from './List';
 
 const styles = theme => ({
   modal: {
@@ -23,8 +23,6 @@ const styles = theme => ({
     padding: theme.spacing(2, 4, 3),
   },
 });
-
-
 
 class TransitionsModal extends Component {
     constructor() {
@@ -65,7 +63,7 @@ class TransitionsModal extends Component {
     moreClick = () => {
       this.handleOpen();
       this.setState({
-        popupContent: <ProceduresAndTasksBar data={'More'} />
+        popupContent: <List data={'More'} />
       })
     }
 
@@ -96,7 +94,7 @@ const { classes, data } = this.props,
     { open } = this.state;
 
   return (
-    <div style={{marginTop: '5px'}}>
+    <div>
       {this.getIcon(data)}
       <Modal
         aria-labelledby="transition-modal-title"
@@ -112,8 +110,7 @@ const { classes, data } = this.props,
       >
         <Fade in={open}>
           <div 
-           className={classes.paper}
-           style={{width: '500px'}}>
+           className={classes.paper}>
              <h2>
              {this.props.data}
              </h2>

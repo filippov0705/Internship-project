@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { menuStateChange } from '../action/HeaderActions';
-import PrimarySearchAppBar from './PrimarySearchAppBar'
+import SearchAppBar from './SearchAppBar'
 
 class Header extends Component {
   render() {
-      return <PrimarySearchAppBar />
+      return <SearchAppBar />
   }
 }
 

@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import withStyles from '@material-ui/core/styles/withStyles';
-import HeaderUserMenu from './MenuBar';
+import UserMenu from './MenuBar';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { mainPath, ProceduresPath } from '../utils/BuildPaths';
@@ -26,6 +26,12 @@ const styles = theme => ({
         [theme.breakpoints.up('lg')]: {
           display: 'none',
         },
+      },
+      btn_margin: {
+        marginRight: '5px'
+      },
+      link: {
+        textDecoration: 'none'
       },
   grow: {
     flexGrow: 1,
@@ -88,7 +94,7 @@ const styles = theme => ({
   },
 });
 
-class PrimarySearchAppBar extends Component {
+class SearchAppBar extends Component {
     constructor() {
         super();
         this.state = {
@@ -130,41 +136,41 @@ render() {
         isMobileMenuOpen = Boolean(mobileMoreAnchorEl),
         menuId = 'primary-search-account-menu',
         renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={this.handleMenuClose}
-    >
-      <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+          <Menu
+           anchorEl={anchorEl}
+           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+           id={menuId}
+           keepMounted
+           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+           open={isMenuOpen}
+           onClose={this.handleMenuClose}
+          >
+            <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+          </Menu>
+        );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={this.handleMobileMenuClose}
-      className={classes.root}>
-    <Link to={mainPath()} >
-      <MenuItem>
-        <FormattedMessage id="navigation.mainPage" />
-      </MenuItem>
-    </Link>
-    <Link to={ProceduresPath()}>
-      <MenuItem>
-        <FormattedMessage id="navigation.procedures" />
-      </MenuItem>
-    </Link>
+     anchorEl={mobileMoreAnchorEl}
+     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+     id={mobileMenuId}
+     keepMounted
+     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+     open={isMobileMenuOpen}
+     onClose={this.handleMobileMenuClose}
+     className={classes.root}>
+      <Link to={mainPath()} >
+        <MenuItem>
+          <FormattedMessage id="navigation.mainPage" />
+        </MenuItem>
+      </Link>
+      <Link to={ProceduresPath()}>
+        <MenuItem>
+          <FormattedMessage id="navigation.procedures" />
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -172,7 +178,7 @@ render() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <HeaderUserMenu />
+          <UserMenu />
           <Typography className={classes.title} variant="h6" noWrap>
             ITechArt
           </Typography>
@@ -191,34 +197,34 @@ render() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link to={mainPath()} style={{textDecoration: 'none'}} >
-            <Button variant="contained" style={{marginRight: '5px'}}>
-              <FormattedMessage id="navigation.mainPage" />
-            </Button>
+            <Link to={mainPath()} className={classes.link} >
+              <Button variant="contained" className={classes.btn_margin}>
+                <FormattedMessage id="navigation.mainPage" />
+              </Button>
             </Link>
-            <Link to={ProceduresPath()} style={{textDecoration: 'none'}}>
-            <Button variant="contained">
-              <FormattedMessage id="navigation.procedures" />
-            </Button>
+            <Link to={ProceduresPath()} className={classes.link}>
+              <Button variant="contained">
+                <FormattedMessage id="navigation.procedures" />
+              </Button>
             </Link>
             <IconButton
-                className={classes.root}
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit">
-            <AccountCircle />
+             className={classes.root}
+             edge="end"
+             aria-label="account of current user"
+             aria-controls={menuId}
+             aria-haspopup="true"
+             onClick={this.handleProfileMenuOpen}
+             color="inherit">
+              <AccountCircle />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={this.handleMobileMenuOpen}
-              color="inherit">
+             aria-label="show more"
+             aria-controls={mobileMenuId}
+             aria-haspopup="true"
+             onClick={this.handleMobileMenuOpen}
+             color="inherit">
               <MoreIcon />
             </IconButton>
           </div>
@@ -231,4 +237,4 @@ render() {
 }
 }
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default withStyles(styles)(SearchAppBar);

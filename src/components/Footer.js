@@ -5,6 +5,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import FooterLogo from '../styles/img/footer-logo.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { FormattedMessage } from 'react-intl';
 
 const styles = theme => ({
   columnGrid: {
@@ -53,6 +54,18 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       display: 'flex',
     },
+  },
+  footerWrapper: {
+    backgroundColor: '#24292e', 
+    minHeight: '130px'
+  },
+  footer: {
+    width: '100%', 
+    maxWidth: '1200px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: '10px'
   }
 })
 
@@ -60,44 +73,36 @@ const Footer = props => {
   const { classes } = props;
 
   return (
-            <React.Fragment>
-            <CssBaseline />
-            <Container 
-              maxWidth="xl" 
-              style={{ 
-                backgroundColor: '#24292e', 
-                minHeight: '130px' }}>
-                <Typography 
-                  component="div" 
-                  style={{
-                    width: '100%', 
-                    maxWidth: '1200px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    paddingTop: '10px'}} >
-                    <Grid container className={classes.footerContainer}>
-                      <Grid item xs={12} md={4}  className={classes.columnGrid}>
-                        <img src={FooterLogo} alt="logo" className={classes.logo}/>
-                        <span className={classes.text}>&#169; 2019 :iTechArt All Rights Reserved.</span>
-                      </Grid>
-                      <Grid item xs={12} md={8} className={classes.footerRight}>
-                      <Grid item xs={6} className={classes.columnGrid}>
-                        <span>Телефоны:</span>
-                        <span>+375 33 38 76 163</span>
-                        <span>+375 29 15 71 703</span>
-                      </Grid>
-                      <Grid item xs={6} className={classes.columnGrid}>
-                        <span>E-mail: <a className={classes.text} href="mailto:careers@itechart-group.com">careers@itechart-group.com</a></span>
-                        <span>Старт карьеры: <a className={classes.text} href="mailto:st.lab@itechart-group.com">st.lab@itechart-group.com</a></span>
-                        <span>Сотрудничество: <a className={classes.text} href="mailto:pr@itechart-group.com">pr@itechart-group.com</a></span>
-                      </Grid>
-                      </Grid>
-                    </Grid>
-                </Typography>
-            </Container>
-          </React.Fragment>
-        )
-                            }
+    <React.Fragment>
+      <CssBaseline />
+        <Container 
+         maxWidth="xl" 
+         className={classes.footerWrapper}>
+          <Typography 
+           component="div" 
+           className={classes.footer} >
+            <Grid container className={classes.footerContainer}>
+              <Grid item xs={12} md={4}  className={classes.columnGrid}>
+                <img src={FooterLogo} alt="logo" className={classes.logo}/>
+                <span className={classes.text}>&#169; 2019 :iTechArt All Rights Reserved.</span>
+              </Grid>
+              <Grid item xs={12} md={8} className={classes.footerRight}>
+                <Grid item xs={6} className={classes.columnGrid}>
+                  <span><FormattedMessage id="footer.telephones" />:</span>
+                  <span>+375 33 38 76 163</span>
+                  <span>+375 29 15 71 703</span>
+                </Grid>
+                <Grid item xs={6} className={classes.columnGrid}>
+                  <span>E-mail: <a className={classes.text} href="mailto:careers@itechart-group.com">careers@itechart-group.com</a></span>
+                  <span><FormattedMessage id="footer.careerStart" />: <a className={classes.text} href="mailto:st.lab@itechart-group.com">st.lab@itechart-group.com</a></span>
+                  <span><FormattedMessage id="footer.cooperation" />: <a className={classes.text} href="mailto:pr@itechart-group.com">pr@itechart-group.com</a></span>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Typography>
+        </Container>
+      </React.Fragment>
+  );
+}
 
 export default withStyles(styles)(Footer);

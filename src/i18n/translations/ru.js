@@ -4,7 +4,10 @@ const translations = {
     'navigation.procedures': 'Процедуры',
     'userMenu.yourProfile': 'Мой профиль',
     'userMenu.help': 'Помощь',
-    'userMenu.signOut': 'Выйти'
+    'userMenu.signOut': 'Выйти',
+    'footer.telephones' : 'Телефоны',
+    'footer.careerStart': 'Старт карьеры',
+    'footer.cooperation': 'Сотрудничество'
 };
 
 export default translations;
