@@ -36,21 +36,21 @@ const GetProcedureContent = props => {
          xs={12} sm={3}
          className={classes.itemName}>
             <Tooltip title="Schedule">
-                <Link to={procedureScheduleUrl('4879')} className={classes.link}>
+                <Link to={procedureScheduleUrl(props.id)} className={classes.link}>
                     <button className={classes.btn}>
                         <ScheduleRoundedIcon className={classes.icon} />
                     </button>
                 </Link>
             </Tooltip>
             <Tooltip title="Edit">
-                <Link to={editProcedureUrl('4879')} className={classes.link}>
+                <Link to={editProcedureUrl(props.id)} className={classes.link}>
                     <button className={classes.btn}>
                         <EditRoundedIcon className={classes.icon} />
                     </button>
                 </Link>
             </Tooltip>
             <Tooltip title="More">
-                <Link to={procedureInfoUrl('4879')} className={classes.link}>
+                <Link to={procedureInfoUrl(props.id)} className={classes.link}>
                     <button className={classes.btn}>
                         <MoreHorizRoundedIcon className={classes.icon} />
                     </button>
