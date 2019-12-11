@@ -22,7 +22,7 @@ const styles = theme => ({
     }
   })
 
-const ProcedureButtons = props => {
+const ItemButtons = props => {
     const { classes } = props;  
 
     return (
@@ -38,4 +38,4 @@ const ProcedureButtons = props => {
     )
 }
 
-export default withStyles(styles)(ProcedureButtons);
+export default withStyles(styles)(ItemButtons);

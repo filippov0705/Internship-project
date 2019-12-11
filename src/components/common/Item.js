@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { procedureInfoUrl } from '../../utils/BuildPaths';
-import ProcedureButtons from './ProcedureButtons';
-import TaskButtons from './TaskButtons';
+import ItemButtons from './ItemButtons';
 import { Link } from 'react-router-dom';
 
 const styles = theme => ({
@@ -50,7 +49,7 @@ const Item = props => {
                 <Grid item xs={12} sm={8} md={9} className={classes.grid}>
                     {getItemName()}
                 </Grid>
-            {(props.info === 'Procedure') ? <ProcedureButtons id={props.id} /> : <TaskButtons spec={props.spec}  /> }
+            {(props.info === 'Procedure') ? <ItemButtons id={props.id} /> : <ItemButtons spec={props.spec}  /> }
         </Grid>
     )
 }
