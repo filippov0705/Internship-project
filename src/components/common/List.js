@@ -17,13 +17,13 @@ const styles = theme => ({
 const List = props => {
 const {classes} = props;
 
-function itemCreation(data) {
-  return data.map((item, i) => {
-    return (
-      <Item info={props.info} name={item.name} spec={props.spec || null} id={item.id} key={i}/>
-    )
-  });
-}
+  function itemCreation(data) {
+    return data.map((item, i) => {
+      return (
+        <Item info={props.info} name={item.name} spec={props.spec || null} id={item.id} key={i}/>
+      )
+    });
+  }
 
   return (
     <Grid item className={classes.list}>

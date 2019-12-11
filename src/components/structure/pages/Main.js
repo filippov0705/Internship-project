@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 export default class Main extends Component {
     render() {

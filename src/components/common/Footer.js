@@ -65,7 +65,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: '10px'
+    paddingTop: '10px',
+    margin: '0 auto'
   }
 })
 

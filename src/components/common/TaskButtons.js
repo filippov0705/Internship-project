@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 const styles = theme => ({
     itemName: {
@@ -12,7 +11,7 @@ const styles = theme => ({
     }
   })
 
-const TaskContent = props => {
+const TaskButtons = props => {
     const { classes } = props; 
 
     function getContent(spec) {
@@ -44,4 +43,4 @@ const TaskContent = props => {
     )
 }
 
-export default withStyles(styles)(TaskContent);
+export default withStyles(styles)(TaskButtons);

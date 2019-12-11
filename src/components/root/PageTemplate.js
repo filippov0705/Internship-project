@@ -9,10 +9,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = theme => ({
   proceduresWrapper: {
     backgroundColor: '#cfe8fc',
-    glexGrow: '2',
+    flexGrow: '2',
     width: '100%',
     borderTopRightRadius: '5px',
     borderTopLeftRadius: '5px',
+  },
+  container: {
+      display: 'flex',
+      flexGrow: '80',
   }
   });
 
@@ -23,7 +27,7 @@ const { classes } = props;
         <React.Fragment>
             <Header />
             <CssBaseline />
-            <Container maxWidth="lg" >
+            <Container maxWidth="lg" className={classes.container} >
                 <Typography 
                  component="div" 
                  className={classes.proceduresWrapper} >

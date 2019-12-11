@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import Main from '../page/Main';
-import Procedures from '../page/procedure/Procedures';
-import ProcedureInfo from '../page/task/ProcedureInfo';
+import Main from '../structure/pages/Main';
+import Procedures from '../structure/pages/procedure/Procedures';
+import ProcedureInfo from '../structure/pages/task/ProcedureInfo';
 import PageTemplate from './PageTemplate';
 import { mainPath, 
     ProceduresPath, 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  } from '../../../action/HeaderActions';
+import {  } from '../../../../action/ProceduresActions';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import List from '../../common/List';
+import List from '../../../common/List';
 
-import fakeData from '../../../mockData/fakeData.json';
+import fakeData from '../../../../mockData/fakeData.json';
 
 const styles = theme => ({
   root: {

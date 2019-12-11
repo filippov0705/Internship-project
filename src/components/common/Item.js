@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { procedureInfoUrl } from '../../utils/BuildPaths';
-import { Redirect } from "react-router-dom";
-import ProcedureContent from '../ProcedureContent';
-import TaskContent from '../TaskContent';
-
-
+import ProcedureButtons from './ProcedureButtons';
+import TaskButtons from './TaskButtons';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     grid: {
@@ -17,40 +15,44 @@ const styles = theme => ({
         borderBottom: '1px solid rgba(94, 92, 92, 0.225)'
     },
     gridSpan: {
-        marginLeft: '10px'
+        marginLeft: '10px',
+        marginTop: '2px',
+        marginBottom: '2px'
+    },
+    link: {
+        width: '100%', 
+        height: '100%', 
+        display: 'flex', 
+        alignItems: 'center',
+        pointerEvents: 'none',
+        textDecoration: 'none',
+        color: 'black'
     }
   })
 
-class Item extends Component {
-    state = {
-        redirect: false
-    }
+const Item = props => {
+    const { classes } = props;  
 
-    redirect = () => {
-        this.setState({
-            redirect: true
-        });
-    }
+    function getItemName() {
+        switch (props.info) {
+            case 'Procedure':
+                return (<Link to={procedureInfoUrl(props.id)} className={classes.link}>
+                            <span className={classes.gridSpan}>{props.name}</span>
+                        </Link>)
 
-    renderRedirect = () => {
-        if (this.state.redirect) {
-            return <Redirect push to={procedureInfoUrl('4879')} />
-          }
+            default:
+                return <span className={classes.gridSpan}>{props.name}</span>
+        }
     }
-
-    render() {
-    const { classes } = this.props;  
 
     return (
         <Grid container className={classes.item_border}>
-            <Grid item xs={12} sm={8} md={9} className={classes.grid} onClick={this.redirect}>
-                {this.renderRedirect()}
-                <span className={classes.gridSpan}>{this.props.name}</span>
-            </Grid>
-            {(this.props.info === 'Procedure') ? <ProcedureContent id={this.props.id} /> : <TaskContent spec={this.props.spec}  /> }
+                <Grid item xs={12} sm={8} md={9} className={classes.grid}>
+                    {getItemName()}
+                </Grid>
+            {(props.info === 'Procedure') ? <ProcedureButtons id={props.id} /> : <TaskButtons spec={props.spec}  /> }
         </Grid>
-        )
-    }
+    )
 }
 
 export default withStyles(styles)(Item);
