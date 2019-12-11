@@ -69,58 +69,58 @@ class TransitionsModal extends Component {
 
     getIcon = () => {
         switch (this.props.data) {
-            case 'Schedule': 
-                return <ScheduleRoundedIcon onClick={this.scheduleClick} />
+          case 'Schedule': 
+            return <ScheduleRoundedIcon onClick={this.scheduleClick} />
 
-            case 'Edit':
-                return <EditRoundedIcon onClick={this.editClick} />
+          case 'Edit':
+            return <EditRoundedIcon onClick={this.editClick} />
 
-            case 'More':
-                return <MoreHorizRoundedIcon onClick={this.moreClick} />
+          case 'More':
+            return <MoreHorizRoundedIcon onClick={this.moreClick} />
             
-            case 'YourProfile':
-              return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.yourProfile" /></MenuItem>
+          case 'YourProfile':
+            return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.yourProfile" /></MenuItem>
                 
-            case 'Help':
-              return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.help" /></MenuItem>
+          case 'Help':
+            return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.help" /></MenuItem>
               
-              default: 
-                return null
+          default: 
+            return null
         }
     }
 
     render() {
-const { classes, data } = this.props,
-    { open } = this.state;
+      const { classes, data } = this.props,
+      { open } = this.state;
 
-  return (
-    <div>
-      {this.getIcon(data)}
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={this.handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <div 
-           className={classes.paper}>
-             <h2>
-             {this.props.data}
-             </h2>
-            {this.state.popupContent}
-          </div>
-        </Fade>
-      </Modal>
-    </div>
-  );
-}
+      return (
+        <div>
+          {this.getIcon(data)}
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={this.handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div 
+              className={classes.paper}>
+                <h2>
+                {this.props.data}
+                </h2>
+                {this.state.popupContent}
+              </div>
+            </Fade>
+          </Modal>
+        </div>
+      );
+    }
 }
 
 export default withStyles(styles)(TransitionsModal);

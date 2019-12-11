@@ -59,32 +59,32 @@ class Procedures extends Component {
     render() {
       const { classes } = this.props;
 
-      return (
-        <React.Fragment>
-              <Grid 
-               container
-               className={classes.rootDiv}
-               justify="space-between"
-               alignItems="center">
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                   id="outlined-search"
-                   label="Filter"
-                   type="search"
-                   className={classes.textField}
-                   margin="normal"
-                   variant="outlined"/>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    ADD
-                  </Button>
-                </Grid>
-              </Grid>
-              <List info={'Procedure'} data={fakeData} />
-        </React.Fragment>
-        )
-    }
+    return (
+      <React.Fragment>
+        <Grid 
+         container
+         className={classes.rootDiv}
+         justify="space-between"
+         alignItems="center">
+          <Grid item xs={12} sm={6}>
+            <TextField
+             id="outlined-search"
+             label="Filter"
+             type="search"
+             className={classes.textField}
+             margin="normal"
+             variant="outlined"/>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" className={classes.button}>
+              ADD
+            </Button>
+          </Grid>
+        </Grid>
+        <List info={'Procedure'} data={fakeData} />
+      </React.Fragment>
+      )
+  }
 }
 
 const mapStateToProps = store => {
