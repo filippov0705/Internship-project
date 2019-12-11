@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import List from '../components/common/List';
 import fakeData from '../mockData/fakeData.json';
+import TransitionsModal from '../components/common/PopUpWindow'
 import './App.css';
 
 const styles = theme => ({
@@ -84,9 +85,7 @@ class Procedures extends Component {
                    variant="outlined"/>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    ADD
-                  </Button>
+                    <TransitionsModal data={'Add'} action={this.handleClose}/>
                 </Grid>
               </Grid>
               <List data={'Procedure'} content={fakeData} />
