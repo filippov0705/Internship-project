@@ -20,7 +20,7 @@ const {classes} = props;
   function itemCreation(data) {
     return data.map((item, i) => {
       return (
-        <Item info={props.info} name={item.name} spec={props.spec || null} id={item.id} key={i}/>
+        <Item info={props.info} name={item.name}  flag={props.flag || 'uneditable'} id={item.id} key={i}/>
       )
     });
   }

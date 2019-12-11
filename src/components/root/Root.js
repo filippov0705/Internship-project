@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Main from '../structure/pages/Main';
 import Procedures from '../structure/pages/procedure/Procedures';
-import ProcedureInfo from '../structure/pages/task/ProcedureInfo';
+import ProcedureInfo from '../structure/pages/procedure/ProcedureInfo';
 import PageTemplate from './PageTemplate';
 import { mainPath, 
     ProceduresPath, 

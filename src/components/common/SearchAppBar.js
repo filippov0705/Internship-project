@@ -95,47 +95,46 @@ const styles = theme => ({
 });
 
 class SearchAppBar extends Component {
-    constructor() {
-        super();
-        this.state = {
-            anchorEl: null,
-            mobileMoreAnchorEl: null
-        };
-    }
-
-    handleProfileMenuOpen = event => {
-        this.setState({
-            anchorEl: event.currentTarget
-        });
+  constructor() {
+    super();
+    this.state = {
+      anchorEl: null,
+      mobileMoreAnchorEl: null
     };
+  }
 
-    handleMobileMenuClose = () => {
-        this.setState({
-            mobileMoreAnchorEl: null
-        })
-    };
+  handleProfileMenuOpen = event => {
+    this.setState({
+      anchorEl: event.currentTarget
+    });
+  };
+
+  handleMobileMenuClose = () => {
+    this.setState({
+      mobileMoreAnchorEl: null
+    })
+  };
     
-    handleMenuClose = () => {
-        this.setState({
-            anchorEl: null
-        });
-        this.handleMobileMenuClose();
-    };
+  handleMenuClose = () => {
+    this.setState({
+      anchorEl: null
+    });
+    this.handleMobileMenuClose();
+  };
 
-    handleMobileMenuOpen = event => {
-        this.setState({
-            mobileMoreAnchorEl: event.currentTarget
-        })
-      };
+  handleMobileMenuOpen = event => {
+    this.setState({
+      mobileMoreAnchorEl: event.currentTarget
+    })
+  };
 
-render() {
-
+  render() {
     const { classes } = this.props,
-        { anchorEl, mobileMoreAnchorEl } = this.state,
-        isMenuOpen = Boolean(anchorEl),
-        isMobileMenuOpen = Boolean(mobileMoreAnchorEl),
-        menuId = 'primary-search-account-menu',
-        renderMenu = (
+      { anchorEl, mobileMoreAnchorEl } = this.state,
+      isMenuOpen = Boolean(anchorEl),
+      isMobileMenuOpen = Boolean(mobileMoreAnchorEl),
+      menuId = 'primary-search-account-menu',
+      renderMenu = (
           <Menu
            anchorEl={anchorEl}
            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -145,34 +144,34 @@ render() {
            open={isMenuOpen}
            onClose={this.handleMenuClose}
           >
-            <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-          </Menu>
-        );
+          <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+          <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        </Menu>
+      );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-     anchorEl={mobileMoreAnchorEl}
-     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-     id={mobileMenuId}
-     keepMounted
-     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-     open={isMobileMenuOpen}
-     onClose={this.handleMobileMenuClose}
-     className={classes.root}>
-      <Link to={mainPath()} >
-        <MenuItem>
-          <FormattedMessage id="navigation.mainPage" />
-        </MenuItem>
-      </Link>
-      <Link to={ProceduresPath()}>
-        <MenuItem>
-          <FormattedMessage id="navigation.procedures" />
-        </MenuItem>
-      </Link>
-    </Menu>
-  );
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+      <Menu
+       anchorEl={mobileMoreAnchorEl}
+       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+       id={mobileMenuId}
+       keepMounted
+       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+       open={isMobileMenuOpen}
+       onClose={this.handleMobileMenuClose}
+       className={classes.root}>
+        <Link to={mainPath()} >
+          <MenuItem>
+            <FormattedMessage id="navigation.mainPage" />
+          </MenuItem>
+        </Link>
+        <Link to={ProceduresPath()}>
+          <MenuItem>
+            <FormattedMessage id="navigation.procedures" />
+          </MenuItem>
+        </Link>
+      </Menu>
+    );
 
   return (
     <div className={classes.grow}>

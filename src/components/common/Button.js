@@ -17,6 +17,13 @@ const styles = theme => ({
     },
     icon: {
         marginTop: '5px'
+    },
+    submitBtn: {
+        backgroundColor: 'greenyellow',
+        width: '85px',
+        height: '40px',
+        border: '1px solid gray',
+        borderRadius: '7px'
     }
   })
 
@@ -48,8 +55,12 @@ const Button = props => {
                 <button className={classes.btn}>
                     {btnIcons[props.title]}
                 </button>
-        </Tooltip>
+            </Tooltip>
         )
+    }
+
+    function getSubmitButton() {
+        return <button className={classes.submitBtn}>Submit</button>
     }
     
     function getButton() {
@@ -59,6 +70,9 @@ const Button = props => {
 
             case 'action':
                 return getActionButton();
+
+            case 'submit':
+                return getSubmitButton();
 
             default:
                 return null;

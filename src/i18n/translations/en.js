@@ -7,7 +7,8 @@ const translations = {
     'userMenu.signOut': 'Sign out',
     'footer.telephones': 'Telephones',
     'footer.careerStart': 'Career start',
-    'footer.cooperation': 'Cooperation'
+    'footer.cooperation': 'Cooperation',
+    'addPopUp.procedureName': 'Procedure Name: '
 };
 
 export default translations;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fakeData from '../../../../mockData/fakeData.json';
 import List from '../../../common/List';
+import ProcedurePage from './ProcedurePage'
 
 class ProcedureInfo extends Component {
 
@@ -21,11 +22,7 @@ class ProcedureInfo extends Component {
 
   render() {
 
-        return (
-          <main>
-            {this.getPageContent()}
-          </main>
-        )
+        return <ProcedurePage data={'procedure'} />;
     }
 }
 

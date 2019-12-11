@@ -44,12 +44,22 @@ const Item = props => {
         }
     }
 
+    function getButtons() {
+        switch (props.info) {
+            case 'Procedure':
+                return <ItemButtons flag={props.flag} info={props.info} id={props.id} />
+
+            default:
+                return null;
+        }
+    }
+
     return (
         <Grid container className={classes.item_border}>
-                <Grid item xs={12} sm={8} md={9} className={classes.grid}>
-                    {getItemName()}
-                </Grid>
-            {(props.info === 'Procedure') ? <ItemButtons id={props.id} /> : <ItemButtons spec={props.spec}  /> }
+            <Grid item xs={12} sm={8} md={9} className={classes.grid}>
+                {getItemName()}
+            </Grid>
+            {getButtons()}
         </Grid>
     )
 }
