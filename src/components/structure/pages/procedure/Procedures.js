@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  } from '../action/HeaderActions';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {  } from '../../../../action/ProceduresActions';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import List from '../components/common/List';
-import fakeData from '../mockData/fakeData.json';
-import './App.css';
+import List from '../../../common/List';
+
+import fakeData from '../../../../mockData/fakeData.json';
 
 const styles = theme => ({
   root: {
@@ -62,39 +59,32 @@ class Procedures extends Component {
     render() {
       const { classes } = this.props;
 
-      return (
-        <React.Fragment>
-          <CssBaseline />
-          <Container maxWidth="lg" >
-            <Typography 
-             component="div" 
-             className={classes.proceduresWrapper} >
-              <Grid 
-               container
-               className={classes.rootDiv}
-               justify="space-between"
-               alignItems="center">
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                   id="outlined-search"
-                   label="Filter"
-                   type="search"
-                   className={classes.textField}
-                   margin="normal"
-                   variant="outlined"/>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    ADD
-                  </Button>
-                </Grid>
-              </Grid>
-              <List data={'Procedure'} content={fakeData} />
-            </Typography>
-          </Container>
-        </React.Fragment>
-        )
-    }
+    return (
+      <React.Fragment>
+        <Grid 
+         container
+         className={classes.rootDiv}
+         justify="space-between"
+         alignItems="center">
+          <Grid item xs={12} sm={6}>
+            <TextField
+             id="outlined-search"
+             label="Filter"
+             type="search"
+             className={classes.textField}
+             margin="normal"
+             variant="outlined"/>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" className={classes.button}>
+              ADD
+            </Button>
+          </Grid>
+        </Grid>
+        <List info={'Procedure'} data={fakeData} />
+      </React.Fragment>
+      )
+  }
 }
 
 const mapStateToProps = store => {

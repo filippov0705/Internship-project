@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import { deepPurple } from '@material-ui/core/colors';
 import { FormattedMessage } from 'react-intl';
-import TransitionsModal from './common/PopUpWindow'
+import TransitionsModal from './PopUp'
 
 const styles = theme => ({
   menuButton: {
@@ -39,8 +39,8 @@ handleClose = () => {
 };
 
 render() {
-   const { anchorEl } = this.state;
-   const { classes } = this.props;
+  const { anchorEl } = this.state;
+  const { classes } = this.props;
    
   return (
     <div>
