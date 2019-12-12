@@ -8,7 +8,6 @@ class ProcedureInfo extends Component {
     const pageContent = window.location.pathname.split('/')[3],
       id = window.location.pathname.split('/')[2],
       data = fakeData.filter(item => item.id === id)[0].tasks;
-      console.log(data)
 
     switch (pageContent) {
       case 'more':
@@ -21,11 +20,7 @@ class ProcedureInfo extends Component {
 
   render() {
 
-        return (
-          <main>
-            {this.getPageContent()}
-          </main>
-        )
+        return <ProcedurePage isEdit={true} />;
     }
 }
 

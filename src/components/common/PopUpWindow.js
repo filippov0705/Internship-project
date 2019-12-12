@@ -6,8 +6,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { FormattedMessage } from 'react-intl';
 import MenuItem from '@material-ui/core/MenuItem';
+import PopUpContent from './PopUpContent'
 import List from './List';
 
 const styles = theme => ({
@@ -22,6 +24,11 @@ const styles = theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  addBtn: {
+    width: '50px',
+    height: '50px',
+    marginRight: '15px'
+  }
 });
 
 class TransitionsModal extends Component {
@@ -50,76 +57,65 @@ class TransitionsModal extends Component {
       this.props.action();
     }
 
-    scheduleClick = () => {
+    addItemClick = () => {
       this.handleOpen();
-      //TODO: add logic for popup content creation
-    }
-
-    editClick = () => {
-      this.handleOpen();
-      //TODO: add logic for popup content creation
-    }
-
-    moreClick = () => {
-      this.handleOpen();
-      this.setState({
-        popupContent: <List data={'More'} />
-      })
     }
 
     getIcon = () => {
+      const { classes } = this.props;
+
         switch (this.props.data) {
-            case 'Schedule': 
-                return <ScheduleRoundedIcon onClick={this.scheduleClick} />
+          case 'Schedule': 
+            return <ScheduleRoundedIcon onClick={this.scheduleClick} />
 
-            case 'Edit':
-                return <EditRoundedIcon onClick={this.editClick} />
+          case 'Edit':
+            return <EditRoundedIcon onClick={this.editClick} />
 
-            case 'More':
-                return <MoreHorizRoundedIcon onClick={this.moreClick} />
+          case 'More':
+            return <MoreHorizRoundedIcon onClick={this.moreClick} />
             
-            case 'YourProfile':
-              return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.yourProfile" /></MenuItem>
+          case 'YourProfile':
+            return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.yourProfile" /></MenuItem>
                 
-            case 'Help':
-              return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.help" /></MenuItem>
+          case 'Help':
+            return <MenuItem onClick={this.menuItemClick}><FormattedMessage id="userMenu.help" /></MenuItem>
+
+          case 'Add':
+            return <button onClick={this.addItemClick} className={classes.addBtn}><AddCircleIcon /></button>
               
-              default: 
-                return null
+          default: 
+            return null
         }
     }
 
     render() {
-const { classes, data } = this.props,
-    { open } = this.state;
+      const { classes, data } = this.props,
+      { open } = this.state;
 
-  return (
-    <div>
-      {this.getIcon(data)}
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={this.handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <div 
-           className={classes.paper}>
-             <h2>
-             {this.props.data}
-             </h2>
-            {this.state.popupContent}
-          </div>
-        </Fade>
-      </Modal>
-    </div>
-  );
+      return (
+        <div>
+          {this.getIcon(data)}
+          <Modal
+           aria-labelledby="transition-modal-title"
+           aria-describedby="transition-modal-description"
+           className={classes.modal}
+           open={open}
+           onClose={this.handleClose}
+           closeAfterTransition
+           BackdropComponent={Backdrop}
+           BackdropProps={{
+            timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div 
+              className={classes.paper}>
+                <PopUpContent handleClose={this.handleClose} data={this.props.data} />
+              </div>
+            </Fade>
+          </Modal>
+        </div>
+      );
 }
 }
 

@@ -7,7 +7,8 @@ const translations = {
     'userMenu.signOut': 'Выйти',
     'footer.telephones' : 'Телефоны',
     'footer.careerStart': 'Старт карьеры',
-    'footer.cooperation': 'Сотрудничество'
+    'footer.cooperation': 'Сотрудничество',
+    'label.procedureName': 'Имя процедуры: '
 };
 
 export default translations;
