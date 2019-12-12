@@ -4,17 +4,6 @@ import { connect } from 'react-redux';
 
 class ProcedureInfo extends Component {
 
-  getPageContent = () => {
-
-    // switch (this.props.data) {
-    //   case 'more':
-    //     return <List info={'Task'} data={data} />
-
-    //   default:
-    //     return null;
-    // }
-  }
-
   render() {
     const proceduresList = this.props.procedures.proceduresList;
     const targetProcedure = proceduresList.find(item => item.id === this.props.user)
