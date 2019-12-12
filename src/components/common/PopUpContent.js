@@ -14,8 +14,7 @@ class PopUpContent extends Component {
     }
 
     render() {
-        // return this.getContent()
-    return this.getContent()
+        return this.getContent()
     }
 }
 

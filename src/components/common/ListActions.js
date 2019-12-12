@@ -31,7 +31,7 @@ class ListActions extends Component {
              justify="space-between"
              alignItems="center">
                 <Search />
-                <Button type={'simple'} message={'Add'} look={'addBtn'} linkTo={addprocedurePath()} />
+                <Button type={'simple'} message={'Add'} looks={'addBtn'} linkTo={addprocedurePath()} />
             </Grid>
         );
     }

@@ -9,40 +9,47 @@ const styles = theme => ({
     backgroundColor: 'white', 
     margin: '20px',
     border: '1px solid gray',
-    borderRadius: '7px'
+    borderRadius: '7px',
+    overflow: 'auto'
   },
   availableProcedures: {
       height: '200px',
       backgroundColor: 'white', 
       margin: '20px',
       border: '1px solid gray',
-      borderRadius: '7px'
+      borderRadius: '7px',
+      overflow: 'auto'
   },
   chosenProcedures: {
     height: '200px',
     backgroundColor: 'white', 
     margin: '20px',
     border: '1px solid gray',
-    borderRadius: '7px'
+    borderRadius: '7px',
+    overflow: 'auto'
 },
 });
 
 
 const List = props => {
-const {classes} = props;
-console.log(props.content)
+  const {classes} = props;
 
   function itemCreation(data) {
     return data.map((item, i) => {
       return (
-        <Item info={props.info} name={item.name}  flag={props.flag || 'uneditable'} id={item.id} key={i}/>
+        <Item
+         content={props.content}
+         name={item.name}  
+         flag={props.flag || 'uneditable'} 
+         id={item.id} 
+         key={i}/>
       )
     });
   }
 
   return (
     <Grid 
-     xs={(props.content === 'availableProcedures' || 'chosenProcedures') ? 6 : 12}  
+     xs={(props.info !== 'availableProcedures' || 'chosenProcedures') ? 12 : 6}  
      item className={classes[props.content]}>
       {itemCreation(props.data)}
     </Grid>

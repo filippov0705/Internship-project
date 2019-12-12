@@ -16,7 +16,7 @@ class ProcedureAdd extends Component {
                     <Tasks content={'availableProcedures'}/>
                     <Tasks content={'chosenProcedures'} />
                 </Grid>
-                <Button type={'simple'} linkTo={ProceduresPath()} message={'Apply'} look />
+                <Button type={'simple'} linkTo={ProceduresPath()} message={'Apply'} looks={'applyBtn'} />
             </>
         )
     }

@@ -25,6 +25,13 @@ const styles = theme => ({
         borderRadius: '7px',
         marginLeft: '80px',
         marginRight: '15px'
+    },
+    applyBtn: {
+        width: '85px',
+        height: '40px',
+        border: '1px solid gray',
+        borderRadius: '7px',
+        marginLeft: '20px'
     }
   })
 
@@ -63,7 +70,7 @@ const Button = props => {
     function getSimpleButton() {
         return (
             <Link to={props.linkTo} className={classes.link}>
-                <button className={classes[props.look]}>{props.message}</button>
+                <button className={classes[props.looks]}>{props.message}</button>
             </Link>)
     }
     
