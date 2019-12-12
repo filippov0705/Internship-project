@@ -6,10 +6,10 @@ import ProcedurePage from '../structure/pages/procedure/ProcedurePage';
 import PageTemplate from './PageTemplate';
 import { mainPath, 
     ProceduresPath, 
-    procedureInfoUrl, 
     procedureInfoPath, 
     procedureSchedulePath,
-    addprocedurePath
+    addprocedurePath,
+    editProcedurePath
     } from '../../utils/BuildPaths';
 
 const Root = props => (
@@ -33,8 +33,8 @@ const Root = props => (
                 component={ProcedurePage}
             />
             <Route
-                path={procedureInfoUrl()}
-                name={'ProcedureInfo'}
+                path={editProcedurePath()}
+                name={'EditProcedure'}
                 component={ProcedurePage}
             />
             <Route
