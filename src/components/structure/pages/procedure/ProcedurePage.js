@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import List from '../../../common/List';
 import Page from '../../../common/Page';
 import ProcedureAdd from './ProcedureAdd';
+import ProcedureInfo from './ProcedureInfo';
 
 class ProcedurePage extends Component {
 
@@ -10,6 +10,9 @@ class ProcedurePage extends Component {
       case 'add':
         return <ProcedureAdd />
 
+      case 'more':
+        return <ProcedureInfo user={data[data.length - 2]} />
+
       default:
         return null;
     }
@@ -17,7 +20,6 @@ class ProcedurePage extends Component {
 
   render() {
   const data = window.location.pathname.split('/').slice(2);
-
     return (
       <Page title={this.props.data}>
         {this.getUserInterface(data)}

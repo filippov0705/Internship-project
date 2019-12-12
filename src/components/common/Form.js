@@ -19,9 +19,9 @@ const styles = theme => ({
 
 class Form extends Component {
 
-    formSubmit = event => {
-        event.preventDefault();
-        this.props.handleClose()
+    formSubmit = () => {
+        this.props.handleClose();
+        
     }
 
     render() {
@@ -30,13 +30,10 @@ class Form extends Component {
 
     return (
         <form className={classes.form} onSubmit={this.formSubmit}>
-            <label>
-                <FormattedMessage id="addPopUp.procedureName" />
-                <Input />
-            </label>
-            <List data={possibleTasks} info={'Task'} flag={'editable'} />
-             <Input />
-            <Button type={'submit'} />
+            <Input label={<FormattedMessage id="addPopUp.procedureName" />} />
+                <List data={possibleTasks} info={'Task'} flag={'editable'} />
+            <Input />
+            <Button type={'submit'} onClick={this.formSubmit} />
         </form>
         )
     }

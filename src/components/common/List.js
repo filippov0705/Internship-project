@@ -28,6 +28,14 @@ const styles = theme => ({
     borderRadius: '7px',
     overflow: 'auto'
 },
+  ShowProcedureTasks: {
+    height: '665px', 
+    backgroundColor: 'white', 
+    margin: '20px',
+    border: '1px solid gray',
+    borderRadius: '7px',
+    overflow: 'auto'
+  }
 });
 
 
@@ -38,6 +46,7 @@ const List = props => {
     return data.map((item, i) => {
       return (
         <Item
+         info={props.info}
          content={props.content}
          name={item.name}  
          flag={props.flag || 'uneditable'} 

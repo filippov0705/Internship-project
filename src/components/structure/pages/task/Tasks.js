@@ -13,6 +13,9 @@ class Tasks extends Component {
       case 'chosenProcedures':
         return this.props.procedures.chosenTasks;
 
+      case 'ShowProcedureTasks':
+        return this.props.data
+
       default:
         return null;
     }

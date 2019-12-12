@@ -1,4 +1,7 @@
-import { GET_USER_DATA, APPLY_TASK_FOR_PROCEDURE, REMOVE_CHOSEN_TASK } from '../action/ProceduresActions'
+import { GET_USER_DATA, APPLY_TASK_FOR_PROCEDURE, 
+         REMOVE_CHOSEN_TASK,
+         NEW_PROCEDURE_NAME,
+         NEW_PROCEDURE_CREATE } from '../action/ProceduresActions'
 
 const initialState = () => {
     return {
@@ -19,6 +22,7 @@ const initialState = () => {
                 "name": "task_5",
             }],
         chosenTasks: [],
+        newProcedureName: ''
     }
 }
 
@@ -34,6 +38,15 @@ export function proceduresReducer(state = initialState(), action) {
 
         case REMOVE_CHOSEN_TASK:
             return { ...state, chosenTasks: action.payload}
+
+        case NEW_PROCEDURE_NAME:
+            return { ...state, newProcedureName: action.payload }
+
+        case NEW_PROCEDURE_CREATE:
+            return { ...state, 
+                proceduresList: state.proceduresList.concat(action.payload), 
+                chosenTasks: [],
+                newProcedureName: ''}
 
         default:
             return state

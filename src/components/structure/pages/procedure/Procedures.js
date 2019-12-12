@@ -6,9 +6,10 @@ import ListActions from '../../../common/ListActions'
 
 class Procedures extends Component {
 
-  componentDidMount() {
-    this.props.getUserData()
-  }
+  // componentDidMount() {
+  //   this.props.getUserData() //TODO add getting tasks from server
+  // }
+
 
     render() {
       const proceduresList = this.props.procedures.proceduresList;

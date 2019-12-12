@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-import fakeData from '../../../../mockData/fakeData.json';
-import List from '../../../common/List';
-import ProcedurePage from './ProcedurePage'
+import Task from '../task/Tasks';
+import { connect } from 'react-redux';
 
 class ProcedureInfo extends Component {
 
   getPageContent = () => {
-    const pageContent = window.location.pathname.split('/')[3],
-      id = window.location.pathname.split('/')[2],
-      data = fakeData.filter(item => item.id === id)[0].tasks;
-      console.log(data)
 
-    switch (pageContent) {
-      case 'more':
-        return <List info={'Task'} data={data} />
+    // switch (this.props.data) {
+    //   case 'more':
+    //     return <List info={'Task'} data={data} />
 
-      default:
-        return null;
-    }
+    //   default:
+    //     return null;
+    // }
   }
 
   render() {
+    const proceduresList = this.props.procedures.proceduresList;
+    const targetProcedure = proceduresList.find(item => item.id === this.props.user)
+    const data = targetProcedure ? targetProcedure.tasks : [];
 
-        return <ProcedurePage data={'procedure'} />;
+    return <Task data={data} content={'ShowProcedureTasks'} />
     }
 }
 
- export default ProcedureInfo;
+const mapStateToProps = store => {
+  return {
+      procedures: store.procedures
+  }
+}
+
+export default connect(mapStateToProps)(ProcedureInfo);

@@ -70,7 +70,7 @@ const Button = props => {
     function getSimpleButton() {
         return (
             <Link to={props.linkTo} className={classes.link}>
-                <button className={classes[props.looks]}>{props.message}</button>
+                <button className={classes[props.looks]} onClick={props.btnAction}>{props.message}</button>
             </Link>)
     }
     
