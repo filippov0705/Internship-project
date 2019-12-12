@@ -6,7 +6,12 @@ const styles = theme => ({});
 class Input extends Component {
 
     render() {
-        return <input />
+        return (
+            <label>
+                <span>{this.props.label}</span>
+                <input/>
+            </label>
+        )
     }
 }
 

@@ -16,7 +16,7 @@ class Procedures extends Component {
       return (
         <React.Fragment>
           <ListActions />
-          <List info={'Procedure'} data={proceduresList} />
+          <List info={'Procedure'} content={'list'} data={proceduresList} />
         </React.Fragment>
       )
   }

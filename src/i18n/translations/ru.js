@@ -8,7 +8,7 @@ const translations = {
     'footer.telephones' : 'Телефоны',
     'footer.careerStart': 'Старт карьеры',
     'footer.cooperation': 'Сотрудничество',
-    'addPopUp.procedureName': 'Имя процедуры: '
+    'label.procedureName': 'Имя процедуры: '
 };
 
 export default translations;

@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
-import Input from './Input';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Button from './Button';
 import Form from './Form';
 
 class PopUpContent extends Component {

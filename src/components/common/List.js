@@ -10,12 +10,27 @@ const styles = theme => ({
     margin: '20px',
     border: '1px solid gray',
     borderRadius: '7px'
-  }
+  },
+  availableProcedures: {
+      height: '200px',
+      backgroundColor: 'white', 
+      margin: '20px',
+      border: '1px solid gray',
+      borderRadius: '7px'
+  },
+  chosenProcedures: {
+    height: '200px',
+    backgroundColor: 'white', 
+    margin: '20px',
+    border: '1px solid gray',
+    borderRadius: '7px'
+},
 });
 
 
 const List = props => {
 const {classes} = props;
+console.log(props.content)
 
   function itemCreation(data) {
     return data.map((item, i) => {
@@ -26,7 +41,9 @@ const {classes} = props;
   }
 
   return (
-    <Grid item className={classes.list}>
+    <Grid 
+     xs={(props.content === 'availableProcedures' || 'chosenProcedures') ? 6 : 12}  
+     item className={classes[props.content]}>
       {itemCreation(props.data)}
     </Grid>
   );

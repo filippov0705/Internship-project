@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import TransitionsModal from './PopUpWindow'
+import { addprocedurePath } from '../../utils/BuildPaths'
 import Search from './Search';
 import Grid from '@material-ui/core/Grid';
+import Button from './Button'
 
 const styles = theme => ({
     rootDiv: {
@@ -29,12 +30,8 @@ class ListActions extends Component {
              className={classes.rootDiv}
              justify="space-between"
              alignItems="center">
-                <Grid item xs={12} sm={6}>
-                    <Search />
-                </Grid>
-                <Grid item>
-                    <TransitionsModal data={'Add'} />
-                </Grid>
+                <Search />
+                <Button type={'simple'} message={'Add'} look={'addBtn'} linkTo={addprocedurePath()} />
             </Grid>
         );
     }

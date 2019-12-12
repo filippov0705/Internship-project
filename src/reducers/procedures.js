@@ -4,25 +4,26 @@ const initialState = () => {
     return {
         proceduresList: [],
         possibleTasks: [{
-            "name": "task_1",
-            "id": "1"
-        },
-        {
-            "name": "task_2",
-            "id": "2"
-        },
-        {
-            "name": "task_3",
-            "id": "3"
-        },
-        {
-            "name": "task_4",
-            "id": "4"
-        },
-        {
-            "name": "task_4",
-            "id": "5"
-        }]
+                "name": "task_1",
+                "id": "1"
+            },
+            {
+                "name": "task_2",
+                "id": "2"
+            },
+            {
+                "name": "task_3",
+                "id": "3"
+            },
+            {
+                "name": "task_4",
+                "id": "4"
+            },
+            {
+                "name": "task_5",
+                "id": "5"
+            }],
+        chosenTasks: [],
     }
 }
 

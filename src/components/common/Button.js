@@ -18,12 +18,13 @@ const styles = theme => ({
     icon: {
         marginTop: '5px'
     },
-    submitBtn: {
-        backgroundColor: 'greenyellow',
+    addBtn: {
         width: '85px',
         height: '40px',
         border: '1px solid gray',
-        borderRadius: '7px'
+        borderRadius: '7px',
+        marginLeft: '80px',
+        marginRight: '15px'
     }
   })
 
@@ -59,8 +60,11 @@ const Button = props => {
         )
     }
 
-    function getSubmitButton() {
-        return <button className={classes.submitBtn}>Submit</button>
+    function getSimpleButton() {
+        return (
+            <Link to={props.linkTo} className={classes.link}>
+                <button className={classes[props.look]}>{props.message}</button>
+            </Link>)
     }
     
     function getButton() {
@@ -71,8 +75,8 @@ const Button = props => {
             case 'action':
                 return getActionButton();
 
-            case 'submit':
-                return getSubmitButton();
+            case 'simple':
+                return getSimpleButton();
 
             default:
                 return null;

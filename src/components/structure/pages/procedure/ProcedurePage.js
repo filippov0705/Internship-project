@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
-import fakeData from '../../../../mockData/fakeData.json';
 import List from '../../../common/List';
-import Page from '../../../common/Page'
-import Tasks from '../task/Tasks'
+import Page from '../../../common/Page';
+import ProcedureAdd from './ProcedureAdd';
 
 class ProcedurePage extends Component {
 
-  render() {
+  getUserInterface = data => {
+    switch(data[data.length - 1]) {
+      case 'add':
+        return <ProcedureAdd />
 
-        return (
-          <Page title="">
-            Procedure name input
-            <Tasks />
-          </Page>
-        )
+      default:
+        return null;
     }
+  }
+
+  render() {
+  const data = window.location.pathname.split('/').slice(2);
+
+    return (
+      <Page title={this.props.data}>
+        {this.getUserInterface(data)}
+      </Page>
+    )
+  }
 }
 
  export default ProcedurePage;

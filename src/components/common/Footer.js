@@ -83,17 +83,17 @@ const Footer = props => {
            component="div" 
            className={classes.footer} >
             <Grid container className={classes.footerContainer}>
-              <Grid item xs={12} md={4}  className={classes.columnGrid}>
+              <Grid item xs={12} md={5}  className={classes.columnGrid}>
                 <img src={FooterLogo} alt="logo" className={classes.logo}/>
                 <span className={classes.text}>&#169; 2019 :iTechArt All Rights Reserved.</span>
               </Grid>
-              <Grid item xs={12} md={8} className={classes.footerRight}>
-                <Grid item xs={6} className={classes.columnGrid}>
+              <Grid item xs={12} md={7} className={classes.footerRight}>
+                <Grid item xs={8} className={classes.columnGrid}>
                   <span><FormattedMessage id="footer.telephones" />:</span>
                   <span>+375 33 38 76 163</span>
                   <span>+375 29 15 71 703</span>
                 </Grid>
-                <Grid item xs={6} className={classes.columnGrid}>
+                <Grid item xs={4} className={classes.columnGrid}>
                   <span>E-mail: <a className={classes.text} href="mailto:careers@itechart-group.com">careers@itechart-group.com</a></span>
                   <span><FormattedMessage id="footer.careerStart" />: <a className={classes.text} href="mailto:st.lab@itechart-group.com">st.lab@itechart-group.com</a></span>
                   <span><FormattedMessage id="footer.cooperation" />: <a className={classes.text} href="mailto:pr@itechart-group.com">pr@itechart-group.com</a></span>
