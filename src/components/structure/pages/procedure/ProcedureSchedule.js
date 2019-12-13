@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DatePicker from '../../../common/DatePicker'
-import TimePicker from '../../../common/TimePIcker'
+import Schedule from '../../../common/Schedule';
 
 class ProcedureSchedule extends Component {
 
@@ -10,10 +9,7 @@ class ProcedureSchedule extends Component {
     const targetProcedure = proceduresList.find(item => item.id === this.props.user);
 
 
-    return (<>
-        <DatePicker />
-        <TimePicker />
-        </>)
+    return <Schedule />
     }
 }
 

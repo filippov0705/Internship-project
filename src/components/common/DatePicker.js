@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+import { editProcedureDate } from '../../action/ProceduresActions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,31 +16,44 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function DatePicker() {
+const DatePicker = props => {
   const classes = useStyles();
-  const todayDate = new Date();
-  const todayYear = todayDate.getFullYear();
-  const todayMonth = todayDate.getMonth() + 1;
-  const todayDay = todayDate.getDate();
+  const proceduresList = props.procedures.proceduresList;
+  const targetProcedure = (proceduresList.find(item => item.id === props.id) || {});
+  const targetDate = (targetProcedure)
+
+  console.log(targetProcedure)
 
 
-  function showDate(event) {
-      console.log(event.target.value)
+  function editDate(event) {
+      props.editProcedureDate(event.target.value);
   }
 
-  return (<>
-    <form className={classes.container} noValidate onClick={showDate}>
+  return (
+    <form className={classes.container} noValidate onClick={editDate}>
       <TextField
         id="date"
-        label="Date"
+        label="Month/day/year"
         type="date"
-        defaultValue={`${todayYear}-${todayMonth}-${todayDay}`}
+        defaultValue='..-..-..'
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
-        }}
-      />
+        }}/>
     </form>
-    </>
   );
 }
+
+const mapStateToProps = store => {
+  return {
+      procedures: store.procedures
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    editProcedureDate: date => dispatch(editProcedureDate(date)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DatePicker);

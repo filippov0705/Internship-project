@@ -17,11 +17,15 @@ const useStyles = makeStyles(theme => ({
 export default function TimePicker() {
   const classes = useStyles();
 
+  function setTime(event) {
+    console.log(event.target.value)
+  }
+
   return (
-    <form className={classes.container} noValidate>
+    <form className={classes.container} noValidate onChange={setTime}>
       <TextField
         id="time"
-        label="Alarm clock"
+        label="Time"
         type="time"
         defaultValue="07:30"
         className={classes.textField}
@@ -29,7 +33,7 @@ export default function TimePicker() {
           shrink: true,
         }}
         inputProps={{
-          step: 300, // 5 min
+          step: 300,
         }}
       />
     </form>
