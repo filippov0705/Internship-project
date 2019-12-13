@@ -15,7 +15,7 @@ class ProcedurePage extends Component {
         return <ProcedureInfo user={data[data.length - 2]} />
 
       case 'edit':
-        return <ProcedureEdit />
+        return <ProcedureEdit user={data[data.length - 2]} />
 
       default:
         return null;
