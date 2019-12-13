@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { browserHistory } from 'react-router';
 import Page from '../../../common/Page';
 import ProcedureAdd from './ProcedureAdd';
 import ProcedureInfo from './ProcedureInfo';
@@ -24,6 +25,7 @@ class ProcedurePage extends Component {
 
   render() {
   const data = window.location.pathname.split('/').slice(2);
+    console.log(this.props)
 
     return (
       <Page title={this.props.data}>

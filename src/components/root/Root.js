@@ -3,6 +3,9 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Main from '../structure/pages/Main';
 import Procedures from '../structure/pages/procedure/Procedures';
 import ProcedurePage from '../structure/pages/procedure/ProcedurePage';
+import ProcedureAdd from '../structure/pages/procedure/ProcedureAdd';
+import ProcedureEdit from '../structure/pages/procedure/ProcedureEdit';
+import ProcedureInfo from '../structure/pages/procedure/ProcedureInfo'
 import PageTemplate from './PageTemplate';
 import { mainPath, 
     ProceduresPath, 
@@ -30,23 +33,23 @@ const Root = props => (
             <Route
                 path={addprocedurePath()}
                 name={'AddProcedure'}
-                component={ProcedurePage}
+                component={ProcedureAdd}
             />
             <Route
                 path={editProcedurePath()}
                 name={'EditProcedure'}
-                component={ProcedurePage}
+                component={ProcedureEdit}
             />
             <Route
                 path={procedureInfoPath()}
                 name={'ProcedureInfo'}
-                component={ProcedurePage}
+                component={ProcedureInfo}
             />
-            <Route
+            {/* <Route
                 path={procedureSchedulePath()}
-                name={'ProcedureInfo'}
+                name={'ProcedureInfo'}              TODO: change after schedulePage will be merged
                 component={ProcedurePage}
-            />
+            /> */}
             <Route name={'Main'} component={Main} />
         </Switch>
     </PageTemplate>
