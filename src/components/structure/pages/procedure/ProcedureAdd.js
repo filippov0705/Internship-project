@@ -7,6 +7,7 @@ import { ProceduresPath } from '../../../../utils/BuildPaths';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { newProcedureCreate } from '../../../../action/ProceduresActions';
+import ProcedurePage from './ProcedurePage';
 
 class ProcedureAdd extends Component {
 
@@ -23,14 +24,19 @@ class ProcedureAdd extends Component {
 
     render() {
         return (
-            <>
-            <Input label={<FormattedMessage id="label.procedureName" />}/>
-            <Grid style={{display: 'flex'}}>
-                <Tasks content={'availableProcedures'}/>
-                <Tasks content={'chosenProcedures'} />
-            </Grid>
-            <Button btnAction={this.createProcedure} type={'simple'} linkTo={ProceduresPath()} message={'Apply'} looks={'applyBtn'} />
-            </>
+            <ProcedurePage>
+                <Input label={<FormattedMessage id="label.procedureName" />}/>
+                <Grid style={{display: 'flex'}}>
+                    <Tasks content={'availableProcedures'}/>
+                    <Tasks content={'chosenProcedures'} />
+                </Grid>
+                <Button 
+                 btnAction={this.createProcedure} 
+                 type={'simple'} 
+                 linkTo={ProceduresPath()} 
+                 message={'Apply'} 
+                 looks={'applyBtn'} />
+            </ProcedurePage>
         )
     }
 }
