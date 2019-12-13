@@ -19,7 +19,7 @@ class ProcedurePage extends Component {
         return <ProcedureEdit />
 
       case 'schedule':
-        return <ProcedureSchedule user={data[data.length - 2]}/>
+        return <ProcedureSchedule id={data[data.length - 2]}/>
 
       default:
         return null;

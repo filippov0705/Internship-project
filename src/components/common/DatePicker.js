@@ -18,24 +18,22 @@ const useStyles = makeStyles(theme => ({
 
 const DatePicker = props => {
   const classes = useStyles();
-  const proceduresList = props.procedures.proceduresList;
-  const targetProcedure = (proceduresList.find(item => item.id === props.id) || {});
-  const targetDate = (targetProcedure)
-
-  console.log(targetProcedure)
-
+  const dateNow = new Date();
+  const yearNow = dateNow.getFullYear();
+  const monthNow = dateNow.getMonth();
+  const dayNow = dateNow.getDate();
 
   function editDate(event) {
       props.editProcedureDate(event.target.value);
   }
 
   return (
-    <form className={classes.container} noValidate onClick={editDate}>
+    <form className={classes.container} noValidate onChange={editDate}>
       <TextField
         id="date"
         label="Month/day/year"
         type="date"
-        defaultValue='..-..-..'
+        defaultValue={`${yearNow}-${monthNow}-${dayNow}`}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -44,16 +42,10 @@ const DatePicker = props => {
   );
 }
 
-const mapStateToProps = store => {
-  return {
-      procedures: store.procedures
-  }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     editProcedureDate: date => dispatch(editProcedureDate(date)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DatePicker);
+export default connect(null, mapDispatchToProps)(DatePicker);

@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+import { editProcedureTime } from '../../action/ProceduresActions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,20 +16,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TimePicker() {
+const TimePicker = props => {
   const classes = useStyles();
 
-  function setTime(event) {
-    console.log(event.target.value)
-  }
+
+  function editTime(event) {
+    props.editProcedureTime(event.target.value);
+}
 
   return (
-    <form className={classes.container} noValidate onChange={setTime}>
+    <form className={classes.container} noValidate onChange={editTime}>
       <TextField
         id="time"
         label="Time"
         type="time"
-        defaultValue="07:30"
+        defaultValue="23:59"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -39,3 +42,11 @@ export default function TimePicker() {
     </form>
   );
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    editProcedureTime: date => dispatch(editProcedureTime(date)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(TimePicker);

@@ -80,6 +80,9 @@ const Item = props => {
             case 'chosenProcedures':
                 return removeTask();
 
+            case 'availableSchedule':
+                return null;
+
             default:
                 return null;
         }

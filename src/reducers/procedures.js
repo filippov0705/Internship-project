@@ -2,7 +2,9 @@ import { GET_USER_DATA, APPLY_TASK_FOR_PROCEDURE,
          REMOVE_CHOSEN_TASK,
          NEW_PROCEDURE_NAME,
          NEW_PROCEDURE_CREATE,
-         EDIT_DATE } from '../action/ProceduresActions'
+         EDIT_DATE,
+        EDIT_TIME,
+        EDIT_PROCEDURE_LIST } from '../action/ProceduresActions'
 
 const initialState = () => {
     return {
@@ -24,8 +26,8 @@ const initialState = () => {
             }],
             chosenTasks: [],
             newProcedureName: '',
-            newPrcedureDate: '',
-            newProcedureTime: ''
+            prcedureNewDate: '',
+            procedureNewTime: ''
     }
 }
 
@@ -46,14 +48,20 @@ export function proceduresReducer(state = initialState(), action) {
             return { ...state, newProcedureName: action.payload }
 
             case EDIT_DATE:
-                    return { ...state, newPrcedureDate: action.payload }
-        
-                case NEW_PROCEDURE_CREATE:
+                    return { ...state, prcedureNewDate: action.payload }
+
+            case EDIT_TIME:
+                return { ...state, prcedureNewTime: action.payload }
+
+            case EDIT_PROCEDURE_LIST:
+                return { ...state, proceduresList: action.payload }
+
+            case NEW_PROCEDURE_CREATE:
                     return { ...state, 
                         proceduresList: state.proceduresList.concat(action.payload), 
                         chosenTasks: [],
-                        newProcedureName: '',
-                        newPrcedureDate: '',
+                        procedureNewName: '',
+                        prcedureNewDate: '',
                         newProcedureTime: ''}        
 
         default:

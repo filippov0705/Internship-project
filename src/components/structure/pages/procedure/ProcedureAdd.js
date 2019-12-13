@@ -14,7 +14,7 @@ class ProcedureAdd extends Component {
         const newProcedure = {
             name: this.props.procedures.newProcedureName || `Procedure-${(Math.random() * 10000000 + '').split('.')[0]}`,
             id: (Math.random() * 10000000 + '').split('.')[0],
-            scedule: '',
+            schedule: [{name: '12-9-2019 10-15', value: ['12-9-2019', '10-15']}],
             tasks: this.props.procedures.chosenTasks
         }
 

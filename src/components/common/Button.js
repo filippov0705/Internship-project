@@ -6,10 +6,19 @@ import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import PlayCircleFilledWhiteRoundedIcon from '@material-ui/icons/PlayCircleFilledWhiteRounded';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const styles = theme => ({
     btn: {
         backgroundColor: 'white',
+        border: 'none',
+    },
+    Run: {
+        backgroundColor: 'white',
+        border: 'none',
+    },
+    Add: {
+        backgroundColor: '#cfe8fc',
         border: 'none',
     },
     link: {
@@ -42,7 +51,8 @@ const Button = props => {
         Schedule: <ScheduleRoundedIcon className={classes.icon} />,
         Edit: <EditRoundedIcon className={classes.icon} />,
         More: <MoreHorizRoundedIcon className={classes.icon} />,
-        Run: <PlayCircleFilledWhiteRoundedIcon />
+        Run: <PlayCircleFilledWhiteRoundedIcon />,
+        Add: <AddCircleOutlineIcon />
     };
 
     function getLinkButton() {
@@ -60,7 +70,7 @@ const Button = props => {
     function getActionButton() {
         return (
             <Tooltip title={props.title}>
-                <button className={classes.btn}>
+                <button className={classes[props.title]} onClick={props.btnAction} >
                     {btnIcons[props.title]}
                 </button>
             </Tooltip>

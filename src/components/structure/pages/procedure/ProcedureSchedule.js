@@ -9,7 +9,7 @@ class ProcedureSchedule extends Component {
     const targetProcedure = proceduresList.find(item => item.id === this.props.user);
 
 
-    return <Schedule />
+    return <Schedule id={this.props.id} />
     }
 }
 
