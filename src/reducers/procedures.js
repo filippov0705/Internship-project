@@ -1,7 +1,9 @@
 import { GET_USER_DATA, APPLY_TASK_FOR_PROCEDURE, 
          REMOVE_CHOSEN_TASK,
          NEW_PROCEDURE_NAME,
-         NEW_PROCEDURE_CREATE } from '../action/ProceduresActions'
+         NEW_PROCEDURE_CREATE,
+         EDIT_DATE
+         } from '../action/ProceduresActions'
 
 const initialState = () => {
     return {
@@ -41,6 +43,9 @@ export function proceduresReducer(state = initialState(), action) {
 
         case NEW_PROCEDURE_NAME:
             return { ...state, newProcedureName: action.payload }
+
+        case EDIT_DATE:
+            return { ...state, newPrcedureDate: action.payload }
 
         case NEW_PROCEDURE_CREATE:
             return { ...state, 
