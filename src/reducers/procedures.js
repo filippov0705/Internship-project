@@ -3,6 +3,7 @@ import { GET_USER_DATA,
     REMOVE_CHOSEN_TASK,
     NEW_PROCEDURE_NAME,
     NEW_PROCEDURE_CREATE,
+    SET_PERIODISITY,
     EDIT_DATE,
    EDIT_PROCEDURE_LIST } from '../action/ProceduresActions'
 
@@ -27,7 +28,8 @@ return {
        chosenTasks: [],
        newProcedureName: '',
        prcedureNewDate: '',
-       procedureNewTime: ''
+       procedureNewTime: '',
+       periodicity: []
 }
 }
 
@@ -51,7 +53,10 @@ switch (action.type) {
                return { ...state, prcedureNewDate: action.payload[0], procedureNewTime: action.payload[1] }
 
        case EDIT_PROCEDURE_LIST:
-           return { ...state, proceduresList: action.payload }
+           return { ...state, proceduresList: action.payload, periodicity: [] }
+        
+        case SET_PERIODISITY:
+            return { ...state, periodicity: action.payload }
 
        case NEW_PROCEDURE_CREATE:
                return { ...state, 
@@ -59,7 +64,8 @@ switch (action.type) {
                    chosenTasks: [],
                    procedureNewName: '',
                    prcedureNewDate: '',
-                   newProcedureTime: ''}        
+                   newProcedureTime: '',
+                   periodicity: []}        
 
    default:
        return state

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Tasks from '../structure/pages/task/Tasks';
 import Button from '../common/Button';
 import { ProceduresPath, editProcedureUrl } from '../../utils/BuildPaths';
-import { editProceduresList, editProcedureDate } from '../../action/ProceduresActions';
+import { editProceduresList, editProcedureDate, setPeriodicity } from '../../action/ProceduresActions';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import DaysOfTheWeekBtns from './DaysOfTheWeekButtons';
 
@@ -24,7 +24,7 @@ const styles = theme => ({
 class Schedule extends Component {
 
     componentDidMount() {
-        this.props.editProcedureDate([this.timeNow(), '21:55:00'])
+        this.props.editProcedureDate([this.timeNow(), '21:55:00']);
     }
 
     timeNow = () => {
@@ -40,10 +40,15 @@ class Schedule extends Component {
         const newDate = this.props.procedures.prcedureNewDate;
         const newTime = this.props.procedures.procedureNewTime;
         const proceduresList = this.props.procedures.proceduresList;
-        const targetProcedure = (proceduresList.find(item => item.id === this.props.id) || {});
+        const targetProcedure = this.props.targetProcedure;
+        const daysInAWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const periodisity = daysInAWeek.reduce((sum, cur) => {
+            if (this.props.procedures.periodicity.includes(cur)) return `${sum} ${cur}`;
+            return sum;
+        }, '')
 
         if (!newDate || !newTime) return;
-        targetProcedure.schedule.push({name: `${newDate} ${newTime}`, value: [newDate, newTime]});
+        targetProcedure.schedule.push({name: `${newDate} ${newTime} ${periodisity} `, value: [newDate, newTime], periodicity: this.props.procedures.periodicity});
         const newProceduresList = proceduresList.map(item => {
             if(item.id === targetProcedure.id) return targetProcedure;
             return item;
@@ -53,8 +58,7 @@ class Schedule extends Component {
 
     render() {
     const {classes} = this.props;
-    const proceduresList = this.props.procedures.proceduresList;
-    const targetProcedure = (proceduresList.find(item => item.id === this.props.id) || {});
+    const targetProcedure = this.props.targetProcedure;
     const targetSchedule = targetProcedure.schedule;
 
     return (<>
@@ -97,7 +101,8 @@ const mapStateToProps = store => {
   const mapDispatchToProps = dispatch => {
     return {
         editProceduresList: list => dispatch(editProceduresList(list)),
-        editProcedureDate: date => dispatch(editProcedureDate(date))
+        editProcedureDate: date => dispatch(editProcedureDate(date)),
+        setPeriodicity: periodicity => dispatch(setPeriodicity(periodicity))
     }
   }
 
