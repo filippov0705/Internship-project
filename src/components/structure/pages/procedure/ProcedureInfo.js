@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Task from '../task/Tasks';
 import { connect } from 'react-redux';
+import { ProceduresPath } from '../../../../utils/BuildPaths';
+import Button from '../../../common/Button'; 
 
 class ProcedureInfo extends Component {
 
@@ -9,7 +11,10 @@ class ProcedureInfo extends Component {
     const targetProcedure = proceduresList.find(item => item.id === this.props.user)
     const data = targetProcedure ? targetProcedure.tasks : [];
 
-    return <Task data={data} content={'ShowProcedureTasks'} />
+    return (<>
+            <Task data={data} content={'ShowProcedureTasks'} />
+            <Button type={'simple'} linkTo={ProceduresPath()} message={'Go back'} looks={'applyBtn'} />
+            </>)
     }
 }
 
