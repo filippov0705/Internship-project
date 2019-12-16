@@ -35,6 +35,14 @@ const styles = theme => ({
     border: '1px solid gray',
     borderRadius: '7px',
     overflow: 'auto'
+  },
+  availableSchedule: {
+    height: '665px', 
+    backgroundColor: 'white', 
+    margin: '20px',
+    border: '1px solid gray',
+    borderRadius: '7px',
+    overflow: 'auto'
   }
 });
 

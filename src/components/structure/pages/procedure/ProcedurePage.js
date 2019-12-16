@@ -3,6 +3,7 @@ import Page from '../../../common/Page';
 import ProcedureAdd from './ProcedureAdd';
 import ProcedureInfo from './ProcedureInfo';
 import ProcedureEdit from './ProcedureEdit';
+import ProcedureSchedule from './ProcedureSchedule';
 
 class ProcedurePage extends Component {
 
@@ -16,6 +17,9 @@ class ProcedurePage extends Component {
 
       case 'edit':
         return <ProcedureEdit id={data[data.length - 2]} />
+
+      case 'schedule':
+        return <ProcedureSchedule id={data[data.length - 2]}/>
 
       default:
         return null;
