@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUserData } from '../../../../action/ProceduresActions';
 import List from '../../../common/List';
-import ListActions from '../../../common/ListActions'
+import ListActions from '../../../common/ListActions';
+import Page from '../../../common/Page';
 
 class Procedures extends Component {
 
@@ -15,10 +16,10 @@ class Procedures extends Component {
       const proceduresList = this.props.procedures.proceduresList;
 
       return (
-        <React.Fragment>
+        <Page>
           <ListActions />
           <List info={'Procedure'} content={'list'} data={proceduresList} />
-        </React.Fragment>
+        </Page>
       )
   }
 }

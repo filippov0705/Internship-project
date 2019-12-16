@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { addprocedurePath } from '../../utils/BuildPaths'
+import { newProcedurePath } from '../../utils/BuildPaths'
 import Search from './Search';
 import Grid from '@material-ui/core/Grid';
 import Button from './Button'
@@ -31,7 +31,7 @@ class ListActions extends Component {
              justify="space-between"
              alignItems="center">
                 <Search />
-                <Button type={'simple'} message={'Add'} looks={'addBtn'} linkTo={addprocedurePath()} />
+                <Button type={'simple'} message={'Add'} looks={'addBtn'} linkTo={newProcedurePath()} />
             </Grid>
         );
     }
