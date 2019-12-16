@@ -1,97 +1,97 @@
-import React, { Component } from 'react';
-import { fade } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import withStyles from '@material-ui/core/styles/withStyles';
-import UserMenu from './UserMenu';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { mainPath, ProceduresPath } from '../../utils/BuildPaths';
-import { FormattedMessage } from 'react-intl';
+import React, { Component } from "react";
+import { fade } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import withStyles from "@material-ui/core/styles/withStyles";
+import UserMenu from "./UserMenu";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { mainPath, ProceduresPath } from "../../utils/BuildPaths";
+import { FormattedMessage } from "react-intl";
 
 const styles = theme => ({
-    root: {
-        padding: theme.spacing(1),
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
-        [theme.breakpoints.up('lg')]: {
-          display: 'none',
-        },
-      },
-      btn_margin: {
-        marginRight: '5px'
-      },
-      link: {
-        textDecoration: 'none'
-      },
+  root: {
+    padding: theme.spacing(1),
+    [theme.breakpoints.up("md")]: {
+      display: "none"
+    },
+    [theme.breakpoints.up("lg")]: {
+      display: "none"
+    }
+  },
+  btn_margin: {
+    marginRight: "5px"
+  },
+  link: {
+    textDecoration: "none"
+  },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block"
+    }
   },
   search: {
-    position: 'relative',
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
+      width: "auto"
+    }
   },
   searchIcon: {
     width: theme.spacing(7),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   inputRoot: {
-    color: 'inherit',
+    color: "inherit"
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: 200,
-    },
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: 200
+    }
   },
   sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex"
+    }
   },
   sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none"
+    }
+  }
 });
 
 class SearchAppBar extends Component {
@@ -112,9 +112,9 @@ class SearchAppBar extends Component {
   handleMobileMenuClose = () => {
     this.setState({
       mobileMoreAnchorEl: null
-    })
+    });
   };
-    
+
   handleMenuClose = () => {
     this.setState({
       anchorEl: null
@@ -125,7 +125,7 @@ class SearchAppBar extends Component {
   handleMobileMenuOpen = event => {
     this.setState({
       mobileMoreAnchorEl: event.currentTarget
-    })
+    });
   };
 
   render() {
@@ -133,34 +133,35 @@ class SearchAppBar extends Component {
       { anchorEl, mobileMoreAnchorEl } = this.state,
       isMenuOpen = Boolean(anchorEl),
       isMobileMenuOpen = Boolean(mobileMoreAnchorEl),
-      menuId = 'primary-search-account-menu',
+      menuId = "primary-search-account-menu",
       renderMenu = (
-          <Menu
-           anchorEl={anchorEl}
-           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-           id={menuId}
-           keepMounted
-           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-           open={isMenuOpen}
-           onClose={this.handleMenuClose}
-          >
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+          open={isMenuOpen}
+          onClose={this.handleMenuClose}
+        >
           <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
           <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
         </Menu>
       );
 
-    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const mobileMenuId = "primary-search-account-menu-mobile";
     const renderMobileMenu = (
       <Menu
-       anchorEl={mobileMoreAnchorEl}
-       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-       id={mobileMenuId}
-       keepMounted
-       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-       open={isMobileMenuOpen}
-       onClose={this.handleMobileMenuClose}
-       className={classes.root}>
-        <Link to={mainPath()} >
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMobileMenuOpen}
+        onClose={this.handleMobileMenuClose}
+        className={classes.root}
+      >
+        <Link to={mainPath()}>
           <MenuItem>
             <FormattedMessage id="navigation.mainPage" />
           </MenuItem>
@@ -173,67 +174,69 @@ class SearchAppBar extends Component {
       </Menu>
     );
 
-  return (
-    <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <UserMenu />
-          <Typography className={classes.title} variant="h6" noWrap>
-            ITechArt
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+    return (
+      <div className={classes.grow}>
+        <AppBar position="static">
+          <Toolbar>
+            <UserMenu />
+            <Typography className={classes.title} variant="h6" noWrap>
+              ITechArt
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <Link to={mainPath()} className={classes.link} >
-              <Button variant="contained" className={classes.btn_margin}>
-                <FormattedMessage id="navigation.mainPage" />
-              </Button>
-            </Link>
-            <Link to={ProceduresPath()} className={classes.link}>
-              <Button variant="contained">
-                <FormattedMessage id="navigation.procedures" />
-              </Button>
-            </Link>
-            <IconButton
-             className={classes.root}
-             edge="end"
-             aria-label="account of current user"
-             aria-controls={menuId}
-             aria-haspopup="true"
-             onClick={this.handleProfileMenuOpen}
-             color="inherit">
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-             aria-label="show more"
-             aria-controls={mobileMenuId}
-             aria-haspopup="true"
-             onClick={this.handleMobileMenuOpen}
-             color="inherit">
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </div>
-  );
-}
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <Link to={mainPath()} className={classes.link}>
+                <Button variant="contained" className={classes.btn_margin}>
+                  <FormattedMessage id="navigation.mainPage" />
+                </Button>
+              </Link>
+              <Link to={ProceduresPath()} className={classes.link}>
+                <Button variant="contained">
+                  <FormattedMessage id="navigation.procedures" />
+                </Button>
+              </Link>
+              <IconButton
+                className={classes.root}
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={this.handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={this.handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </div>
+    );
+  }
 }
 
 export default withStyles(styles)(SearchAppBar);
