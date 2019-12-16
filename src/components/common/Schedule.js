@@ -1,29 +1,46 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import TimePicker from './TimePicker';
 import DatePicker from './DatePicker';
 import { connect } from 'react-redux';
 import Tasks from '../structure/pages/task/Tasks';
 import Button from '../common/Button';
 import { ProceduresPath, editProcedureUrl } from '../../utils/BuildPaths';
-import { editProceduresList } from '../../action/ProceduresActions';
+import { editProceduresList, editProcedureDate } from '../../action/ProceduresActions';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import DaysOfTheWeekBtns from './DaysOfTheWeekButtons';
 
 const styles = theme => ({
     gridDisplay: {
-      display: 'flex'
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    scheduleBtns: {
+        display: 'flex',
+        justifyContent: 'center'
     }
 });
 
-const Schedule = props => {
-    const {classes} = props;
-    const proceduresList = props.procedures.proceduresList;
-    const targetProcedure = (proceduresList.find(item => item.id === props.id) || {});
-    const targetSchedule = targetProcedure.schedule;
+class Schedule extends Component {
 
-    function addSchedule() {
-        const newDate = props.procedures.prcedureNewDate;
-        const newTime = props.procedures.prcedureNewTime;
+    componentDidMount() {
+        this.props.editProcedureDate([this.timeNow(), '21:55:00'])
+    }
+
+    timeNow = () => {
+        const dateNow = new Date();
+        const yearNow = dateNow.getFullYear();
+        const monthNow = dateNow.getMonth() + 1;
+        const dayNow = dateNow.getDate();
+        
+        return `${yearNow}-${monthNow}-${dayNow}`;
+    }
+
+    addSchedule = () => {
+        const newDate = this.props.procedures.prcedureNewDate;
+        const newTime = this.props.procedures.procedureNewTime;
+        const proceduresList = this.props.procedures.proceduresList;
+        const targetProcedure = (proceduresList.find(item => item.id === this.props.id) || {});
 
         if (!newDate || !newTime) return;
         targetProcedure.schedule.push({name: `${newDate} ${newTime}`, value: [newDate, newTime]});
@@ -31,17 +48,27 @@ const Schedule = props => {
             if(item.id === targetProcedure.id) return targetProcedure;
             return item;
         });
-        props.editProceduresList(newProceduresList)
+        this.props.editProceduresList(newProceduresList)
     } 
+
+    render() {
+    const {classes} = this.props;
+    const proceduresList = this.props.procedures.proceduresList;
+    const targetProcedure = (proceduresList.find(item => item.id === this.props.id) || {});
+    const targetSchedule = targetProcedure.schedule;
 
     return (<>
         <Grid className={classes.gridDisplay}>
-            <DatePicker id={props.id} />
-            <TimePicker />
-            <Button 
-             btnAction={addSchedule}
-             type={'action'} 
-             title={'Add'} />  
+            <DatePicker id={this.props.id} dateNow={this.timeNow()} />
+            <Grid container className={classes.scheduleBtns}>
+                <Button 
+                 btnAction={this.addSchedule}
+                 type={'action'} 
+                 title={'Add'} >
+                     <AddCircleOutlineIcon />
+                </Button> 
+                <DaysOfTheWeekBtns />
+             </Grid> 
         </Grid>
         <Tasks data={targetSchedule} content={'availableSchedule'}/>
         <Button 
@@ -53,11 +80,12 @@ const Schedule = props => {
         <Button 
          btnAction={null} 
          type={'simple'} 
-         linkTo={editProcedureUrl(props.id)} 
+         linkTo={editProcedureUrl(this.props.id)} 
          message={'Edit'} 
          looks={'applyBtn'} />  
         </>
     )
+    }
 }
 
 const mapStateToProps = store => {
@@ -68,7 +96,8 @@ const mapStateToProps = store => {
 
   const mapDispatchToProps = dispatch => {
     return {
-        editProceduresList: list => dispatch(editProceduresList(list))
+        editProceduresList: list => dispatch(editProceduresList(list)),
+        editProcedureDate: date => dispatch(editProcedureDate(date))
     }
   }
 

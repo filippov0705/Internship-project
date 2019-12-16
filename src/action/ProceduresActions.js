@@ -47,15 +47,9 @@ export function newProcedureCreate(newProcedure) {
 }
 
 export function editProcedureDate(date) {
+    console.log(date)
     return {
         type: EDIT_DATE,
-        payload: date
-    }
-}
-
-export function editProcedureTime(date) {
-    return {
-        type: EDIT_TIME,
         payload: date
     }
 }

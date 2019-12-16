@@ -70,9 +70,11 @@ const Button = props => {
     function getActionButton() {
         return (
             <Tooltip title={props.title}>
-                <button className={classes[props.title]} onClick={props.btnAction} >
-                    {btnIcons[props.title]}
-                </button>
+                {/* <Link to={props.linkTo} className={classes.link}> */}
+                    <button className={classes[props.title]} onClick={props.btnAction} >
+                        {props.children}
+                    </button>
+                {/* </Link> */}
             </Tooltip>
         )
     }
