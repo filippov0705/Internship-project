@@ -17,9 +17,8 @@ const DatePicker = props => {
 
   const handleDateChange = date => {
     const datePickerValue = JSON.stringify(date).slice(1, 20).split('T');
-
     setSelectedDate(date);
-    editProcedureDate(datePickerValue)
+    editProcedureDate(datePickerValue);
   };
 
   return (

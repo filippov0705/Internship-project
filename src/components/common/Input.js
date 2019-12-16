@@ -2,20 +2,47 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { newProcedureName } from '../../action/ProceduresActions';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
     input: {
-        marginTop: '10px',
-        marginLeft: '20px'
+        marginLeft: '10px',
+        height: '30px',
+        borderRadius: '5px',
+        [theme.breakpoints.up('xs')]: {
+            width: '80%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '300px'
+        },
     },
     label: {
+        display: 'flex',
+        alignItems: 'center',
+        width: '80%',
+        [theme.breakpoints.up('xs')]: {
+            flexDirection: 'column',
+            alignItems: 'start',
+        },
+        [theme.breakpoints.up('md')]: {
+            flexDirection: 'row'
+        },
+    },
+    labelSpan: {
         marginLeft: '20px'
     }
 });
 
 class Input extends Component {
 
+    componentDidMount() {
+        this.props.newProcedureName('');
+    }
+
     inputTextChange = event => {
+        if (event.target.value.length > 25) {
+            return event.target.value = event.target.value.substr(0, 25);
+        }
         this.props.newProcedureName(event.target.value);
     }
 
@@ -23,9 +50,11 @@ class Input extends Component {
         const { classes } = this.props;
 
         return (
-            <label>
-                <span className={classes.label}>{this.props.label}</span>
-                <input className={classes.input} onChange={this.inputTextChange} />
+            <label className={classes.label}>
+                <span className={classes.labelSpan}>{this.props.label}</span>
+                <Tooltip title={'no more than 25 characters'}>
+                    <input className={classes.input} onChange={this.inputTextChange} />
+                </Tooltip>
             </label>
         )
     }

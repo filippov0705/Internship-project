@@ -12,19 +12,19 @@ const initialState = () => {
 return {
    proceduresList: [],
    possibleTasks: [{
-           "name": "task_1",
+           "name": "Get results",
        },
        {
-           "name": "task_2",
+           "name": "Show results",
        },
        {
-           "name": "task_3",
+           "name": "Mailing",
        },
        {
-           "name": "task_4",
+           "name": "Сalculate the average",
        },
        {
-           "name": "task_5",
+           "name": "Show maximum value",
        }],
        chosenTasks: [],
        newProcedureName: '',

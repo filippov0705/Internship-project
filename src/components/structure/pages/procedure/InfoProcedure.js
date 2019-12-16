@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Task from '../task/Tasks';
 import { connect } from 'react-redux';
-import { ProceduresPath } from '../../../../utils/BuildPaths';
-import Button from '../../../common/Button'; 
 import ProcedurePage from './ProcedurePage';
 
 class InfoProcedure extends Component {
@@ -16,7 +14,6 @@ class InfoProcedure extends Component {
     return (
       <ProcedurePage>
         <Task data={data} content={'data'} />
-        <Button type={'simple'} linkTo={ProceduresPath()} message={'Go back'} looks={'applyBtn'} />
       </ProcedurePage>
     )
   }

@@ -9,11 +9,14 @@ import { connect } from 'react-redux';
 import { newProcedureCreate, setChosenTasks } from '../../../../action/ProceduresActions';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ProcedurePage from './ProcedurePage';
+import Heading from '../../../common/Heading';
 
 const styles = theme => ({
     gridStyle: {
-        display: 'flex'
-    }
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
 });
 
 class ProcedureAdd extends Component {
@@ -38,14 +41,14 @@ class ProcedureAdd extends Component {
 
         return (
             <ProcedurePage>
-                <Input label={<FormattedMessage id="label.procedureName" />}/>
+                <Heading size={'big'} heading={'Add new procedure'} />
                 <Grid className={classes.gridStyle}>
-                    <Tasks data={'possibleTasks'} content={'possibleTasks'}/>
-                    <Tasks data={'chosenTasks'} content={'chosenTasks'} />
+                    <Input label={<FormattedMessage id="label.procedureName" />}/>
+                    <Button btnAction={this.createProcedure} type={'simple'} linkTo={ProceduresPath()} message={'Apply'} looks={'applyBtn'} />
                 </Grid>
                 <Grid className={classes.gridStyle}>
-                    <Button btnAction={this.createProcedure} type={'simple'} linkTo={ProceduresPath()} message={'Apply'} looks={'applyBtn'} />
-                    <Button type={'simple'} linkTo={ProceduresPath()} message={'Go back'} looks={'applyBtn'} />
+                    <Tasks data={'possibleTasks'} content={'possibleTasks'} heading={'Types of available tasks'}/>
+                    <Tasks data={'chosenTasks'} content={'chosenTasks'}  heading={'Chosen tasks'} />
                 </Grid>
             </ProcedurePage>
         )

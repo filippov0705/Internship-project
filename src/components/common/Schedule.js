@@ -32,10 +32,10 @@ class Schedule extends Component {
         const yearNow = dateNow.getFullYear();
         const monthNow = dateNow.getMonth() + 1;
         const dayNow = dateNow.getDate();
-        
+        //объеденить
         return `${yearNow}-${monthNow}-${dayNow}`;
     }
-
+//переименовать и вынести в отдельную функцию
     addSchedule = () => {
         const newDate = this.props.procedures.prcedureNewDate;
         const newTime = this.props.procedures.procedureNewTime;
@@ -45,7 +45,7 @@ class Schedule extends Component {
         const periodisity = daysInAWeek.reduce((sum, cur) => {
             if (this.props.procedures.periodicity.includes(cur)) return `${sum} ${cur}`;
             return sum;
-        }, '')
+        }, '');
 
         if (!newDate || !newTime) return;
         targetProcedure.schedule.push({name: `${newDate} ${newTime} ${periodisity} `, value: [newDate, newTime], periodicity: this.props.procedures.periodicity});
@@ -57,7 +57,7 @@ class Schedule extends Component {
     } 
 
     render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     const targetProcedure = this.props.targetProcedure;
     const targetSchedule = targetProcedure.schedule;
 
@@ -66,9 +66,10 @@ class Schedule extends Component {
             <DatePicker id={this.props.id} dateNow={this.timeNow()} />
             <Grid container className={classes.scheduleBtns}>
                 <Button 
-                 btnAction={this.addSchedule}
-                 type={'action'} 
-                 title={'Add'} >
+                   btnAction={this.addSchedule}
+                   type={'action'} 
+                   title={'Add'} 
+                 >
                      <AddCircleOutlineIcon />
                 </Button> 
                 <DaysOfTheWeekBtns />

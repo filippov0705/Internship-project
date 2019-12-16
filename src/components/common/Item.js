@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { procedureInfoUrl } from '../../utils/BuildPaths';
+import { editProcedureUrl } from '../../utils/BuildPaths';
 import ItemButtons from './ItemButtons';
 import { Link } from 'react-router-dom';
 import { applyTaskForProcedure, removeChosenTask } from '../../action/ProceduresActions';
@@ -13,7 +13,8 @@ const styles = theme => ({
         alignItems: 'center',
     },
     item_border: {
-        borderBottom: '1px solid rgba(94, 92, 92, 0.225)'
+        borderBottom: '1px solid rgba(94, 92, 92, 0.225)',
+        cursor: 'pointer'
     },
     gridSpan: {
         marginLeft: '10px',
@@ -37,7 +38,8 @@ const Item = props => {
     function getItemName() {
         switch (props.info) {
             case 'Procedure':
-                return (<Link to={procedureInfoUrl(props.id)} className={classes.link}>
+                console.log(props.id)
+                return (<Link to={editProcedureUrl(props.id)} className={classes.link}>
                             <span className={classes.gridSpan}>{props.name}</span>
                         </Link>)
 

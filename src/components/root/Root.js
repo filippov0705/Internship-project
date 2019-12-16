@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Main from '../structure/pages/Main';
 import Procedures from '../structure/pages/procedure/Procedures';
-import ProcedurePage from '../structure/pages/procedure/ProcedurePage';
 import NewProcedure from '../structure/pages/procedure/NewProcedure';
 import EditProcedure from '../structure/pages/procedure/EditProcedure';
 import InfoProcedure from '../structure/pages/procedure/InfoProcedure';
@@ -46,11 +45,11 @@ const Root = props => (
                 name={'InfoProcedure'}
                 component={InfoProcedure}
             />
-            <Route
+            {/* <Route
                 path={procedureSchedulePath()}
                 name={'ProcedureInfo'}
                 component={ScheduleProcedure}
-            />
+            /> */}
             <Route name={'Main'} component={Main} />
         </Switch>
     </PageTemplate>

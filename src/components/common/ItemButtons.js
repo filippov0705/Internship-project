@@ -32,7 +32,7 @@ const ItemButtons = props => {
          className={classes.itemName}>
              <Button type={'link'} title={'Schedule'} linkTo={procedureScheduleUrl(props.id)} />
              <Button type={'link'} title={'Edit'} linkTo={editProcedureUrl(props.id)} />
-             <Button type={'link'} title={'More'} linkTo={procedureInfoUrl(props.id)} />
+             <Button type={'link'} title={'Tasks'} linkTo={procedureInfoUrl(props.id)} />
              <Button type={'action'} title={'Run'} />
         </Grid>
     )

@@ -14,10 +14,10 @@ class Procedures extends Component {
 
     render() {
       const proceduresList = this.props.procedures.proceduresList;
-
+// ListActions переименовать
       return (
         <Page>
-          <ListActions />
+          <ListActions /> 
           <List info={'Procedure'} content={'list'} data={proceduresList} />
         </Page>
       )
@@ -32,7 +32,7 @@ const mapStateToProps = store => {
   
   const mapDispatchToProps = dispatch => {
     return {
-      getUserData: () => dispatch(getUserData()),
+      // getUserData: () => dispatch(getUserData()),
     }
   }
   

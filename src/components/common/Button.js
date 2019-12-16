@@ -33,14 +33,17 @@ const styles = theme => ({
         border: '1px solid gray',
         borderRadius: '7px',
         marginLeft: '80px',
-        marginRight: '15px'
+        marginRight: '15px',
+        cursor: 'pointer'
     },
     applyBtn: {
         width: '85px',
         height: '40px',
         border: '1px solid gray',
         borderRadius: '7px',
-        marginLeft: '20px'
+        marginLeft: '20px',
+        marginRight: '20px',
+        cursor: 'pointer'
     }
   })
 
@@ -50,7 +53,7 @@ const Button = props => {
         btnIcons = {
         Schedule: <ScheduleRoundedIcon className={classes.icon} />,
         Edit: <EditRoundedIcon className={classes.icon} />,
-        More: <MoreHorizRoundedIcon className={classes.icon} />,
+        Tasks: <MoreHorizRoundedIcon className={classes.icon} />,
         Run: <PlayCircleFilledWhiteRoundedIcon />,
         Add: <AddCircleOutlineIcon />
     };

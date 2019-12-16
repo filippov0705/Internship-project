@@ -10,7 +10,7 @@ import ProcedurePage from './ProcedurePage';
 
 const styles = theme => ({
   gridDisplay: {
-    display: 'flex'
+    display: 'flex',
   }
   });
 
@@ -48,7 +48,6 @@ class EditProcedure extends Component {
         </Grid>
         <Button btnAction={this.editProcedure} type={'simple'} linkTo={this.props.location.pathname} message={'Apply'} looks={'applyBtn'} />
         <Button type={'simple'} linkTo={procedureScheduleUrl(id)} message={'Schedule'} looks={'applyBtn'} />
-        <Button type={'simple'} linkTo={ProceduresPath()} message={'Go back'} looks={'applyBtn'} />
       </ProcedurePage>
     )
 

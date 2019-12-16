@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import Item from './Item';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Heading from './Heading';
 
 const styles = theme => ({
   list: {
@@ -58,7 +59,7 @@ const List = props => {
 
   return (
     <Grid 
-     xs={(props.info !== 'possibleTasks' || 'chosenTasks') ? 12 : 6}  
+    //  xs={(props.info !== 'possibleTasks' || 'chosenTasks') ? 12 : 6}  
      item className={classes[props.content]}>
       {itemCreation(props.data)}
     </Grid>
