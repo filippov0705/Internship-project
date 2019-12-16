@@ -1,8 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import { editProcedureDate } from '../../action/ProceduresActions';
+import { useState } from 'react';
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -14,7 +13,7 @@ import {
 
 const DatePicker = props => {
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date(`${props.dateNow}T23:55:00`));
+  const [selectedDate, setSelectedDate] = useState(new Date(`${props.dateNow}T23:55:00`));
 
   const handleDateChange = date => {
     const datePickerValue = JSON.stringify(date).slice(1, 20).split('T');

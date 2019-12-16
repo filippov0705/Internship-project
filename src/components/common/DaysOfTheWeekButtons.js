@@ -13,50 +13,52 @@ const DaysOfTheWeekBtns = props => {
         }
     }
 
-    return (<>
-        <Button
-        btnAction={btnClick}
-        type={'action'} 
-        title={'Mon'} >
-            <span>Mon</span>
-       </Button>
-       <Button 
-        btnAction={btnClick}
-        type={'action'} 
-        title={'Tue'} >
-            <span>Tue</span>
-       </Button>
-       <Button 
-        btnAction={btnClick}
-        type={'action'} 
-        title={'Wed'} >
-            <span>Wed</span>
-       </Button>
-       <Button 
-        btnAction={btnClick}
-        type={'action'} 
-        title={'Thu'} >
-            <span>Thu</span>
-       </Button>
-       <Button 
-        btnAction={btnClick}
-        type={'action'} 
-        title={'Fri'} >
-            <span>Fri</span>
-       </Button>
-       <Button 
-        btnAction={btnClick}
-        type={'action'} 
-        title={'Sat'} >
-            <span>Sat</span>
-       </Button>
-       <Button 
-        btnAction={btnClick}
-        type={'action'} 
-        title={'Sun'} >
-            <span>Sun</span>
-       </Button>
-        </>);
+    return (
+        <>
+            <Button
+             btnAction={btnClick}
+             type={'action'} 
+             title={'Mon'} >
+                <span>Mon</span>
+            </Button>
+            <Button 
+             btnAction={btnClick}
+             type={'action'} 
+             title={'Tue'} >
+                <span>Tue</span>
+            </Button>
+            <Button 
+             btnAction={btnClick}
+             type={'action'} 
+             title={'Wed'} >
+                <span>Wed</span>
+            </Button>
+            <Button 
+             btnAction={btnClick}
+             type={'action'} 
+             title={'Thu'} >
+                <span>Thu</span>
+            </Button>
+            <Button 
+             btnAction={btnClick}
+             type={'action'} 
+             title={'Fri'} >
+                <span>Fri</span>
+            </Button>
+            <Button 
+             btnAction={btnClick}
+             type={'action'} 
+             title={'Sat'} >
+                <span>Sat</span>
+            </Button>
+            <Button 
+             btnAction={btnClick}
+             type={'action'} 
+             title={'Sun'} >
+                <span>Sun</span>
+            </Button>
+        </>
+    );
 }
 
 const mapStateToProps = store => {
