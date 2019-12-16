@@ -6,7 +6,7 @@ import Button from '../../../common/Button';
 import { ProceduresPath } from '../../../../utils/BuildPaths';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-import { newProcedureCreate } from '../../../../action/ProceduresActions';
+import { newProcedureCreate, setChosenTasks } from '../../../../action/ProceduresActions';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ProcedurePage from './ProcedurePage';
 
@@ -17,6 +17,10 @@ const styles = theme => ({
 });
 
 class ProcedureAdd extends Component {
+
+    componentDidMount() {
+        this.props.setChosenTasks([]);
+    }
 
     createProcedure = () => {
         const newProcedure = {
@@ -36,8 +40,8 @@ class ProcedureAdd extends Component {
             <ProcedurePage>
                 <Input label={<FormattedMessage id="label.procedureName" />}/>
                 <Grid className={classes.gridStyle}>
-                    <Tasks content={'availableProcedures'}/>
-                    <Tasks content={'chosenProcedures'} />
+                    <Tasks data={'possibleTasks'} content={'possibleTasks'}/>
+                    <Tasks data={'chosenTasks'} content={'chosenTasks'} />
                 </Grid>
                 <Grid className={classes.gridStyle}>
                     <Button btnAction={this.createProcedure} type={'simple'} linkTo={ProceduresPath()} message={'Apply'} looks={'applyBtn'} />
@@ -56,7 +60,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        newProcedureCreate: newProcedure => dispatch(newProcedureCreate(newProcedure))
+        newProcedureCreate: newProcedure => dispatch(newProcedureCreate(newProcedure)),
+        setChosenTasks: tasks => dispatch(setChosenTasks(tasks))
     }
   }
 

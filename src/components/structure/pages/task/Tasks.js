@@ -5,25 +5,9 @@ import List from '../../../common/List';
 
 class Tasks extends Component {
 
-  getContent = () => {
-    switch (this.props.content) {
-      case 'availableProcedures':
-        return this.props.procedures.possibleTasks;
-
-      case 'chosenProcedures':
-        return this.props.procedures.chosenTasks;
-
-      case 'ShowProcedureTasks':
-      case 'availableSchedule':
-        return this.props.data;
-
-      default:
-        return null;
-    }
-  }
-
   render() {
-        return <List data={this.getContent() || []} content={this.props.content} />
+    const data = (typeof(this.props.data) === 'string') ? this.props.procedures[this.props.data] : this.props.data;
+        return <List data={data || []} content={this.props.content} />
     }
 }
 

@@ -5,6 +5,7 @@ import { GET_USER_DATA,
     NEW_PROCEDURE_CREATE,
     SET_PERIODISITY,
     EDIT_DATE,
+    SET_CHOSEN_TASKS,
    EDIT_PROCEDURE_LIST } from '../action/ProceduresActions'
 
 const initialState = () => {
@@ -49,14 +50,17 @@ switch (action.type) {
    case NEW_PROCEDURE_NAME:
        return { ...state, newProcedureName: action.payload }
 
-       case EDIT_DATE:
-               return { ...state, prcedureNewDate: action.payload[0], procedureNewTime: action.payload[1] }
+    case EDIT_DATE:
+        return { ...state, prcedureNewDate: action.payload[0], procedureNewTime: action.payload[1] }
 
-       case EDIT_PROCEDURE_LIST:
-           return { ...state, proceduresList: action.payload, periodicity: [] }
+    case EDIT_PROCEDURE_LIST:
+        return { ...state, proceduresList: action.payload, periodicity: [] }
         
-        case SET_PERIODISITY:
-            return { ...state, periodicity: action.payload }
+    case SET_PERIODISITY:
+        return { ...state, periodicity: action.payload }
+
+    case SET_CHOSEN_TASKS:
+        return { ...state, chosenTasks: action.payload }
 
        case NEW_PROCEDURE_CREATE:
                return { ...state, 

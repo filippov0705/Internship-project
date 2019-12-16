@@ -12,7 +12,7 @@ const styles = theme => ({
     borderRadius: '7px',
     overflow: 'auto'
   },
-  availableProcedures: {
+  possibleTasks: {
       height: '200px',
       backgroundColor: 'white', 
       margin: '20px',
@@ -20,7 +20,7 @@ const styles = theme => ({
       borderRadius: '7px',
       overflow: 'auto'
   },
-  chosenProcedures: {
+  chosenTasks: {
     height: '200px',
     backgroundColor: 'white', 
     margin: '20px',
@@ -28,16 +28,8 @@ const styles = theme => ({
     borderRadius: '7px',
     overflow: 'auto'
 },
-  ShowProcedureTasks: {
-    height: '665px', 
-    backgroundColor: 'white', 
-    margin: '20px',
-    border: '1px solid gray',
-    borderRadius: '7px',
-    overflow: 'auto'
-  },
-  availableSchedule: {
-    height: '665px', 
+  data: {
+    height: '620px', 
     backgroundColor: 'white', 
     margin: '20px',
     border: '1px solid gray',
@@ -66,7 +58,7 @@ const List = props => {
 
   return (
     <Grid 
-     xs={(props.info !== 'availableProcedures' || 'chosenProcedures') ? 12 : 6}  
+     xs={(props.info !== 'possibleTasks' || 'chosenTasks') ? 12 : 6}  
      item className={classes[props.content]}>
       {itemCreation(props.data)}
     </Grid>

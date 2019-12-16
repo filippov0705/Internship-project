@@ -72,9 +72,9 @@ class Schedule extends Component {
                      <AddCircleOutlineIcon />
                 </Button> 
                 <DaysOfTheWeekBtns />
-             </Grid> 
+             </Grid>
         </Grid>
-        <Tasks data={targetSchedule} content={'availableSchedule'}/>
+        <Tasks data={targetSchedule} content={'data'}/>
         <Button 
          btnAction={null} 
          type={'simple'} 

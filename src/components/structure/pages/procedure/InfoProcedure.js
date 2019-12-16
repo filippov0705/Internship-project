@@ -10,12 +10,12 @@ class InfoProcedure extends Component {
   render() {
     const proceduresList = this.props.procedures.proceduresList;
     const id = this.props.match.params.id;
-    const targetProcedure = proceduresList.find(item => item.id === id)
+    const targetProcedure = proceduresList.find(item => item.id === id);
     const data = targetProcedure ? targetProcedure.tasks : [];
 
     return (
       <ProcedurePage>
-        <Task data={data} content={'ShowProcedureTasks'} />
+        <Task data={data} content={'data'} />
         <Button type={'simple'} linkTo={ProceduresPath()} message={'Go back'} looks={'applyBtn'} />
       </ProcedurePage>
     )

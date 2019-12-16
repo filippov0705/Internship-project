@@ -9,6 +9,7 @@ export const EDIT_DATE = 'EDIT_DATE';
 export const EDIT_TIME = 'EDIT_TIME';
 export const EDIT_PROCEDURE_LIST = 'EDIT_PROCEDURE_LIST';
 export const SET_PERIODISITY = 'SET_PERIODISITY';
+export const SET_CHOSEN_TASKS = 'SET_CHOSEN_TASKS';
 
 
 
@@ -67,5 +68,13 @@ export function setPeriodicity(periodicity) {
     return {
         type: SET_PERIODISITY,
         payload: periodicity
+    }
+}
+
+
+export function setChosenTasks(tasks) {
+    return {
+        type: SET_CHOSEN_TASKS,
+        payload: tasks
     }
 }

@@ -74,10 +74,10 @@ const Item = props => {
 
     function itemClickAction() {
         switch(props.content) {
-            case 'availableProcedures':
+            case 'possibleTasks':
                 return applyTask();
 
-            case 'chosenProcedures':
+            case 'chosenTasks':
                 return removeTask();
 
             case 'availableSchedule':
