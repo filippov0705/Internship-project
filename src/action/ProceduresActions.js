@@ -12,6 +12,7 @@ export const SET_PERIODISITY = 'SET_PERIODISITY';
 
 
 
+
 export function getUserData(data) {
     return {
         type: GET_USER_DATA,
@@ -46,6 +47,7 @@ export function newProcedureCreate(newProcedure) {
         payload: newProcedure
     }
 }
+
 
 export function editProcedureDate(date) {
     return {

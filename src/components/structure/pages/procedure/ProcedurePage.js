@@ -16,7 +16,7 @@ class ProcedurePage extends Component {
         return <ProcedureInfo user={data[data.length - 2]} />
 
       case 'edit':
-        return <ProcedureEdit />
+        return <ProcedureEdit id={data[data.length - 2]} />
 
       case 'schedule':
         return <ProcedureSchedule id={data[data.length - 2]}/>

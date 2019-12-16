@@ -7,6 +7,13 @@ import { ProceduresPath } from '../../../../utils/BuildPaths';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { newProcedureCreate } from '../../../../action/ProceduresActions';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+const styles = theme => ({
+    gridStyle: {
+        display: 'flex'
+    }
+});
 
 class ProcedureAdd extends Component {
 
@@ -22,14 +29,19 @@ class ProcedureAdd extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <>
             <Input label={<FormattedMessage id="label.procedureName" />}/>
-            <Grid style={{display: 'flex'}}>
+            <Grid className={classes.gridStyle}>
                 <Tasks content={'availableProcedures'}/>
                 <Tasks content={'chosenProcedures'} />
             </Grid>
-            <Button btnAction={this.createProcedure} type={'simple'} linkTo={ProceduresPath()} message={'Apply'} looks={'applyBtn'} />
+            <Grid className={classes.gridStyle}>
+                <Button btnAction={this.createProcedure} type={'simple'} linkTo={ProceduresPath()} message={'Apply'} looks={'applyBtn'} />
+                <Button type={'simple'} linkTo={ProceduresPath()} message={'Go back'} looks={'applyBtn'} />
+            </Grid>
             </>
         )
     }
@@ -47,4 +59,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProcedureAdd);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ProcedureAdd));
