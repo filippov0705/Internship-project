@@ -56,18 +56,6 @@ const Item = props => {
     }
   }
 
-  function getButtons() {
-    switch (props.info) {
-      case "Procedure":
-        return (
-          <ItemButtons flag={props.flag} info={props.info} id={props.id} />
-        );
-
-      default:
-        return null;
-    }
-  }
-
   return (
     <Grid
       container
@@ -85,7 +73,9 @@ const Item = props => {
       >
         {getItemName()}
       </Grid>
-      {getButtons()}
+      {props.info === "Procedure" ? (
+        <ItemButtons flag={props.flag} info={props.info} id={props.id} />
+      ) : null}
     </Grid>
   );
 };

@@ -89,28 +89,28 @@ class ProcedureAdd extends Component {
 
     return (
       <ProcedurePage>
-        <Heading size={"big"} heading={"Add new procedure"} />
+        <Heading size={"big"} heading={"New procedure"} />
         <Grid className={classes.gridStyle}>
           <Input label={<FormattedMessage id="label.procedureName" />} />
           <Button
-            btnAction={this.createProcedure}
-            type={"simple"}
-            linkTo={ProceduresPath()}
-            message={"Apply"}
             looks={"applyBtn"}
-          />
+            linkTo={ProceduresPath()}
+            btnAction={this.createProcedure}
+          >
+            <span>Save</span>
+          </Button>
         </Grid>
         <Grid className={classes.gridTasks}>
           <Tasks
             data={"possibleTasks"}
             content={"possibleTasks"}
-            heading={"Types of available tasks"}
+            heading={"Available tasks"}
             action={this.applyTask}
           />
           <Tasks
             data={"chosenTasks"}
             content={"chosenTasks"}
-            heading={"Chosen tasks"}
+            heading={"Selected tasks"}
             action={this.removeTask}
           />
         </Grid>

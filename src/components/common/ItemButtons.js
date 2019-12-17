@@ -4,7 +4,8 @@ import Grid from "@material-ui/core/Grid";
 import {
   procedureScheduleUrl,
   editProcedureUrl,
-  procedureInfoUrl
+  procedureInfoUrl,
+  ProceduresPath
 } from "../../utils/BuildPaths";
 import ScheduleRoundedIcon from "@material-ui/icons/ScheduleRounded";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
@@ -16,7 +17,8 @@ const styles = theme => ({
   itemName: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    paddingRight: "15px"
   },
   btn: {
     backgroundColor: "white",
@@ -35,20 +37,16 @@ const ItemButtons = props => {
 
   return (
     <Grid item xs={12} sm={3} className={classes.itemName}>
-      <Button
-        type={"link"}
-        title={"Schedule"}
-        linkTo={procedureScheduleUrl(props.id)}
-      >
+      <Button looks={"btn"} linkTo={procedureScheduleUrl(props.id)}>
         <ScheduleRoundedIcon className={classes.icon} />
       </Button>
-      <Button type={"link"} title={"Edit"} linkTo={editProcedureUrl(props.id)}>
+      <Button looks={"btn"} linkTo={editProcedureUrl(props.id)}>
         <EditRoundedIcon className={classes.icon} />
       </Button>
-      <Button type={"link"} title={"Tasks"} linkTo={procedureInfoUrl(props.id)}>
+      <Button looks={"btn"} linkTo={procedureInfoUrl(props.id)}>
         <MoreHorizRoundedIcon className={classes.icon} />
       </Button>
-      <Button type={"action"} title={"Run"}>
+      <Button looks={"btn"} linkTo={ProceduresPath()}>
         <PlayCircleFilledWhiteRoundedIcon />
       </Button>
     </Grid>

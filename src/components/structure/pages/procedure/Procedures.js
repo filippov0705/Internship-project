@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { getUserData } from '../../../../action/ProceduresActions';
-import List from "../../../common/List";
-import ListActions from "../../../common/ListActions";
+import SearchBar from "../../../common/SearchBar";
 import Page from "../../../common/Page";
+import Tasks from "../task/Tasks";
 
 class Procedures extends Component {
   // componentDidMount() {
@@ -12,11 +12,15 @@ class Procedures extends Component {
 
   render() {
     const proceduresList = this.props.procedures.proceduresList;
-    // ListActions переименовать
     return (
       <Page>
-        <ListActions />
-        <List info={"Procedure"} content={"list"} data={proceduresList} />
+        <SearchBar />
+        <Tasks
+          data={proceduresList}
+          content={"procedures"}
+          action={this.applyTask}
+          info={"Procedure"}
+        />
       </Page>
     );
   }

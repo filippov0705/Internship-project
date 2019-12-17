@@ -22,6 +22,7 @@ class Tasks extends Component {
           content={this.props.content}
           action={this.props.action}
           id={this.props.id}
+          info={this.props.info}
         />
       </Grid>
     );

@@ -9,7 +9,7 @@ class ScheduleProcedure extends Component {
     const id = this.props.match.params.id;
     const proceduresList = this.props.procedures.proceduresList;
     const targetProcedure = proceduresList.find(item => item.id === id);
-    console.log(this.props);
+
     return (
       <ProcedurePage>
         <Tabs data={"schedule"} id={id} />

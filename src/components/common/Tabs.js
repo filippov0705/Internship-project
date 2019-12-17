@@ -73,25 +73,13 @@ const Tabs = props => {
 
   return (
     <Grid container className={classes.tabsWrapper}>
-      <Link to={procedureScheduleUrl(props.id)} className={classes.link}>
-        <Grid
-          item
-          xs={12}
-          className={
-            props.data === "schedule" ? classes.activeTab : classes.tab
-          }
-        >
-          <span className={classes.span}>Schedule</span>
-          <ScheduleRoundedIcon className={classes.icon} />
-        </Grid>
-      </Link>
       <Link to={editProcedureUrl(props.id)} className={classes.link}>
         <Grid
           item
           xs={12}
           className={props.data === "edit" ? classes.activeTab : classes.tab}
         >
-          <span className={classes.span}>Edit</span>
+          <span className={classes.span}>Details</span>
           <EditRoundedIcon className={classes.icon} />
         </Grid>
       </Link>
@@ -103,6 +91,18 @@ const Tabs = props => {
         >
           <span className={classes.span}>Tasks</span>
           <MoreHorizRoundedIcon className={classes.icon} />
+        </Grid>
+      </Link>
+      <Link to={procedureScheduleUrl(props.id)} className={classes.link}>
+        <Grid
+          item
+          xs={12}
+          className={
+            props.data === "schedule" ? classes.activeTab : classes.tab
+          }
+        >
+          <span className={classes.span}>Schedules</span>
+          <ScheduleRoundedIcon className={classes.icon} />
         </Grid>
       </Link>
     </Grid>

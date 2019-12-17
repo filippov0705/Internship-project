@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Button from "../../../common/Button";
 import Tasks from "../task/Tasks";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
