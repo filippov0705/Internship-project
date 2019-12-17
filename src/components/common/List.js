@@ -13,6 +13,7 @@ const styles = theme => ({
     overflow: "auto"
   },
   possibleTasks: {
+    minWidth: "170px",
     height: "200px",
     backgroundColor: "white",
     margin: "20px",
@@ -21,6 +22,7 @@ const styles = theme => ({
     overflow: "auto"
   },
   chosenTasks: {
+    minWidth: "170px",
     height: "200px",
     backgroundColor: "white",
     margin: "20px",

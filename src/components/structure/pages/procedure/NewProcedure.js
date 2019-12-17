@@ -20,7 +20,24 @@ const styles = theme => ({
   gridStyle: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    [theme.breakpoints.up("xs")]: {
+      flexDirection: "column-reverse"
+    },
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
+  },
+  gridTasks: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.up("xs")]: {
+      flexDirection: "column"
+    },
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
   }
 });
 
@@ -83,7 +100,7 @@ class ProcedureAdd extends Component {
             looks={"applyBtn"}
           />
         </Grid>
-        <Grid className={classes.gridStyle}>
+        <Grid className={classes.gridTasks}>
           <Tasks
             data={"possibleTasks"}
             content={"possibleTasks"}

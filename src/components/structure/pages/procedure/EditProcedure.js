@@ -14,7 +14,13 @@ import Tabs from "../../../common/Tabs";
 
 const styles = theme => ({
   gridDisplay: {
-    display: "flex"
+    display: "flex",
+    [theme.breakpoints.up("xs")]: {
+      flexDirection: "column"
+    },
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
   }
 });
 
@@ -73,11 +79,13 @@ class EditProcedure extends Component {
         <Tabs data={"edit"} id={id} />
         <Grid className={classes.gridDisplay}>
           <Tasks
+            heading={"Types of available tasks"}
             data={"possibleTasks"}
             content={"possibleTasks"}
             action={this.applyTask}
           />
           <Tasks
+            heading={"Chosen tasks"}
             data={"chosenTasks"}
             content={"chosenTasks"}
             action={this.removeTask}

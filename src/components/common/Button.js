@@ -94,6 +94,15 @@ const Button = props => {
   }
 
   return getButton();
+  // return (
+  //   <Tooltip title={props.title}>
+  //     <Link to={props.linkTo} className={classes.link}>
+  //       <button className={classes[props.title]} onClick={props.btnAction}>
+  //         {props.children}
+  //       </button>
+  //     </Link>
+  // </Tooltip>
+  // )
 };
 
 export default withStyles(styles)(Button);
