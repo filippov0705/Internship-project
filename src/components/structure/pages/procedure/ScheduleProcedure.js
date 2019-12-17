@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Schedule from "../../../common/Schedule";
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
+import Heading from "../../../common/Heading";
 
 class ScheduleProcedure extends Component {
   render() {
@@ -12,6 +13,11 @@ class ScheduleProcedure extends Component {
 
     return (
       <ProcedurePage>
+        <Heading
+          heading={targetProcedure.name}
+          size={"big"}
+          background={"pageLabel"}
+        />
         <Tabs data={"schedule"} id={id} />
         <Schedule
           id={id}

@@ -12,6 +12,7 @@ import {
 
 const styles = theme => ({
   grid: {
+    maxHeight: "32px",
     display: "flex",
     alignItems: "center"
   },
@@ -22,7 +23,10 @@ const styles = theme => ({
   gridSpan: {
     marginLeft: "10px",
     marginTop: "2px",
-    marginBottom: "2px"
+    marginBottom: "2px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis"
   },
   link: {
     width: "100%",
@@ -37,8 +41,9 @@ const styles = theme => ({
 
 const Item = props => {
   const { classes } = props;
+  const flag = props.info === "Procedure";
 
-  function getItemName() {
+  const getItemName = () => {
     switch (props.info) {
       case "Procedure":
         return (
@@ -50,11 +55,11 @@ const Item = props => {
       default:
         return (
           <span data-id={props.id} className={classes.gridSpan}>
-            {props.name}
+            {props.name.substr(0, 25)}
           </span>
         );
     }
-  }
+  };
 
   return (
     <Grid
@@ -66,14 +71,14 @@ const Item = props => {
       <Grid
         item
         xs={12}
-        sm={8}
-        md={9}
+        sm={flag ? 8 : 12}
+        md={flag ? 9 : 12}
         className={classes.grid}
         data-id={props.id}
       >
         {getItemName()}
       </Grid>
-      {props.info === "Procedure" ? (
+      {flag ? (
         <ItemButtons flag={props.flag} info={props.info} id={props.id} />
       ) : null}
     </Grid>

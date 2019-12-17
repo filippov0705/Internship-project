@@ -3,6 +3,7 @@ import Task from "../task/Tasks";
 import { connect } from "react-redux";
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
+import Heading from "../../../common/Heading";
 
 class InfoProcedure extends Component {
   render() {
@@ -13,6 +14,11 @@ class InfoProcedure extends Component {
 
     return (
       <ProcedurePage>
+        <Heading
+          heading={targetProcedure.name}
+          size={"big"}
+          background={"pageLabel"}
+        />
         <Tabs data={"info"} id={this.props.match.params.id} />
         <Task data={data} content={"data"} />
       </ProcedurePage>

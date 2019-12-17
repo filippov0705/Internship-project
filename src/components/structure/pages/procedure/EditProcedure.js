@@ -10,6 +10,7 @@ import {
 } from "../../../../action/ProceduresActions";
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
+import Heading from "../../../common/Heading";
 
 const styles = theme => ({
   gridDisplay: {
@@ -71,11 +72,18 @@ class EditProcedure extends Component {
 
   render() {
     const { classes } = this.props;
-    const id = this.props.match.params.id;
+    const targetProcedure = this.props.procedures.proceduresList.filter(
+      item => item.id === this.props.match.params.id
+    )[0];
 
     return (
       <ProcedurePage>
-        <Tabs data={"edit"} id={id} />
+        <Heading
+          heading={targetProcedure.name}
+          size={"big"}
+          background={"pageLabel"}
+        />
+        <Tabs data={"edit"} id={this.props.match.params.id} />
         <Grid className={classes.gridDisplay}>
           <Tasks
             heading={"Types of available tasks"}
