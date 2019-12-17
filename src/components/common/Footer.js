@@ -56,8 +56,7 @@ const styles = theme => ({
     }
   },
   footerWrapper: {
-    backgroundColor: "#24292e",
-    minHeight: "130px"
+    backgroundColor: "#24292e"
   },
   footer: {
     width: "100%",

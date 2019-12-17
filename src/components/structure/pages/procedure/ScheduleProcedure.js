@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Schedule from '../../../common/Schedule';
-import ProcedurePage from './ProcedurePage';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Schedule from "../../../common/Schedule";
+import ProcedurePage from "./ProcedurePage";
+import Tabs from "../../../common/Tabs";
 
 class ScheduleProcedure extends Component {
-
   render() {
     const id = this.props.match.params.id;
     const proceduresList = this.props.procedures.proceduresList;
@@ -12,16 +12,20 @@ class ScheduleProcedure extends Component {
 
     return (
       <ProcedurePage>
-        <Schedule id={id} targetProcedure={targetProcedure || {schedule: {periodicity: ''}}} />
+        <Tabs data={"schedule"} id={id} />
+        <Schedule
+          id={id}
+          targetProcedure={targetProcedure || { schedule: { periodicity: "" } }}
+        />
       </ProcedurePage>
-    )
+    );
   }
 }
 
 const mapStateToProps = store => {
   return {
-      procedures: store.procedures
-  }
-}
+    procedures: store.procedures
+  };
+};
 
 export default connect(mapStateToProps)(ScheduleProcedure);

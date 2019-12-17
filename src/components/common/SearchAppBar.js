@@ -31,7 +31,8 @@ const styles = theme => ({
     marginRight: "5px"
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
+    color: "black"
   },
   grow: {
     flexGrow: 1
@@ -161,12 +162,12 @@ class SearchAppBar extends Component {
         onClose={this.handleMobileMenuClose}
         className={classes.root}
       >
-        <Link to={mainPath()}>
+        <Link to={mainPath()} className={classes.link}>
           <MenuItem>
             <FormattedMessage id="navigation.mainPage" />
           </MenuItem>
         </Link>
-        <Link to={ProceduresPath()}>
+        <Link to={ProceduresPath()} className={classes.link}>
           <MenuItem>
             <FormattedMessage id="navigation.procedures" />
           </MenuItem>

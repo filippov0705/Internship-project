@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Button from "../../../common/Button";
+// import Button from "../../../common/Button";
 import Tasks from "../task/Tasks";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { procedureScheduleUrl } from "../../../../utils/BuildPaths";
 import {
   setChosenTasks,
-  editProceduresList
+  editProceduresList,
+  applyTaskForProcedure
 } from "../../../../action/ProceduresActions";
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
@@ -20,23 +20,48 @@ const styles = theme => ({
 
 class EditProcedure extends Component {
   componentDidMount() {
-    const id = this.props.match.params.id;
-    const proceduresList = this.props.procedures.proceduresList;
-    const targetProcedure = proceduresList.find(item => item.id === id);
-    const chosenTasks = targetProcedure.tasks;
-    this.props.setChosenTasks(chosenTasks);
+    const targetProcedure = this.props.procedures.proceduresList.find(
+      item => item.id === this.props.match.params.id
+    );
+    this.props.setChosenTasks(targetProcedure.tasks);
   }
 
-  editProcedure = () => {
-    const id = this.props.match.params.id;
-    const proceduresList = this.props.procedures.proceduresList;
-    const newProcedureList = proceduresList.map(item => {
-      if (item.id === id) {
-        item.tasks = this.props.procedures.chosenTasks;
+  applyTask = event => {
+    const targetTask = this.props.procedures.possibleTasks.filter(
+      item => item.name === event.target.innerText
+    )[0];
+    const task = {
+      name: targetTask.name,
+      id: (Math.random() * 10000000 + "").split(".")[0]
+    };
+    const newTaskList = this.props.procedures.chosenTasks.concat(task);
+    const newPeocedureList = this.props.procedures.proceduresList.map(item => {
+      if (item.id === this.props.match.params.id) {
+        item.tasks = newTaskList;
       }
       return item;
     });
-    this.props.editProceduresList(newProcedureList);
+
+    this.props.editProceduresList(newPeocedureList);
+    this.props.setChosenTasks(newTaskList);
+  };
+
+  removeTask = event => {
+    const filteredTasks = this.props.procedures.chosenTasks.filter(
+      item => item.id !== event.target.dataset.id
+    );
+    const newPeocedureList = this.props.procedures.proceduresList.map(item => {
+      if (item.id === this.props.match.params.id) {
+        item.tasks = filteredTasks;
+      }
+      return item;
+    });
+    const newChosenTasks = this.props.procedures.chosenTasks.filter(item => {
+      return item.id !== event.target.dataset.id;
+    });
+
+    this.props.editProceduresList(newPeocedureList);
+    this.props.setChosenTasks(newChosenTasks);
   };
 
   render() {
@@ -45,24 +70,19 @@ class EditProcedure extends Component {
 
     return (
       <ProcedurePage>
-        <Tabs />
+        <Tabs data={"edit"} id={id} />
         <Grid className={classes.gridDisplay}>
-          <Tasks data={"possibleTasks"} content={"possibleTasks"} />
-          <Tasks data={"chosenTasks"} content={"chosenTasks"} />
+          <Tasks
+            data={"possibleTasks"}
+            content={"possibleTasks"}
+            action={this.applyTask}
+          />
+          <Tasks
+            data={"chosenTasks"}
+            content={"chosenTasks"}
+            action={this.removeTask}
+          />
         </Grid>
-        <Button
-          btnAction={this.editProcedure}
-          type={"simple"}
-          linkTo={this.props.location.pathname}
-          message={"Apply"}
-          looks={"applyBtn"}
-        />
-        <Button
-          type={"simple"}
-          linkTo={procedureScheduleUrl(id)}
-          message={"Schedule"}
-          looks={"applyBtn"}
-        />
       </ProcedurePage>
     );
   }
@@ -77,7 +97,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     setChosenTasks: tasks => dispatch(setChosenTasks(tasks)),
-    editProceduresList: list => dispatch(editProceduresList(list))
+    editProceduresList: list => dispatch(editProceduresList(list)),
+    applyTaskForProcedure: task => dispatch(applyTaskForProcedure(task))
   };
 };
 

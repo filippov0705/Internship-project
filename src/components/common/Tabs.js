@@ -2,6 +2,9 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
+import ScheduleRoundedIcon from "@material-ui/icons/ScheduleRounded";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import MoreHorizRoundedIcon from "@material-ui/icons/MoreHorizRounded";
 import {
   procedureInfoUrl,
   procedureScheduleUrl,
@@ -38,10 +41,30 @@ const styles = theme => ({
     cursor: "auto"
   },
   link: {
-    marginLeft: "10px",
+    marginLeft: "3px",
     textDecoration: "none",
-    width: "15%",
-    minWidth: "100px"
+    [theme.breakpoints.up("xs")]: {
+      width: "50px"
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: "18%"
+    }
+  },
+  span: {
+    [theme.breakpoints.up("xs")]: {
+      display: "none"
+    },
+    [theme.breakpoints.up("sm")]: {
+      display: "box"
+    }
+  },
+  icon: {
+    [theme.breakpoints.up("xs")]: {
+      display: "box"
+    },
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
   }
 });
 
@@ -58,7 +81,8 @@ const Tabs = props => {
             props.data === "schedule" ? classes.activeTab : classes.tab
           }
         >
-          Schedule
+          <span className={classes.span}>Schedule</span>
+          <ScheduleRoundedIcon className={classes.icon} />
         </Grid>
       </Link>
       <Link to={editProcedureUrl(props.id)} className={classes.link}>
@@ -67,7 +91,8 @@ const Tabs = props => {
           xs={12}
           className={props.data === "edit" ? classes.activeTab : classes.tab}
         >
-          Edit
+          <span className={classes.span}>Edit</span>
+          <EditRoundedIcon className={classes.icon} />
         </Grid>
       </Link>
       <Link to={procedureInfoUrl(props.id)} className={classes.link}>
@@ -76,7 +101,8 @@ const Tabs = props => {
           xs={12}
           className={props.data === "info" ? classes.activeTab : classes.tab}
         >
-          Tasks
+          <span className={classes.span}>Tasks</span>
+          <MoreHorizRoundedIcon className={classes.icon} />
         </Grid>
       </Link>
     </Grid>

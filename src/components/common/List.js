@@ -41,7 +41,7 @@ const styles = theme => ({
 const List = props => {
   const { classes } = props;
 
-  function itemCreation(data) {
+  const itemCreation = data => {
     return data.map((item, i) => {
       return (
         <Item
@@ -51,17 +51,14 @@ const List = props => {
           flag={props.flag || "uneditable"}
           id={item.id}
           key={i}
+          action={props.action}
         />
       );
     });
-  }
+  };
 
   return (
-    <Grid
-      //  xs={(props.info !== 'possibleTasks' || 'chosenTasks') ? 12 : 6}
-      item
-      className={classes[props.content]}
-    >
+    <Grid item className={classes[props.content]}>
       {itemCreation(props.data)}
     </Grid>
   );
