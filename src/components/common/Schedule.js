@@ -2,26 +2,34 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 import DatePicker from "./DatePicker";
+import TimePicker from "./TimePicker";
 import { connect } from "react-redux";
-import Tasks from "../structure/pages/task/Tasks";
-import Button from "../common/Button";
-import { ProceduresPath, editProcedureUrl } from "../../utils/BuildPaths";
+// import { procedureScheduleUrl } from "../../utils/BuildPaths";
 import {
   editProceduresList,
   editProcedureDate,
   setPeriodicity
 } from "../../action/ProceduresActions";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import DaysOfTheWeekBtns from "./DaysOfTheWeekButtons";
+import RadioBtn from "./Radio";
 
 const styles = theme => ({
   gridDisplay: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    justifyContent: "center"
   },
   scheduleBtns: {
     display: "flex",
     justifyContent: "center"
+  },
+  calendar: {
+    margin: "0 auto"
+  },
+  radio: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "40px"
   }
 });
 
@@ -66,35 +74,23 @@ class Schedule extends Component {
 
   render() {
     const { classes } = this.props;
-    const targetProcedure = this.props.targetProcedure;
-    const targetSchedule = targetProcedure.schedule;
+    // const targetProcedure = this.props.targetProcedure;
+    // const targetSchedule = targetProcedure.schedule;
 
     return (
       <React.Fragment>
         <Grid className={classes.gridDisplay}>
-          <DatePicker id={this.props.id} dateNow={this.timeNow()} />
-          <Grid container className={classes.scheduleBtns}>
-            <Button btnAction={this.addSchedule} type={"action"} title={"Add"}>
-              <AddCircleOutlineIcon />
-            </Button>
-            <DaysOfTheWeekBtns />
+          <Grid container className={classes.radio}>
+            <RadioBtn />
           </Grid>
+          <Grid container className={classes.scheduleBtns}>
+            <DaysOfTheWeekBtns id={this.props.id} />
+          </Grid>
+          <div className={classes.calendar}>
+            <DatePicker id={this.props.id} dateNow={this.timeNow()} />
+            <TimePicker id={this.props.id} dateNow={this.timeNow()} />
+          </div>
         </Grid>
-        <Tasks data={targetSchedule} content={"data"} />
-        <Button
-          btnAction={null}
-          type={"simple"}
-          linkTo={ProceduresPath()}
-          message={"Procedures"}
-          looks={"applyBtn"}
-        />
-        <Button
-          btnAction={null}
-          type={"simple"}
-          linkTo={editProcedureUrl(this.props.id)}
-          message={"Edit"}
-          looks={"applyBtn"}
-        />
       </React.Fragment>
     );
   }

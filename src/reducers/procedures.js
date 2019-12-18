@@ -1,77 +1,88 @@
-import { GET_USER_DATA,
-    APPLY_TASK_FOR_PROCEDURE, 
-    REMOVE_CHOSEN_TASK,
-    NEW_PROCEDURE_NAME,
-    NEW_PROCEDURE_CREATE,
-    SET_PERIODISITY,
-    EDIT_DATE,
-    SET_CHOSEN_TASKS,
-   EDIT_PROCEDURE_LIST } from '../action/ProceduresActions'
+import {
+  GET_USER_DATA,
+  APPLY_TASK_FOR_PROCEDURE,
+  REMOVE_CHOSEN_TASK,
+  NEW_PROCEDURE_NAME,
+  NEW_PROCEDURE_CREATE,
+  SET_PERIODISITY,
+  EDIT_DATE,
+  SET_CHOSEN_TASKS,
+  EDIT_PROCEDURE_LIST
+} from "../action/ProceduresActions";
 
 const initialState = () => {
-return {
-   proceduresList: [],
-   possibleTasks: [{
-           "name": "Get results",
-       },
-       {
-           "name": "Show results",
-       },
-       {
-           "name": "Mailing",
-       },
-       {
-           "name": "Сalculate the average",
-       },
-       {
-           "name": "Show maximum value",
-       }],
-       chosenTasks: [],
-       newProcedureName: '',
-       prcedureNewDate: '',
-       procedureNewTime: '',
-       periodicity: []
-}
-}
-
+  return {
+    proceduresList: [],
+    possibleTasks: [
+      {
+        name: "Get results"
+      },
+      {
+        name: "Show results"
+      },
+      {
+        name: "Mailing"
+      },
+      {
+        name: "Сalculate the average"
+      },
+      {
+        name: "Show maximum value"
+      }
+    ],
+    chosenTasks: [],
+    newProcedureName: "",
+    prcedureNewDate: [],
+    procedureNewTime: [],
+    periodicity: "single"
+  };
+};
 
 export function proceduresReducer(state = initialState(), action) {
+  switch (action.type) {
+    case GET_USER_DATA:
+      return { ...state, proceduresList: action.payload };
 
-switch (action.type) {
-   case GET_USER_DATA:
-       return { ...state, proceduresList: action.payload}
+    case APPLY_TASK_FOR_PROCEDURE:
+      return {
+        ...state,
+        chosenTasks: state.chosenTasks.concat(action.payload)
+      };
 
-   case APPLY_TASK_FOR_PROCEDURE:
-       return { ...state, chosenTasks: state.chosenTasks.concat(action.payload) }
+    case REMOVE_CHOSEN_TASK:
+      return { ...state, chosenTasks: action.payload };
 
-   case REMOVE_CHOSEN_TASK:
-       return { ...state, chosenTasks: action.payload}
-
-   case NEW_PROCEDURE_NAME:
-       return { ...state, newProcedureName: action.payload }
+    case NEW_PROCEDURE_NAME:
+      return { ...state, newProcedureName: action.payload };
 
     case EDIT_DATE:
-        return { ...state, prcedureNewDate: action.payload[0], procedureNewTime: action.payload[1] }
+      return { ...state, prcedureNewDate: action.payload };
 
     case EDIT_PROCEDURE_LIST:
-        return { ...state, proceduresList: action.payload, periodicity: [] }
-        
+      return {
+        ...state,
+        proceduresList: action.payload,
+        periodicity: "single"
+      };
+
     case SET_PERIODISITY:
-        return { ...state, periodicity: action.payload }
+      return { ...state, periodicity: action.payload };
 
     case SET_CHOSEN_TASKS:
-        return { ...state, chosenTasks: action.payload }
+      return { ...state, chosenTasks: action.payload };
 
-       case NEW_PROCEDURE_CREATE:
-               return { ...state, 
-                   proceduresList: state.proceduresList.concat(action.payload), 
-                   chosenTasks: [],
-                   procedureNewName: '',
-                   prcedureNewDate: '',
-                   newProcedureTime: '',
-                   periodicity: []}        
+    case NEW_PROCEDURE_CREATE:
+      return {
+        ...state,
+        proceduresList: state.proceduresList.concat(action.payload),
+        chosenTasks: [],
+        procedureNewName: "",
+        prcedureNewDate: "",
+        newProcedureTime: "",
+        periodicity: []
+      };
 
-   default:
-       return state
-}
+    default:
+      return state;
+  }
 }

@@ -40,6 +40,15 @@ const styles = theme => ({
     marginLeft: "20px",
     marginRight: "20px",
     cursor: "pointer"
+  },
+  sceduleBtn: {
+    width: "80px",
+    height: "40px",
+    margin: "5px",
+    borderRadius: "7px"
+  },
+  active: {
+    backgroundColor: "white"
   }
 });
 
@@ -48,7 +57,11 @@ const Button = props => {
 
   return (
     <Link to={props.linkTo} className={classes.link}>
-      <button className={classes[props.looks]} onClick={props.btnAction}>
+      <button
+        className={`${classes[props.looks]} button`}
+        onClick={props.btnAction}
+        data-info={props.info}
+      >
         {props.children}
       </button>
     </Link>

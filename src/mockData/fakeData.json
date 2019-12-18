@@ -1,7 +1,7 @@
 [{
     "name": "procedure 1",
     "id": "1234124",
-    "scedule": "",
+    "scedule": [],
     "tasks": [{
         "name": "task_1",
         "id": "1"
@@ -22,7 +22,7 @@
 {
     "name": "procedure 2",
     "id": "1245674",
-    "scedule": "",
+    "scedule": [],
     "tasks": [{
         "name": "task_4",
         "id": "4"
@@ -43,7 +43,7 @@
 {
     "name": "procedure 3",
     "id": "9683764",
-    "scedule": "",
+    "scedule": [],
     "tasks": [{
         "name": "task_4",
         "id": "4"
@@ -64,7 +64,7 @@
 {
     "name": "procedure 4",
     "id": "5890340",
-    "scedule": "",
+    "scedule": [],
     "tasks": [{
         "name": "task_3",
         "id": "3"

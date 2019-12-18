@@ -4,12 +4,18 @@ import Schedule from "../../../common/Schedule";
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
 import Heading from "../../../common/Heading";
+import { getUserData } from "../../../../action/ProceduresActions";
 
 class ScheduleProcedure extends Component {
+  componentDidMount() {
+    this.props.getUserData();
+  }
+
   render() {
-    const id = this.props.match.params.id;
-    const proceduresList = this.props.procedures.proceduresList;
-    const targetProcedure = proceduresList.find(item => item.id === id);
+    if (this.props.procedures.proceduresList.length === 0) return null;
+    const targetProcedure = this.props.procedures.proceduresList.find(
+      item => item.id === this.props.match.params.id
+    );
 
     return (
       <ProcedurePage>
@@ -18,9 +24,9 @@ class ScheduleProcedure extends Component {
           size={"big"}
           background={"pageLabel"}
         />
-        <Tabs data={"schedule"} id={id} />
+        <Tabs data={"schedule"} id={this.props.match.params.id} />
         <Schedule
-          id={id}
+          id={this.props.match.params.id}
           targetProcedure={targetProcedure || { schedule: { periodicity: "" } }}
           location={this.props}
         />
@@ -35,4 +41,10 @@ const mapStateToProps = store => {
   };
 };
 
-export default connect(mapStateToProps)(ScheduleProcedure);
+const mapDispatchToProps = dispatch => {
+  return {
+    getUserData: () => dispatch(getUserData())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScheduleProcedure);

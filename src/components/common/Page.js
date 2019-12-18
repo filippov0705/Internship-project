@@ -1,7 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
 
-export default class Main extends Component {
-  render() {
-    return <main className="main">{this.props.children}</main>;
+const styles = theme => ({
+  main: {
+    marginTop: "65px"
   }
-}
+});
+
+const Main = props => {
+  const { classes } = props;
+
+  return <main className={classes.main}>{props.children}</main>;
+};
+
+export default withStyles(styles)(Main);

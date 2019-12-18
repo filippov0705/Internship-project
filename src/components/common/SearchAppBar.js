@@ -34,9 +34,6 @@ const styles = theme => ({
     textDecoration: "none",
     color: "black"
   },
-  grow: {
-    flexGrow: 1
-  },
   menuButton: {
     marginRight: theme.spacing(2)
   },
@@ -92,6 +89,12 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  appBar: {
+    justifyContent: "center"
+  },
+  grow: {
+    flexGrow: "5"
   }
 });
 
@@ -176,8 +179,8 @@ class SearchAppBar extends Component {
     );
 
     return (
-      <div className={classes.grow}>
-        <AppBar position="static">
+      <React.Fragment>
+        <AppBar>
           <Toolbar>
             <UserMenu />
             <Typography className={classes.title} variant="h6" noWrap>
@@ -235,7 +238,7 @@ class SearchAppBar extends Component {
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
-      </div>
+      </React.Fragment>
     );
   }
 }

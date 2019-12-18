@@ -7,49 +7,55 @@ import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardTimePicker
 } from "@material-ui/pickers";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme => ({
   datePicker: {
-    width: "0px"
+    width: "0px",
+    display: "none"
   }
 });
 
-const DatePicker = props => {
+const TimePicker = props => {
   const { classes } = props;
   const [selectedDate, setSelectedDate] = useState(
     new Date(`${props.dateNow}T23:55:00`)
   );
 
   const handleDateChange = date => {
+    const datePickerValue = JSON.stringify(date)
+      .slice(1, 20)
+      .split("T");
+    console.log(date);
     setSelectedDate(date);
-    editProcedureDate([
-      date.getFullYear(),
-      date.getMonth() + 1,
-      date.getDate()
-    ]);
-    document.getElementsByClassName("MuiIconButton-root")[4].click();
+    editProcedureDate(datePickerValue);
   };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around" className={classes.datePicker}>
-        <KeyboardDatePicker
+        <KeyboardTimePicker
+          className="this"
           margin="normal"
-          id="date-picker-dialog"
+          id="time-picker"
           label=""
-          format="MM/dd/yyyy"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
-            "aria-label": "change date"
+            "aria-label": "change time"
           }}
         />
       </Grid>
     </MuiPickersUtilsProvider>
   );
+};
+
+const mapStateToProps = store => {
+  return {
+    procedures: store.procedures
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -59,5 +65,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withStyles(styles)(
-  connect(null, mapDispatchToProps)(DatePicker)
+  connect(mapStateToProps, mapDispatchToProps)(TimePicker)
 );
