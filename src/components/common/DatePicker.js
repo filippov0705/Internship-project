@@ -13,7 +13,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme => ({
   datePicker: {
-    width: "0px"
+    width: "0px",
+    marginRight: "60px"
   }
 });
 
@@ -24,13 +25,16 @@ const DatePicker = props => {
   );
 
   const handleDateChange = date => {
+    const flag = props.procedures.periodicity === "single";
+
     setSelectedDate(date);
-    editProcedureDate([
+    props.editProcedureDate([
       date.getFullYear(),
       date.getMonth() + 1,
-      date.getDate()
+      flag ? date.getDate() : `${date}`.split(" ")[0]
     ]);
-    document.getElementsByClassName("MuiIconButton-root")[4].click();
+
+    document.getElementsByClassName("MuiIconButton-root")[6].click();
   };
 
   return (
@@ -52,6 +56,12 @@ const DatePicker = props => {
   );
 };
 
+const mapStateToProps = store => {
+  return {
+    procedures: store.procedures
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     editProcedureDate: date => dispatch(editProcedureDate(date))
@@ -59,5 +69,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withStyles(styles)(
-  connect(null, mapDispatchToProps)(DatePicker)
+  connect(mapStateToProps, mapDispatchToProps)(DatePicker)
 );

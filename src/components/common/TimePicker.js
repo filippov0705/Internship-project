@@ -25,12 +25,8 @@ const TimePicker = props => {
   );
 
   const handleDateChange = date => {
-    const datePickerValue = JSON.stringify(date)
-      .slice(1, 20)
-      .split("T");
-    console.log(date);
     setSelectedDate(date);
-    editProcedureDate(datePickerValue);
+    props.addSchedule(date.getHours(), date.getMinutes());
   };
 
   return (
@@ -52,12 +48,6 @@ const TimePicker = props => {
   );
 };
 
-const mapStateToProps = store => {
-  return {
-    procedures: store.procedures
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     editProcedureDate: date => dispatch(editProcedureDate(date))
@@ -65,5 +55,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(TimePicker)
+  connect(null, mapDispatchToProps)(TimePicker)
 );

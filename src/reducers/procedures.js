@@ -33,7 +33,6 @@ const initialState = () => {
     chosenTasks: [],
     newProcedureName: "",
     prcedureNewDate: [],
-    procedureNewTime: [],
     periodicity: "single"
   };
 };
@@ -76,10 +75,9 @@ export function proceduresReducer(state = initialState(), action) {
         ...state,
         proceduresList: state.proceduresList.concat(action.payload),
         chosenTasks: [],
-        procedureNewName: "",
-        prcedureNewDate: "",
-        newProcedureTime: "",
-        periodicity: []
+        newProcedureName: "",
+        prcedureNewDate: [],
+        periodicity: "single"
       };
 
     default:

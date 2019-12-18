@@ -12,6 +12,7 @@ import {
 } from "../../action/ProceduresActions";
 import DaysOfTheWeekBtns from "./DaysOfTheWeekButtons";
 import RadioBtn from "./Radio";
+import CardTemplate from "./CardTemplate";
 
 const styles = theme => ({
   gridDisplay: {
@@ -34,41 +35,20 @@ const styles = theme => ({
 });
 
 class Schedule extends Component {
-  componentDidMount() {
-    this.props.editProcedureDate([this.timeNow(), "21:55:00"]);
-  }
-
   timeNow = () => {
-    const dateNow = new Date();
-    const yearNow = dateNow.getFullYear();
-    const monthNow = dateNow.getMonth() + 1;
-    const dayNow = dateNow.getDate();
-    //объеденить
-    return `${yearNow}-${monthNow}-${dayNow}`;
+    return `${new Date().getFullYear()}-${new Date().getMonth() +
+      1}-${new Date().getDate()}`;
   };
-  //переименовать и вынести в отдельную функцию
-  addSchedule = () => {
-    const newDate = this.props.procedures.prcedureNewDate;
-    const newTime = this.props.procedures.procedureNewTime;
-    const proceduresList = this.props.procedures.proceduresList;
-    const targetProcedure = this.props.targetProcedure;
-    const daysInAWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    const periodisity = daysInAWeek.reduce((sum, cur) => {
-      if (this.props.procedures.periodicity.includes(cur))
-        return `${sum} ${cur}`;
-      return sum;
-    }, "");
 
-    if (!newDate || !newTime) return;
-    targetProcedure.schedule.push({
-      name: `${newDate} ${newTime} ${periodisity} `,
-      value: [newDate, newTime],
-      periodicity: this.props.procedures.periodicity
-    });
-    const newProceduresList = proceduresList.map(item => {
-      if (item.id === targetProcedure.id) return targetProcedure;
+  addSchedule = (hours, minutes) => {
+    const newProceduresList = this.props.procedures.proceduresList.map(item => {
+      if (item.id === this.props.id)
+        item.schedule.push({
+          value: [...this.props.procedures.prcedureNewDate, hours, minutes]
+        });
       return item;
     });
+
     this.props.editProceduresList(newProceduresList);
   };
 
@@ -88,8 +68,15 @@ class Schedule extends Component {
           </Grid>
           <div className={classes.calendar}>
             <DatePicker id={this.props.id} dateNow={this.timeNow()} />
-            <TimePicker id={this.props.id} dateNow={this.timeNow()} />
+            <TimePicker
+              id={this.props.id}
+              dateNow={this.timeNow()}
+              addSchedule={this.addSchedule}
+            />
           </div>
+        </Grid>
+        <Grid item xs={12}>
+          <CardTemplate />
         </Grid>
       </React.Fragment>
     );

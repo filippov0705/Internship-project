@@ -42,7 +42,7 @@ const RadioBtn = props => {
         <FormControlLabel
           value="periodically"
           control={<Radio />}
-          label="periodically"
+          label="Periodically"
         />
       </RadioGroup>
     </FormControl>

@@ -13,121 +13,62 @@ const styles = theme => ({
 });
 
 const DaysOfTheWeekBtns = props => {
-  const { classes } = props;
-  const today = `${new Date()}`.split(" ")[0];
-  const period = props.procedures.periodicity;
-
   const btnClick = event => {
-    editProcedureDate([
+    const info = event.target.closest("button").dataset.info;
+
+    props.editProcedureDate([
       new Date().getFullYear(),
       new Date().getMonth() + 1,
-      new Date().getDate() + +event.target.closest("button").dataset.info
+      Number.isNaN(+info) ? info : new Date().getDate() + +info
     ]);
-    document.getElementsByClassName("MuiIconButton-root")[4].click();
+    document
+      .getElementsByClassName("MuiIconButton-root")
+      [
+        document.getElementsByClassName("MuiIconButton-root").length - 1
+      ].click();
   };
 
-  return (
-    <React.Fragment>
-      <Button
-        btnAction={btnClick}
-        info={0}
-        linkTo={procedureScheduleUrl(props.id)}
-        looks={"sceduleBtn"}
-      >
-        <span
-          className={
-            today === "Mon" && period === "single" ? classes.today : null
-          }
-        >
-          {today === "Mon" && period === "single" ? "Today" : "Mon"}
-        </span>
-      </Button>
-      <Button
-        btnAction={btnClick}
-        info={1}
-        linkTo={procedureScheduleUrl(props.id)}
-        looks={"sceduleBtn"}
-      >
-        <span
-          className={
-            today === "Tue" && period === "single" ? classes.today : null
-          }
-        >
-          {today === "Tue" && period === "single" ? "Today" : "Tue"}
-        </span>
-      </Button>
-      <Button
-        btnAction={btnClick}
-        info={2}
-        linkTo={procedureScheduleUrl(props.id)}
-        looks={"sceduleBtn"}
-      >
-        <span
-          className={
-            today === "Wed" && period === "single" ? classes.today : null
-          }
-        >
-          {today === "Wed" && period === "single" ? "Today" : "Wed"}
-        </span>
-      </Button>
-      <Button
-        btnAction={btnClick}
-        info={3}
-        linkTo={procedureScheduleUrl(props.id)}
-        looks={"sceduleBtn"}
-      >
-        <span
-          className={
-            today === "Thu" && period === "single" ? classes.today : null
-          }
-        >
-          {today === "Thu" && period === "single" ? "Today" : "Thu"}
-        </span>
-      </Button>
-      <Button
-        btnAction={btnClick}
-        info={4}
-        linkTo={procedureScheduleUrl(props.id)}
-        looks={"sceduleBtn"}
-      >
-        <span
-          className={
-            today === "Fri" && period === "single" ? classes.today : null
-          }
-        >
-          {today === "Fri" && period === "single" ? "Today" : "Fri"}
-        </span>
-      </Button>
-      <Button
-        btnAction={btnClick}
-        info={5}
-        linkTo={procedureScheduleUrl(props.id)}
-        looks={"sceduleBtn"}
-      >
-        <span
-          className={
-            today === "Sat" && period === "single" ? classes.today : null
-          }
-        >
-          {today === "Sat" && period === "single" ? "Today" : "Sat"}
-        </span>
-      </Button>
-      <Button
-        btnAction={btnClick}
-        info={6}
-        linkTo={procedureScheduleUrl(props.id)}
-        looks={"sceduleBtn"}
-      >
-        <span
-          className={
-            today === "Sun" && period === "single" ? classes.today : null
-          }
-        >
-          {today === "Sun" && period === "single" ? "Today" : "Sun"}
-        </span>
-      </Button>
-    </React.Fragment>
-  );
+  const createButtons = () => {
+    const flag = props.procedures.periodicity === "single";
+    const arr = [];
+    const daysInAWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    for (let i = 0; i < 7; i++) {
+      if (!flag) {
+        arr.push(
+          <Button
+            key={i}
+            btnAction={btnClick}
+            info={daysInAWeek[i]}
+            linkTo={procedureScheduleUrl(props.id)}
+            looks={"sceduleBtn"}
+          >
+            {daysInAWeek[i]}
+          </Button>
+        );
+      } else {
+        arr.push(
+          <Button
+            key={i}
+            btnAction={btnClick}
+            info={i}
+            linkTo={procedureScheduleUrl(props.id)}
+            looks={"sceduleBtn"}
+          >
+            {!i ? "Today" : null}
+            {i === 1 ? "Tomorrow" : null}
+            {i > 1
+              ? `${new Date(2019, 11, new Date().getDate() + i)}`.split(" ")[0]
+              : null}
+          </Button>
+        );
+      }
+    }
+
+    return arr;
+  };
+
+  return <React.Fragment>{createButtons()}</React.Fragment>;
 };
 
 const mapStateToProps = store => {
@@ -138,7 +79,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setPeriodicity: periodicity => dispatch(setPeriodicity(periodicity))
+    setPeriodicity: periodicity => dispatch(setPeriodicity(periodicity)),
+    editProcedureDate: date => dispatch(editProcedureDate(date))
   };
 };
 
