@@ -55,14 +55,26 @@ const DaysOfTheWeekBtns = props => {
             linkTo={procedureScheduleUrl(props.id)}
             looks={"sceduleBtn"}
           >
-            {!i ? "Today" : null}
-            {i === 1 ? "Tomorrow" : null}
-            {i > 1
-              ? `${new Date(2019, 11, new Date().getDate() + i)}`.split(" ")[0]
-              : null}
+            {`${new Date(2019, 11, new Date().getDate() + i)}`.split(" ")[0]}
           </Button>
         );
       }
+    }
+
+    if (flag) {
+      arr.sort((a, b) => {
+        if (
+          daysInAWeek.indexOf(a.props.children) >
+          daysInAWeek.indexOf(b.props.children)
+        )
+          return 1;
+        if (
+          daysInAWeek.indexOf(a.props.children) <
+          daysInAWeek.indexOf(b.props.children)
+        )
+          return -1;
+        return null;
+      });
     }
 
     return arr;

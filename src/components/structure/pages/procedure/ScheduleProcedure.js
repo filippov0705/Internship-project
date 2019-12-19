@@ -8,15 +8,18 @@ import { getUserData } from "../../../../action/ProceduresActions";
 
 class ScheduleProcedure extends Component {
   componentDidMount() {
-    this.props.getUserData();
+    const data = this.props.mockData.allProcedures.filter(
+      item => item.id === this.props.match.params.id
+    );
+    this.props.getUserData(data);
   }
 
   render() {
+    // if (this.props.procedures.proceduresList === undefined) return null;
     if (this.props.procedures.proceduresList.length === 0) return null;
     const targetProcedure = this.props.procedures.proceduresList.find(
       item => item.id === this.props.match.params.id
     );
-
     return (
       <ProcedurePage>
         <Heading
@@ -37,13 +40,14 @@ class ScheduleProcedure extends Component {
 
 const mapStateToProps = store => {
   return {
-    procedures: store.procedures
+    procedures: store.procedures,
+    mockData: store.mockData
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserData: () => dispatch(getUserData())
+    getUserData: data => dispatch(getUserData(data))
   };
 };
 

@@ -7,11 +7,12 @@ import { ProceduresPath } from "../../../../utils/BuildPaths";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import {
-  newProcedureCreate,
   setChosenTasks,
   applyTaskForProcedure,
-  removeChosenTask
+  removeChosenTask,
+  setPossibleTasks
 } from "../../../../action/ProceduresActions";
+import { newProcedureCreate } from "../../../../action/MockDataActions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import ProcedurePage from "./ProcedurePage";
 import Heading from "../../../common/Heading";
@@ -43,6 +44,7 @@ const styles = theme => ({
 
 class ProcedureAdd extends Component {
   componentDidMount() {
+    this.props.setPossibleTasks(this.props.mockData.possibleTasks);
     this.props.setChosenTasks([]);
   }
 
@@ -121,7 +123,8 @@ class ProcedureAdd extends Component {
 
 const mapStateToProps = store => {
   return {
-    procedures: store.procedures
+    procedures: store.procedures,
+    mockData: store.mockData
   };
 };
 
@@ -131,7 +134,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(newProcedureCreate(newProcedure)),
     setChosenTasks: tasks => dispatch(setChosenTasks(tasks)),
     applyTaskForProcedure: task => dispatch(applyTaskForProcedure(task)),
-    removeChosenTask: newArr => dispatch(removeChosenTask(newArr))
+    removeChosenTask: newArr => dispatch(removeChosenTask(newArr)),
+    setPossibleTasks: data => dispatch(setPossibleTasks(data))
   };
 };
 

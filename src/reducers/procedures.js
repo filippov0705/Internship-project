@@ -3,33 +3,17 @@ import {
   APPLY_TASK_FOR_PROCEDURE,
   REMOVE_CHOSEN_TASK,
   NEW_PROCEDURE_NAME,
-  NEW_PROCEDURE_CREATE,
   SET_PERIODISITY,
   EDIT_DATE,
   SET_CHOSEN_TASKS,
-  EDIT_PROCEDURE_LIST
+  EDIT_PROCEDURE_LIST,
+  SET_POSSIBLE_TASKS
 } from "../action/ProceduresActions";
 
 const initialState = () => {
   return {
     proceduresList: [],
-    possibleTasks: [
-      {
-        name: "Get results"
-      },
-      {
-        name: "Show results"
-      },
-      {
-        name: "Mailing"
-      },
-      {
-        name: "Сalculate the average"
-      },
-      {
-        name: "Show maximum value"
-      }
-    ],
+    possibleTasks: [],
     chosenTasks: [],
     newProcedureName: "",
     prcedureNewDate: [],
@@ -41,6 +25,9 @@ export function proceduresReducer(state = initialState(), action) {
   switch (action.type) {
     case GET_USER_DATA:
       return { ...state, proceduresList: action.payload };
+
+    case SET_POSSIBLE_TASKS:
+      return { ...state, possibleTasks: action.payload };
 
     case APPLY_TASK_FOR_PROCEDURE:
       return {
@@ -68,16 +55,6 @@ export function proceduresReducer(state = initialState(), action) {
 
     case SET_CHOSEN_TASKS:
       return { ...state, chosenTasks: action.payload };
-
-    case NEW_PROCEDURE_CREATE:
-      return {
-        ...state,
-        proceduresList: state.proceduresList.concat(action.payload),
-        chosenTasks: [],
-        newProcedureName: "",
-        prcedureNewDate: [],
-        periodicity: "single"
-      };
 
     default:
       return state;

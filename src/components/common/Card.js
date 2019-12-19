@@ -8,19 +8,31 @@ import { editProceduresList } from "../../action/ProceduresActions";
 
 const styles = theme => ({
   cardWrapper: {
-    width: "120px",
-    height: "150px",
+    width: "100%",
+    height: "40px",
     backgroundColor: "#3f51b586",
     margin: "9px",
     borderRadius: "5px",
-    position: "relative"
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: "20px"
   },
   timeWrapper: {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
-    fontSize: "20px",
-    marginTop: "35px"
+    fontSize: "20px"
+  },
+  span: {
+    marginRight: "8px"
+  },
+  disappearing: {
+    [theme.breakpoints.up("xs")]: {
+      display: "none"
+    },
+    [theme.breakpoints.up("sm")]: {
+      display: "box"
+    }
   }
 });
 
@@ -28,17 +40,35 @@ const Card = props => {
   const { classes } = props;
   const getContent = () => {
     if (typeof props.item.value[2] === "string") {
+      const dateSpan = props.item.value.map(item => {
+        if (`${item}`.length === 1) return `0${item}`;
+        return item;
+      });
       return (
         <div className={classes.timeWrapper}>
-          <span>{props.item.value[2]}</span>
-          <span>{`${props.item.value[3]}:${props.item.value[3]}`}</span>
+          <span className={`${classes.span} ${classes.disappearing}`}>
+            Runs every
+          </span>
+          <span className={classes.span}>{props.item.value[2]}</span>
+          <span className={`${classes.span} ${classes.disappearing}`}>at</span>
+          <span>{`${dateSpan[3]}:${dateSpan[4]}`}</span>
         </div>
       );
     } else {
+      const dateSpan = props.item.value.map(item => {
+        if (`${item}`.length === 1) return `0${item}`;
+        return item;
+      });
       return (
         <div className={classes.timeWrapper}>
-          <span>{`${props.item.value[2]}-${props.item.value[1]}-${props.item.value[0]}`}</span>
-          <span>{`${props.item.value[3]}:${props.item.value[3]}`}</span>
+          <span className={`${classes.span} ${classes.disappearing}`}>
+            Runs only on
+          </span>
+          <span
+            className={classes.span}
+          >{`${dateSpan[2]}-${dateSpan[1]}-${dateSpan[0]}`}</span>
+          <span className={`${classes.span} ${classes.disappearing}`}>at</span>
+          <span>{`${dateSpan[3]}:${dateSpan[4]}`}</span>
         </div>
       );
     }
