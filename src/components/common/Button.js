@@ -49,6 +49,16 @@ const styles = theme => ({
   },
   active: {
     backgroundColor: "white"
+  },
+  cardRemove: {
+    position: "absolute",
+    backgroundColor: "rgb(207, 0, 0)",
+    top: "-8px",
+    right: "-8px",
+    width: "28px",
+    height: "28px",
+    padding: "0",
+    borderRadius: "50%"
   }
 });
 

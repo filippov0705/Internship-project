@@ -1,7 +1,7 @@
 [{
     "name": "procedure 1",
     "id": "1234124",
-    "schedule": [{"value": [2019, 12, "Mon", 15, 30]}],
+    "schedule": [{"value": [2019, 12, "Mon", 15, 30], "id": "1597538"}],
     "tasks": [{
         "name": "task_1",
         "id": "1"

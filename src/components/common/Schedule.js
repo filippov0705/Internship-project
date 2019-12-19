@@ -44,7 +44,8 @@ class Schedule extends Component {
     const newProceduresList = this.props.procedures.proceduresList.map(item => {
       if (item.id === this.props.id)
         item.schedule.push({
-          value: [...this.props.procedures.prcedureNewDate, hours, minutes]
+          value: [...this.props.procedures.prcedureNewDate, hours, minutes],
+          id: (Math.random() * 10000000 + "").split(".")[0]
         });
       return item;
     });
@@ -54,8 +55,9 @@ class Schedule extends Component {
 
   render() {
     const { classes } = this.props;
-    // const targetProcedure = this.props.targetProcedure;
-    // const targetSchedule = targetProcedure.schedule;
+    const targetSchedule = this.props.procedures.proceduresList.filter(
+      item => item.id === this.props.id
+    )[0].schedule;
 
     return (
       <React.Fragment>
@@ -76,7 +78,7 @@ class Schedule extends Component {
           </div>
         </Grid>
         <Grid item xs={12}>
-          <CardTemplate />
+          <CardTemplate id={this.props.id} targetSchedule={targetSchedule} />
         </Grid>
       </React.Fragment>
     );

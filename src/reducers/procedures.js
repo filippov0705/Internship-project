@@ -60,8 +60,7 @@ export function proceduresReducer(state = initialState(), action) {
     case EDIT_PROCEDURE_LIST:
       return {
         ...state,
-        proceduresList: action.payload,
-        periodicity: "single"
+        proceduresList: action.payload
       };
 
     case SET_PERIODISITY:

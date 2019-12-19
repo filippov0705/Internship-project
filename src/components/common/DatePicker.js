@@ -33,7 +33,7 @@ const DatePicker = props => {
       date.getMonth() + 1,
       flag ? date.getDate() : `${date}`.split(" ")[0]
     ]);
-
+    console.log(props.procedures.periodicity);
     document.getElementsByClassName("MuiIconButton-root")[6].click();
   };
 

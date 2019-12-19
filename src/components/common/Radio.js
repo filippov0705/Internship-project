@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const RadioBtn = props => {
   const classes = useStyles();
-  const [value, setValue] = React.useState("single");
+  const [value, setValue] = useState("single");
 
   const handleChange = event => {
     props.setPeriodicity(event.target.value);
