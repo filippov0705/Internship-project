@@ -33,7 +33,6 @@ const styles = theme => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    pointerEvents: "none",
     textDecoration: "none",
     color: "black"
   }
