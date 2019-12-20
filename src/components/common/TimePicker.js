@@ -30,6 +30,7 @@ const TimePicker = props => {
 
   const handleDateChange = date => {
     setSelectedDate(date);
+    if (props.procedures.prcedureNewDate.length === 0) return;
     props.addSchedule(date.getHours(), date.getMinutes());
   };
 

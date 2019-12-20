@@ -7,7 +7,7 @@ import { ProceduresPath } from "../../../../utils/BuildPaths";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import {
-  setChosenTasks,
+  clearChosenTasks,
   applyTaskForProcedure,
   removeChosenTask,
   setPossibleTasks,
@@ -45,13 +45,14 @@ const styles = theme => ({
 class ProcedureAdd extends Component {
   componentDidMount() {
     this.props.setPossibleTasks();
-    this.props.setChosenTasks([]);
+    this.props.clearChosenTasks([]);
   }
 
   applyTask = event => {
     const targetTask = this.props.procedures.possibleTasks.filter(
       item => item.name === event.target.innerText
     )[0];
+    if (!targetTask) return;
     const task = {
       name: targetTask.name,
       id: (Math.random() * 10000000 + "").split(".")[0]
@@ -132,7 +133,7 @@ const mapDispatchToProps = dispatch => {
   return {
     newProcedureCreate: newProcedure =>
       dispatch(newProcedureCreate(newProcedure)),
-    setChosenTasks: tasks => dispatch(setChosenTasks(tasks)),
+    clearChosenTasks: tasks => dispatch(clearChosenTasks(tasks)),
     applyTaskForProcedure: task => dispatch(applyTaskForProcedure(task)),
     removeChosenTask: newArr => dispatch(removeChosenTask(newArr)),
     setPossibleTasks: () => dispatch(setPossibleTasks())

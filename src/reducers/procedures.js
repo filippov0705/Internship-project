@@ -10,7 +10,8 @@ import {
   SET_POSSIBLE_TASKS,
   NEW_PROCEDURE_CREATE,
   SET_TARGET_PROCEDURE,
-  CHANGE_TASK_LIST
+  CHANGE_TASK_LIST,
+  CLEAR_CHOSEN_TASKS
 } from "../action/ProceduresActions";
 import { mockData } from "./mockData";
 
@@ -90,6 +91,9 @@ export function proceduresReducer(state = initialState(), action) {
           item => item.id === action.payload
         ).tasks
       };
+
+    case CLEAR_CHOSEN_TASKS:
+      return { ...state, chosenTasks: [] };
 
     case CHANGE_TASK_LIST:
       return {

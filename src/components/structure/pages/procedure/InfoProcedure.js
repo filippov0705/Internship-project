@@ -11,17 +11,15 @@ import {
 
 class InfoProcedure extends Component {
   componentDidMount() {
-    if (this.props.procedures.proceduresList.length === 0) {
-      this.props.getUserData();
-    }
     this.props.setTargetProcedure(this.props.match.params.id);
   }
 
   render() {
-    if (this.props.procedures.proceduresList.length === 0) return null;
+    if (this.props.procedures.targetProcedure.length === 0) return null;
     const data = this.props.procedures.targetProcedure[0]
       ? this.props.procedures.targetProcedure[0].tasks
       : [];
+
     return (
       <ProcedurePage>
         <Heading

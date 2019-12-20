@@ -5,6 +5,7 @@ import { procedureScheduleUrl } from "../../utils/BuildPaths";
 import CloseIcon from "@material-ui/icons/Close";
 import { connect } from "react-redux";
 import { editProceduresList } from "../../action/ProceduresActions";
+import moment from "moment";
 
 const styles = theme => ({
   cardWrapper: {
@@ -57,33 +58,40 @@ const Card = props => {
           </span>
           <span className={classes.span}>{weekSchedule.join(" ")}</span>
           <span className={`${classes.span} ${classes.disappearing}`}>at</span>
-          <span>{`${
-            `${value[value.length - 2]}`.length === 1
-              ? `0${value[value.length - 2]}`
-              : value[value.length - 2]
-          }
-          :${
-            `${value[value.length - 1]}`.length === 1
-              ? `0${value[value.length - 1]}`
-              : value[value.length - 1]
-          }`}</span>
+          <span>
+            {moment([
+              2019,
+              9,
+              31,
+              value[value.length - 2],
+              value[value.length - 1]
+            ]).format("hh:mm a")}
+          </span>
         </div>
       );
     } else {
-      const dateSpan = props.item.value.map(item => {
-        if (`${item}`.length === 1) return `0${item}`;
-        return item;
-      });
       return (
         <div className={classes.timeWrapper}>
           <span className={`${classes.span} ${classes.disappearing}`}>
             Runs only on
           </span>
-          <span
-            className={classes.span}
-          >{`${dateSpan[2]}-${dateSpan[1]}-${dateSpan[0]}`}</span>
+          <span className={classes.span}>
+            {moment([
+              props.item.value[0],
+              props.item.value[1] - 1,
+              props.item.value[2]
+            ]).format("DD MM YYYY")}
+          </span>
           <span className={`${classes.span} ${classes.disappearing}`}>at</span>
-          <span>{`${dateSpan[3]}:${dateSpan[4]}`}</span>
+          <span>
+            {moment([
+              2019,
+              9,
+              31,
+              value[value.length - 2],
+              value[value.length - 1]
+            ]).format("hh:mm a")}
+          </span>
         </div>
       );
     }

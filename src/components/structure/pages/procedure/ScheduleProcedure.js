@@ -7,18 +7,12 @@ import Heading from "../../../common/Heading";
 import { getUserData } from "../../../../action/ProceduresActions";
 
 class ScheduleProcedure extends Component {
-  componentDidMount() {
-    const data = this.props.procedures.proceduresList.filter(
-      item => item.id === this.props.match.params.id
-    );
-    this.props.getUserData(data);
-  }
-
   render() {
     if (this.props.procedures.proceduresList.length === 0) return null;
     const targetProcedure = this.props.procedures.proceduresList.find(
       item => item.id === this.props.match.params.id
     );
+
     return (
       <ProcedurePage>
         <Heading

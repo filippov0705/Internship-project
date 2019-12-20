@@ -1,5 +1,3 @@
-// import fakeData from '../mockData/fakeData';
-
 export const GET_USER_DATA = "GET_USER_DATA";
 export const APPLY_TASK_FOR_PROCEDURE = "APPLY_TASK_FOR_PROCEDURE";
 export const REMOVE_CHOSEN_TASK = "REMOVE_CHOSEN_TASK";
@@ -13,6 +11,7 @@ export const SET_POSSIBLE_TASKS = "SET_POSSIBLE_TASKS";
 export const NEW_PROCEDURE_CREATE = "NEW_PROCEDURE_CREATE";
 export const SET_TARGET_PROCEDURE = "SET_TARGET_PROCEDURE";
 export const CHANGE_TASK_LIST = "CHANGE_TASK_LIST";
+export const CLEAR_CHOSEN_TASKS = "CLEAR_CHOSEN_TASKS";
 
 export function newProcedureCreate(newProcedure) {
   return {
@@ -95,5 +94,12 @@ export function changeTaskList(taskList) {
   return {
     type: CHANGE_TASK_LIST,
     payload: taskList
+  };
+}
+
+export function clearChosenTasks() {
+  return {
+    type: CLEAR_CHOSEN_TASKS,
+    payload: ""
   };
 }
