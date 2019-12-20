@@ -4,7 +4,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import DatePicker from "./DatePicker";
 import TimePicker from "./TimePicker";
 import { connect } from "react-redux";
-// import { procedureScheduleUrl } from "../../utils/BuildPaths";
 import {
   editProceduresList,
   editProcedureDate,

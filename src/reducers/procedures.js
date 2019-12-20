@@ -47,7 +47,8 @@ export function proceduresReducer(state = initialState(), action) {
     case EDIT_PROCEDURE_LIST:
       return {
         ...state,
-        proceduresList: action.payload
+        proceduresList: action.payload,
+        prcedureNewDate: []
       };
 
     case SET_PERIODISITY:

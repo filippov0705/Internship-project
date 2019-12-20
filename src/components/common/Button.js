@@ -45,9 +45,15 @@ const styles = theme => ({
     width: "80px",
     height: "40px",
     margin: "5px",
-    borderRadius: "7px"
+    borderRadius: "7px",
+    cursor: "pointer"
   },
-  active: {
+  sceduleBtnActive: {
+    width: "80px",
+    height: "40px",
+    margin: "5px",
+    borderRadius: "7px",
+    cursor: "pointer",
     backgroundColor: "white"
   },
   cardRemove: {
@@ -59,6 +65,16 @@ const styles = theme => ({
     height: "28px",
     padding: "0",
     borderRadius: "50%"
+  },
+  schedule: {
+    backgroundColor: "#cfe8fc",
+    borderRadius: "50%",
+    border: "none",
+    margin: "16px 0 11px 1px",
+    cursor: "pointer"
+  },
+  hidden: {
+    display: "none"
   }
 });
 

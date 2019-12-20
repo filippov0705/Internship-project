@@ -15,18 +15,20 @@ const styles = theme => ({
   datePicker: {
     width: "0px",
     marginRight: "60px"
+  },
+  display: {
+    display: "none"
   }
 });
 
 const DatePicker = props => {
   const { classes } = props;
+  const flag = props.procedures.periodicity === "single";
   const [selectedDate, setSelectedDate] = useState(
     new Date(`${props.dateNow}T23:55:00`)
   );
 
   const handleDateChange = date => {
-    const flag = props.procedures.periodicity === "single";
-
     setSelectedDate(date);
     props.editProcedureDate([
       date.getFullYear(),
@@ -39,7 +41,13 @@ const DatePicker = props => {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around" className={classes.datePicker}>
+      <Grid
+        container
+        justify="space-around"
+        className={
+          flag ? classes.datePicker : `${classes.datePicker} ${classes.display}`
+        }
+      >
         <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"

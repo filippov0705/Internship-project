@@ -13,7 +13,7 @@ const styles = theme => ({
 });
 
 const DaysOfTheWeekBtns = props => {
-  const btnClick = event => {
+  const singlePeriodicityDatePick = event => {
     const info = event.target.closest("button").dataset.info;
 
     props.editProcedureDate([
@@ -28,6 +28,20 @@ const DaysOfTheWeekBtns = props => {
       ].click();
   };
 
+  const multiplePeriodicityDatePick = event => {
+    const ProcedureDate = props.procedures.prcedureNewDate;
+    if (ProcedureDate.includes(event.target.closest("button").dataset.info)) {
+      props.editProcedureDate(
+        ProcedureDate.filter(
+          item => item !== event.target.closest("button").dataset.info
+        )
+      );
+    } else {
+      ProcedureDate.push(event.target.closest("button").dataset.info);
+      props.editProcedureDate(ProcedureDate);
+    }
+  };
+
   const createButtons = () => {
     const flag = props.procedures.periodicity === "single";
     const arr = [];
@@ -38,10 +52,14 @@ const DaysOfTheWeekBtns = props => {
         arr.push(
           <Button
             key={i}
-            btnAction={btnClick}
+            btnAction={multiplePeriodicityDatePick}
             info={daysInAWeek[i]}
             linkTo={procedureScheduleUrl(props.id)}
-            looks={"sceduleBtn"}
+            looks={
+              props.procedures.prcedureNewDate.includes(daysInAWeek[i])
+                ? "sceduleBtnActive"
+                : "sceduleBtn"
+            }
           >
             {daysInAWeek[i]}
           </Button>
@@ -50,7 +68,7 @@ const DaysOfTheWeekBtns = props => {
         arr.push(
           <Button
             key={i}
-            btnAction={btnClick}
+            btnAction={singlePeriodicityDatePick}
             info={i}
             linkTo={procedureScheduleUrl(props.id)}
             looks={"sceduleBtn"}

@@ -38,20 +38,35 @@ const styles = theme => ({
 
 const Card = props => {
   const { classes } = props;
+  const value = props.item.value;
+  const daysInAWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const getContent = () => {
-    if (typeof props.item.value[2] === "string") {
-      const dateSpan = props.item.value.map(item => {
-        if (`${item}`.length === 1) return `0${item}`;
-        return item;
+    if (typeof value[0] === "string") {
+      const weekSchedule = value.filter(item => typeof item === "string");
+
+      weekSchedule.sort((a, b) => {
+        if (daysInAWeek.indexOf(a) > daysInAWeek.indexOf(b)) return 1;
+        if (daysInAWeek.indexOf(a) < daysInAWeek.indexOf(b)) return -1;
+        return null;
       });
+
       return (
         <div className={classes.timeWrapper}>
           <span className={`${classes.span} ${classes.disappearing}`}>
             Runs every
           </span>
-          <span className={classes.span}>{props.item.value[2]}</span>
+          <span className={classes.span}>{weekSchedule.join(" ")}</span>
           <span className={`${classes.span} ${classes.disappearing}`}>at</span>
-          <span>{`${dateSpan[3]}:${dateSpan[4]}`}</span>
+          <span>{`${
+            `${value[value.length - 2]}`.length === 1
+              ? `0${value[value.length - 2]}`
+              : value[value.length - 2]
+          }
+          :${
+            `${value[value.length - 1]}`.length === 1
+              ? `0${value[value.length - 1]}`
+              : value[value.length - 1]
+          }`}</span>
         </div>
       );
     } else {

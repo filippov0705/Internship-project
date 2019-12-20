@@ -15,7 +15,6 @@ class ScheduleProcedure extends Component {
   }
 
   render() {
-    // if (this.props.procedures.proceduresList === undefined) return null;
     if (this.props.procedures.proceduresList.length === 0) return null;
     const targetProcedure = this.props.procedures.proceduresList.find(
       item => item.id === this.props.match.params.id
