@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const RadioBtn = props => {
   const classes = useStyles();
-  const [value, setValue] = useState("single");
+  const [value, setValue] = useState(props.procedures.periodicity);
 
   const handleChange = event => {
     props.setPeriodicity(event.target.value);
@@ -49,10 +49,16 @@ const RadioBtn = props => {
   );
 };
 
+const mapStateToProps = store => {
+  return {
+    procedures: store.procedures
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     setPeriodicity: periodicity => dispatch(setPeriodicity(periodicity))
   };
 };
 
-export default connect(null, mapDispatchToProps)(RadioBtn);
+export default connect(mapStateToProps, mapDispatchToProps)(RadioBtn);
