@@ -7,11 +7,13 @@ import Tasks from "../task/Tasks";
 
 class Procedures extends Component {
   componentDidMount() {
-    this.props.getUserData(this.props.mockData.allProceduresHeads);
+    if (this.props.procedures.proceduresList.length === 0) {
+      this.props.getUserData();
+    }
   }
 
   render() {
-    const proceduresList = this.props.procedures.proceduresList;
+    const proceduresList = this.props.procedures.proceduresHeads;
     return (
       <Page>
         <SearchBar />
@@ -35,7 +37,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserData: data => dispatch(getUserData(data))
+    getUserData: () => dispatch(getUserData())
   };
 };
 

@@ -10,9 +10,9 @@ import {
   setChosenTasks,
   applyTaskForProcedure,
   removeChosenTask,
-  setPossibleTasks
+  setPossibleTasks,
+  newProcedureCreate
 } from "../../../../action/ProceduresActions";
-import { newProcedureCreate } from "../../../../action/MockDataActions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import ProcedurePage from "./ProcedurePage";
 import Heading from "../../../common/Heading";
@@ -44,7 +44,7 @@ const styles = theme => ({
 
 class ProcedureAdd extends Component {
   componentDidMount() {
-    this.props.setPossibleTasks(this.props.mockData.possibleTasks);
+    this.props.setPossibleTasks();
     this.props.setChosenTasks([]);
   }
 
@@ -135,7 +135,7 @@ const mapDispatchToProps = dispatch => {
     setChosenTasks: tasks => dispatch(setChosenTasks(tasks)),
     applyTaskForProcedure: task => dispatch(applyTaskForProcedure(task)),
     removeChosenTask: newArr => dispatch(removeChosenTask(newArr)),
-    setPossibleTasks: data => dispatch(setPossibleTasks(data))
+    setPossibleTasks: () => dispatch(setPossibleTasks())
   };
 };
 

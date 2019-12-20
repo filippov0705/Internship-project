@@ -8,7 +8,7 @@ import { getUserData } from "../../../../action/ProceduresActions";
 
 class ScheduleProcedure extends Component {
   componentDidMount() {
-    const data = this.props.mockData.allProcedures.filter(
+    const data = this.props.procedures.proceduresList.filter(
       item => item.id === this.props.match.params.id
     );
     this.props.getUserData(data);
@@ -39,8 +39,7 @@ class ScheduleProcedure extends Component {
 
 const mapStateToProps = store => {
   return {
-    procedures: store.procedures,
-    mockData: store.mockData
+    procedures: store.procedures
   };
 };
 

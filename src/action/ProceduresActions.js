@@ -10,11 +10,28 @@ export const EDIT_PROCEDURE_LIST = "EDIT_PROCEDURE_LIST";
 export const SET_PERIODISITY = "SET_PERIODISITY";
 export const SET_CHOSEN_TASKS = "SET_CHOSEN_TASKS";
 export const SET_POSSIBLE_TASKS = "SET_POSSIBLE_TASKS";
+export const NEW_PROCEDURE_CREATE = "NEW_PROCEDURE_CREATE";
+export const SET_TARGET_PROCEDURE = "SET_TARGET_PROCEDURE";
+export const CHANGE_TASK_LIST = "CHANGE_TASK_LIST";
 
-export function getUserData(data) {
+export function newProcedureCreate(newProcedure) {
+  return {
+    type: NEW_PROCEDURE_CREATE,
+    payload: newProcedure
+  };
+}
+
+export function getUserData() {
   return {
     type: GET_USER_DATA,
-    payload: data
+    payload: ""
+  };
+}
+
+export function setTargetProcedure(id) {
+  return {
+    type: SET_TARGET_PROCEDURE,
+    payload: id
   };
 }
 
@@ -67,9 +84,16 @@ export function setPeriodicity(periodicity) {
   };
 }
 
-export function setChosenTasks(tasks) {
+export function setChosenTasks(id) {
   return {
     type: SET_CHOSEN_TASKS,
-    payload: tasks
+    payload: id
+  };
+}
+
+export function changeTaskList(taskList) {
+  return {
+    type: CHANGE_TASK_LIST,
+    payload: taskList
   };
 }

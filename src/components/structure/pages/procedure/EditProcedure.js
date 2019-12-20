@@ -6,7 +6,10 @@ import Grid from "@material-ui/core/Grid";
 import {
   setChosenTasks,
   editProceduresList,
-  applyTaskForProcedure
+  applyTaskForProcedure,
+  getUserData,
+  setTargetProcedure,
+  changeTaskList
 } from "../../../../action/ProceduresActions";
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
@@ -26,10 +29,7 @@ const styles = theme => ({
 
 class EditProcedure extends Component {
   componentDidMount() {
-    const targetProcedure = this.props.procedures.proceduresList.find(
-      item => item.id === this.props.match.params.id
-    );
-    this.props.setChosenTasks(targetProcedure.tasks);
+    this.props.setChosenTasks(this.props.match.params.id);
   }
 
   applyTask = event => {
@@ -41,15 +41,15 @@ class EditProcedure extends Component {
       id: (Math.random() * 10000000 + "").split(".")[0]
     };
     const newTaskList = this.props.procedures.chosenTasks.concat(task);
-    const newPeocedureList = this.props.procedures.proceduresList.map(item => {
+    const newProcedureList = this.props.procedures.proceduresList.map(item => {
       if (item.id === this.props.match.params.id) {
         item.tasks = newTaskList;
       }
       return item;
     });
 
-    this.props.editProceduresList(newPeocedureList);
-    this.props.setChosenTasks(newTaskList);
+    this.props.editProceduresList(newProcedureList);
+    this.props.changeTaskList(newTaskList);
   };
 
   removeTask = event => {
@@ -67,19 +67,17 @@ class EditProcedure extends Component {
     });
 
     this.props.editProceduresList(newPeocedureList);
-    this.props.setChosenTasks(newChosenTasks);
+    this.props.changeTaskList(newChosenTasks);
   };
 
   render() {
+    if (this.props.procedures.targetProcedure.length === 0) return null;
     const { classes } = this.props;
-    const targetProcedure = this.props.procedures.proceduresList.filter(
-      item => item.id === this.props.match.params.id
-    )[0];
 
     return (
       <ProcedurePage>
         <Heading
-          heading={targetProcedure.name}
+          heading={this.props.procedures.targetProcedure[0].name}
           size={"big"}
           background={"pageLabel"}
         />
@@ -111,7 +109,10 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setChosenTasks: tasks => dispatch(setChosenTasks(tasks)),
+    getUserData: () => dispatch(getUserData()),
+    setTargetProcedure: id => dispatch(setTargetProcedure(id)),
+    setChosenTasks: id => dispatch(setChosenTasks(id)),
+    changeTaskList: taskList => dispatch(changeTaskList(taskList)),
     editProceduresList: list => dispatch(editProceduresList(list)),
     applyTaskForProcedure: task => dispatch(applyTaskForProcedure(task))
   };
