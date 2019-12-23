@@ -1,52 +1,90 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
-import { editProcedureTime } from '../../action/ProceduresActions';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { editProcedureDate } from "../../action/ProceduresActions";
+import "date-fns";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker
+} from "@material-ui/pickers";
+import withStyles from "@material-ui/core/styles/withStyles";
+import AvTimerIcon from "@material-ui/icons/AvTimer";
+import { procedureScheduleUrl } from "../../utils/BuildPaths";
+import Button from "./Button";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
-}));
+const styles = theme => ({
+  datePicker: {
+    width: "0px",
+    display: "none"
+  }
+});
 
 const TimePicker = props => {
-  const classes = useStyles();
+  const { classes } = props;
+  const flag = props.procedures.periodicity === "single";
+  const [selectedDate, setSelectedDate] = useState(
+    new Date(`${props.dateNow}T23:55:00`)
+  );
 
+  const handleDateChange = date => {
+    setSelectedDate(date);
+    if (props.procedures.prcedureNewDate.length === 0) return;
+    props.addSchedule(date.getHours(), date.getMinutes());
+  };
 
-  function editTime(event) {
-    props.editProcedureTime(event.target.value);
-}
+  const btnClick = () => {
+    document
+      .getElementById("TimePicker")
+      .getElementsByTagName("button")[0]
+      .click();
+  };
 
   return (
-    <form className={classes.container} noValidate onChange={editTime}>
-      <TextField
-        id="time"
-        label="Time"
-        type="time"
-        defaultValue="23:59"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          step: 300,
-        }}
-      />
-    </form>
+    <React.Fragment>
+      <Button
+        linkTo={procedureScheduleUrl(props.id)}
+        btnAction={btnClick}
+        looks={flag ? "hidden" : "schedule"}
+      >
+        <AvTimerIcon />
+      </Button>
+
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Grid
+          container
+          justify="space-around"
+          className={classes.datePicker}
+          id="TimePicker"
+        >
+          <KeyboardTimePicker
+            className="this"
+            margin="normal"
+            label=""
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change time"
+            }}
+          />
+        </Grid>
+      </MuiPickersUtilsProvider>
+    </React.Fragment>
   );
-}
+};
+
+const mapStateToProps = store => {
+  return {
+    procedures: store.procedures
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    editProcedureTime: date => dispatch(editProcedureTime(date)),
-  }
-}
+    editProcedureDate: date => dispatch(editProcedureDate(date))
+  };
+};
 
-export default connect(null, mapDispatchToProps)(TimePicker);
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(TimePicker)
+);

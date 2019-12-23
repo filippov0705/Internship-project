@@ -1,109 +1,103 @@
-import React, { Component } from 'react'
-import Grid from '@material-ui/core/Grid';
-import withStyles from '@material-ui/core/styles/withStyles';
-import DatePicker from './DatePicker';
-import { connect } from 'react-redux';
-import Tasks from '../structure/pages/task/Tasks';
-import Button from '../common/Button';
-import { ProceduresPath, editProcedureUrl } from '../../utils/BuildPaths';
-import { editProceduresList, editProcedureDate, setPeriodicity } from '../../action/ProceduresActions';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import DaysOfTheWeekBtns from './DaysOfTheWeekButtons';
+import React, { Component } from "react";
+import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
+import DatePicker from "./DatePicker";
+import TimePicker from "./TimePicker";
+import { connect } from "react-redux";
+import {
+  editProceduresList,
+  editProcedureDate,
+  setPeriodicity
+} from "../../action/ProceduresActions";
+import DaysOfTheWeekBtns from "./DaysOfTheWeekButtons";
+import RadioBtn from "./Radio";
+import CardTemplate from "./CardTemplate";
 
 const styles = theme => ({
-    gridDisplay: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    scheduleBtns: {
-        display: 'flex',
-        justifyContent: 'center'
-    }
+  gridDisplay: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  },
+  scheduleBtns: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  calendar: {
+    margin: "0 auto"
+  },
+  radio: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "40px"
+  }
 });
 
 class Schedule extends Component {
+  timeNow = () => {
+    return `${new Date().getFullYear()}-${new Date().getMonth() +
+      1}-${new Date().getDate()}`;
+  };
 
-    componentDidMount() {
-        this.props.editProcedureDate([this.timeNow(), '21:55:00']);
-    }
-
-    timeNow = () => {
-        const dateNow = new Date();
-        const yearNow = dateNow.getFullYear();
-        const monthNow = dateNow.getMonth() + 1;
-        const dayNow = dateNow.getDate();
-        
-        return `${yearNow}-${monthNow}-${dayNow}`;
-    }
-
-    addSchedule = () => {
-        const newDate = this.props.procedures.prcedureNewDate;
-        const newTime = this.props.procedures.procedureNewTime;
-        const proceduresList = this.props.procedures.proceduresList;
-        const targetProcedure = this.props.targetProcedure;
-        const daysInAWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        const periodisity = daysInAWeek.reduce((sum, cur) => {
-            if (this.props.procedures.periodicity.includes(cur)) return `${sum} ${cur}`;
-            return sum;
-        }, '')
-
-        if (!newDate || !newTime) return;
-        targetProcedure.schedule.push({name: `${newDate} ${newTime} ${periodisity} `, value: [newDate, newTime], periodicity: this.props.procedures.periodicity});
-        const newProceduresList = proceduresList.map(item => {
-            if(item.id === targetProcedure.id) return targetProcedure;
-            return item;
+  addSchedule = (hours, minutes) => {
+    const newProceduresList = this.props.procedures.proceduresList.map(item => {
+      if (item.id === this.props.id)
+        item.schedule.push({
+          value: [...this.props.procedures.prcedureNewDate, hours, minutes],
+          id: (Math.random() * 10000000 + "").split(".")[0]
         });
-        this.props.editProceduresList(newProceduresList)
-    } 
+      return item;
+    });
 
-    render() {
-    const {classes} = this.props;
-    const targetProcedure = this.props.targetProcedure;
-    const targetSchedule = targetProcedure.schedule;
+    this.props.editProceduresList(newProceduresList);
+  };
 
-    return (<>
+  render() {
+    const { classes } = this.props;
+    const targetSchedule = this.props.procedures.proceduresList.filter(
+      item => item.id === this.props.id
+    )[0].schedule;
+
+    return (
+      <React.Fragment>
         <Grid className={classes.gridDisplay}>
+          <Grid container className={classes.radio}>
+            <RadioBtn />
+          </Grid>
+          <Grid container className={classes.scheduleBtns}>
+            <DaysOfTheWeekBtns id={this.props.id} />
+          </Grid>
+          <div className={classes.calendar}>
             <DatePicker id={this.props.id} dateNow={this.timeNow()} />
-            <Grid container className={classes.scheduleBtns}>
-                <Button 
-                 btnAction={this.addSchedule}
-                 type={'action'} 
-                 title={'Add'} >
-                     <AddCircleOutlineIcon />
-                </Button> 
-                <DaysOfTheWeekBtns />
-             </Grid> 
+            <TimePicker
+              id={this.props.id}
+              dateNow={this.timeNow()}
+              addSchedule={this.addSchedule}
+            />
+          </div>
         </Grid>
-        <Tasks data={targetSchedule} content={'availableSchedule'}/>
-        <Button 
-         btnAction={null} 
-         type={'simple'} 
-         linkTo={ProceduresPath()} 
-         message={'Procedures'} 
-         looks={'applyBtn'} /> 
-        <Button 
-         btnAction={null} 
-         type={'simple'} 
-         linkTo={editProcedureUrl(this.props.id)} 
-         message={'Edit'} 
-         looks={'applyBtn'} />  
-        </>
-    )
-    }
+        <Grid item xs={12}>
+          <CardTemplate id={this.props.id} targetSchedule={targetSchedule} />
+        </Grid>
+      </React.Fragment>
+    );
+  }
 }
 
 const mapStateToProps = store => {
-    return {
-        procedures: store.procedures
-    }
-  }
+  return {
+    procedures: store.procedures
+  };
+};
 
-  const mapDispatchToProps = dispatch => {
-    return {
-        editProceduresList: list => dispatch(editProceduresList(list)),
-        editProcedureDate: date => dispatch(editProcedureDate(date)),
-        setPeriodicity: periodicity => dispatch(setPeriodicity(periodicity))
-    }
-  }
+const mapDispatchToProps = dispatch => {
+  return {
+    editProceduresList: list => dispatch(editProceduresList(list)),
+    editProcedureDate: date => dispatch(editProcedureDate(date)),
+    setPeriodicity: periodicity => dispatch(setPeriodicity(periodicity))
+  };
+};
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Schedule));
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Schedule)
+);
