@@ -10,33 +10,22 @@ import {
   procedureScheduleUrl,
   editProcedureUrl
 } from "../../utils/BuildPaths";
+import mainTheme from "../../style/theme";
 
 const styles = theme => ({
   tabsWrapper: {
-    backgroundColor: "white",
     height: "60px",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
+    ...mainTheme.mainBackground
   },
   tab: {
-    backgroundColor: "#3f51b5",
-    height: "50px",
-    borderTopLeftRadius: "7px",
-    borderTopRightRadius: "7px",
-    color: "white",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "20px"
+    ...mainTheme.tabUnactive,
+    ...mainTheme.tabStyle,
+    color: "white"
   },
   activeTab: {
-    backgroundColor: "#cfe8fc",
-    height: "50px",
-    borderTopLeftRadius: "7px",
-    borderTopRightRadius: "7px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "20px",
+    ...mainTheme.tabActive,
+    ...mainTheme.tabStyle,
     color: "black",
     cursor: "auto"
   },

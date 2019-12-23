@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import { fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -16,8 +13,13 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { mainPath, ProceduresPath } from "../../utils/BuildPaths";
 import { FormattedMessage } from "react-intl";
+import Search from "./Search";
+import mainTheme from "../../style/theme";
 
 const styles = theme => ({
+  header: {
+    ...mainTheme.header
+  },
   root: {
     padding: theme.spacing(1),
     [theme.breakpoints.up("md")]: {
@@ -26,9 +28,6 @@ const styles = theme => ({
     [theme.breakpoints.up("lg")]: {
       display: "none"
     }
-  },
-  btn_margin: {
-    marginRight: "5px"
   },
   link: {
     textDecoration: "none",
@@ -41,41 +40,6 @@ const styles = theme => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
-    }
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto"
-    }
-  },
-  searchIcon: {
-    width: theme.spacing(7),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: "inherit"
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: 200
     }
   },
   sectionDesktop: {
@@ -95,6 +59,12 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: "5"
+  },
+  headerButton: {
+    ...mainTheme.headerButton
+  },
+  active: {
+    color: "red"
   }
 });
 
@@ -166,12 +136,24 @@ class SearchAppBar extends Component {
         className={classes.root}
       >
         <Link to={mainPath()} className={classes.link}>
-          <MenuItem>
+          <MenuItem
+            className={
+              this.props.location === "/"
+                ? `${classes.headerButton} ${classes.active}`
+                : classes.headerButton
+            }
+          >
             <FormattedMessage id="navigation.mainPage" />
           </MenuItem>
         </Link>
         <Link to={ProceduresPath()} className={classes.link}>
-          <MenuItem>
+          <MenuItem
+            className={
+              this.props.location === "/"
+                ? classes.headerButton
+                : `${classes.headerButton} ${classes.active}`
+            }
+          >
             <FormattedMessage id="navigation.procedures" />
           </MenuItem>
         </Link>
@@ -180,34 +162,34 @@ class SearchAppBar extends Component {
 
     return (
       <React.Fragment>
-        <AppBar>
+        <AppBar className={classes.header}>
           <Toolbar>
             <UserMenu />
             <Typography className={classes.title} variant="h6" noWrap>
               ITechArt
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
+            <Search />
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <Link to={mainPath()} className={classes.link}>
-                <Button variant="contained" className={classes.btn_margin}>
+                <Button
+                  className={
+                    this.props.location === "/"
+                      ? `${classes.headerButton} ${classes.active}`
+                      : classes.headerButton
+                  }
+                >
                   <FormattedMessage id="navigation.mainPage" />
                 </Button>
               </Link>
               <Link to={ProceduresPath()} className={classes.link}>
-                <Button variant="contained">
+                <Button
+                  className={
+                    this.props.location === "/"
+                      ? classes.headerButton
+                      : `${classes.headerButton} ${classes.active}`
+                  }
+                >
                   <FormattedMessage id="navigation.procedures" />
                 </Button>
               </Link>
@@ -231,7 +213,7 @@ class SearchAppBar extends Component {
                 onClick={this.handleMobileMenuOpen}
                 color="inherit"
               >
-                <MoreIcon />
+                <MoreIcon color="action" />
               </IconButton>
             </div>
           </Toolbar>

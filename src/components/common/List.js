@@ -5,6 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "./Button";
 import { newProcedurePath } from "../../utils/BuildPaths";
 import AddIcon from "@material-ui/icons/Add";
+import Search from "./Search";
 
 const styles = theme => ({
   list: {
@@ -34,7 +35,7 @@ const styles = theme => ({
     overflow: "auto"
   },
   data: {
-    height: "620px",
+    minHeight: "620px",
     backgroundColor: "white",
     margin: "20px",
     border: "1px solid gray",
@@ -42,7 +43,7 @@ const styles = theme => ({
     overflow: "auto"
   },
   procedures: {
-    height: "620px",
+    minHeight: "620px",
     backgroundColor: "white",
     margin: "20px",
     border: "1px solid gray",
@@ -73,9 +74,12 @@ const List = props => {
   return (
     <Grid item className={classes[props.content]}>
       {props.content === "procedures" ? (
-        <Button looks={"addBtn"} linkTo={newProcedurePath()}>
-          <AddIcon />
-        </Button>
+        <React.Fragment>
+          <Button looks={"addBtn"} linkTo={newProcedurePath()}>
+            <AddIcon />
+          </Button>
+          <Search />
+        </React.Fragment>
       ) : null}
       {itemCreation(props.data)}
     </Grid>

@@ -1,4 +1,4 @@
-import { MAIN, PROCEDURES } from '../constants/urls';
+import { MAIN, PROCEDURES } from "../constants/urls";
 
 export const mainPath = () => MAIN;
 export const ProceduresPath = () => `${MAIN}${PROCEDURES}`;

@@ -17,8 +17,13 @@ const styles = theme => ({
     alignItems: "center"
   },
   item_border: {
-    borderBottom: "1px solid rgba(94, 92, 92, 0.225)",
-    cursor: "pointer"
+    border: "1px solid rgba(94, 92, 92, 0.225)",
+    borderRadius: 5,
+    margin: "0 auto",
+    marginBottom: 5,
+    marginTop: 5,
+    cursor: "pointer",
+    width: "99%"
   },
   gridSpan: {
     marginLeft: "10px",

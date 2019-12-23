@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUserData } from "../../../../action/ProceduresActions";
-import SearchBar from "../../../common/SearchBar";
 import Page from "../../../common/Page";
 import Tasks from "../task/Tasks";
 
@@ -16,7 +15,6 @@ class Procedures extends Component {
     const proceduresList = this.props.procedures.proceduresHeads;
     return (
       <Page>
-        <SearchBar />
         <Tasks
           data={proceduresList}
           content={"procedures"}

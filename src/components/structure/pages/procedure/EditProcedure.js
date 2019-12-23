@@ -33,11 +33,8 @@ class EditProcedure extends Component {
   }
 
   applyTask = event => {
-    const targetTask = this.props.procedures.possibleTasks.filter(
-      item => item.name === event.target.innerText
-    )[0];
     const task = {
-      name: targetTask.name,
+      name: event.target.innerText,
       id: (Math.random() * 10000000 + "").split(".")[0]
     };
     const newTaskList = this.props.procedures.chosenTasks.concat(task);

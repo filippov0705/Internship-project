@@ -58,16 +58,16 @@ const styles = theme => ({
   },
   cardRemove: {
     position: "absolute",
-    backgroundColor: "rgb(207, 0, 0)",
-    top: "-8px",
-    right: "-8px",
+    backgroundColor: "none",
+    top: "7px",
+    right: "8px",
     width: "28px",
     height: "28px",
     padding: "0",
     borderRadius: "50%"
   },
   schedule: {
-    backgroundColor: "#cfe8fc",
+    backgroundColor: "#A6A6A6",
     borderRadius: "50%",
     border: "none",
     margin: "16px 0 11px 1px",
@@ -76,6 +76,10 @@ const styles = theme => ({
   hidden: {
     display: "none"
   }
+  // headerButton: {
+  //   backgrondColor: 'red',
+  //   fontSize: '18px'
+  // }
 });
 
 const Button = props => {

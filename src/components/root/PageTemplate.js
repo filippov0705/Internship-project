@@ -9,7 +9,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 const styles = theme => ({
   proceduresWrapper: {
     minWidth: "260px",
-    backgroundColor: "#cfe8fc",
+    backgroundColor: "white",
     flexGrow: "2",
     width: "100%",
     borderTopRightRadius: "5px",
@@ -29,7 +29,7 @@ const PageTemplate = props => {
 
   return (
     <React.Fragment>
-      <Header />
+      <Header location={props.location} />
       <CssBaseline />
       <Container maxWidth="lg" className={classes.container}>
         <Typography component="div" className={classes.proceduresWrapper}>

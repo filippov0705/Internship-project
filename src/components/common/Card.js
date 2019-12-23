@@ -2,16 +2,17 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "../common/Button";
 import { procedureScheduleUrl } from "../../utils/BuildPaths";
-import CloseIcon from "@material-ui/icons/Close";
 import { connect } from "react-redux";
 import { editProceduresList } from "../../action/ProceduresActions";
 import moment from "moment";
+import mainTheme from "../../style/theme";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const styles = theme => ({
   cardWrapper: {
     width: "100%",
     height: "40px",
-    backgroundColor: "#3f51b586",
+    ...mainTheme.cardColor,
     margin: "9px",
     borderRadius: "5px",
     position: "relative",
@@ -41,6 +42,7 @@ const Card = props => {
   const { classes } = props;
   const value = props.item.value;
   const daysInAWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
   const getContent = () => {
     if (typeof value[0] === "string") {
       const weekSchedule = value.filter(item => typeof item === "string");
@@ -115,7 +117,7 @@ const Card = props => {
         looks={"cardRemove"}
         btnAction={btnAction}
       >
-        <CloseIcon />
+        <DeleteIcon />
       </Button>
       {getContent()}
     </div>
