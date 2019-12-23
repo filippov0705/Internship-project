@@ -11,7 +11,8 @@ import {
   NEW_PROCEDURE_CREATE,
   SET_TARGET_PROCEDURE,
   CHANGE_TASK_LIST,
-  CLEAR_CHOSEN_TASKS
+  CLEAR_CHOSEN_TASKS,
+  CHANGE_SCHEDULE_EDIT
 } from "../action/ProceduresActions";
 import { mockData } from "./mockData";
 
@@ -101,6 +102,9 @@ export function proceduresReducer(state = initialState(), action) {
         ...state,
         chosenTasks: action.payload
       };
+
+    case CHANGE_SCHEDULE_EDIT:
+      return { ...state, scheduleEdit: action.payload };
 
     default:
       return state;

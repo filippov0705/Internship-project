@@ -8,7 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme => ({
   proceduresWrapper: {
-    minWidth: "260px",
+    minWidth: "340px",
     backgroundColor: "white",
     flexGrow: "2",
     width: "100%",

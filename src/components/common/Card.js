@@ -8,6 +8,7 @@ import moment from "moment";
 import mainTheme from "../../style/theme";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { changeScheduleEdit } from "../../action/ProceduresActions";
 
 const styles = theme => ({
   cardWrapper: {
@@ -111,7 +112,9 @@ const Card = props => {
     props.editProceduresList(newProcedureList);
   };
 
-  const editCardAction = event => {
+  const editCardAction = () => {
+    console.log(props);
+    props.changeScheduleEdit([props.id, props.item.id]);
     document
       .getElementById("TimePicker")
       .getElementsByTagName("button")[0]
@@ -147,7 +150,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editProceduresList: list => dispatch(editProceduresList(list))
+    editProceduresList: list => dispatch(editProceduresList(list)),
+    changeScheduleEdit: flag => dispatch(changeScheduleEdit(flag))
   };
 };
 

@@ -44,17 +44,17 @@ const styles = theme => ({
     cursor: "pointer"
   },
   sceduleBtn: {
-    width: "80px",
-    height: "40px",
-    margin: "5px",
-    borderRadius: "7px",
+    width: 80,
+    height: 40,
+    margin: 5,
+    borderRadius: 7,
     cursor: "pointer"
   },
   sceduleBtnActive: {
-    width: "80px",
-    height: "40px",
-    margin: "5px",
-    borderRadius: "7px",
+    width: 80,
+    height: 40,
+    margin: 5,
+    borderRadius: 7,
     cursor: "pointer",
     backgroundColor: "white"
   },
@@ -62,10 +62,10 @@ const styles = theme => ({
     ...mainTheme.cardColor,
     position: "absolute",
     border: "none",
-    top: "7px",
-    right: "8px",
-    width: "28px",
-    height: "28px",
+    top: 7,
+    right: 0,
+    width: 28,
+    height: 28,
     padding: "0",
     borderRadius: "50%"
   },
@@ -74,7 +74,7 @@ const styles = theme => ({
     position: "absolute",
     border: "none",
     top: 7,
-    right: 48
+    right: 32
   },
   schedule: {
     backgroundColor: "#A6A6A6",

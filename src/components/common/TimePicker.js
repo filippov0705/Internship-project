@@ -11,6 +11,10 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import AvTimerIcon from "@material-ui/icons/AvTimer";
 import { procedureScheduleUrl } from "../../utils/BuildPaths";
+import {
+  changeScheduleEdit,
+  editProceduresList
+} from "../../action/ProceduresActions";
 import Button from "./Button";
 
 const styles = theme => ({
@@ -28,6 +32,22 @@ const TimePicker = props => {
   );
 
   const handleDateChange = date => {
+    if (props.procedures.scheduleEdit) {
+      props.changeScheduleEdit(false);
+      const newProcedureList = props.procedures.proceduresList.map(item => {
+        if (item.id === props.procedures.scheduleEdit[0]) {
+          item.schedule = item.schedule.map(value => {
+            if (value.id === props.procedures.scheduleEdit[1]) {
+              value.value[value.value.length - 2] = date.getHours();
+              value.value[value.value.length - 1] = date.getMinutes();
+            }
+            return value;
+          });
+        }
+        return item;
+      });
+      return props.editProceduresList(newProcedureList);
+    }
     setSelectedDate(date);
     if (props.procedures.prcedureNewDate.length === 0) return;
     props.addSchedule(date.getHours(), date.getMinutes());
@@ -81,7 +101,9 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editProcedureDate: date => dispatch(editProcedureDate(date))
+    editProceduresList: list => dispatch(editProceduresList(list)),
+    editProcedureDate: date => dispatch(editProcedureDate(date)),
+    changeScheduleEdit: flag => dispatch(changeScheduleEdit(flag))
   };
 };
 

@@ -12,6 +12,7 @@ export const NEW_PROCEDURE_CREATE = "NEW_PROCEDURE_CREATE";
 export const SET_TARGET_PROCEDURE = "SET_TARGET_PROCEDURE";
 export const CHANGE_TASK_LIST = "CHANGE_TASK_LIST";
 export const CLEAR_CHOSEN_TASKS = "CLEAR_CHOSEN_TASKS";
+export const CHANGE_SCHEDULE_EDIT = "CHANGE_SCHEDULE_EDIT";
 
 export function newProcedureCreate(newProcedure) {
   return {
@@ -101,5 +102,12 @@ export function clearChosenTasks() {
   return {
     type: CLEAR_CHOSEN_TASKS,
     payload: ""
+  };
+}
+
+export function changeScheduleEdit(flag) {
+  return {
+    type: CHANGE_SCHEDULE_EDIT,
+    payload: flag
   };
 }
