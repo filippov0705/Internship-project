@@ -24,7 +24,8 @@ const initialState = () => {
     newProcedureName: "",
     prcedureNewDate: [],
     periodicity: "single",
-    targetProcedure: []
+    targetProcedure: [],
+    scheduleEdit: false
   };
 };
 

@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { editProcedureDate } from "../../action/ProceduresActions";
-import { useState } from "react";
 import "date-fns";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
@@ -35,7 +34,10 @@ const TimePicker = props => {
   };
 
   const btnClick = () => {
-    document.getElementsByClassName("MuiIconButton-root")[6].click();
+    document
+      .getElementById("TimePicker")
+      .getElementsByTagName("button")[0]
+      .click();
   };
 
   return (
@@ -49,11 +51,15 @@ const TimePicker = props => {
       </Button>
 
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="space-around" className={classes.datePicker}>
+        <Grid
+          container
+          justify="space-around"
+          className={classes.datePicker}
+          id="TimePicker"
+        >
           <KeyboardTimePicker
             className="this"
             margin="normal"
-            id="time-picker"
             label=""
             value={selectedDate}
             onChange={handleDateChange}

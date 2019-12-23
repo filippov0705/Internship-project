@@ -5,8 +5,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 const styles = theme => ({
   root: {
     margin: theme.spacing(1),
-    width: 200,
-    minWidth: 80
+    minWidth: 80,
+    width: 170
   }
 });
 

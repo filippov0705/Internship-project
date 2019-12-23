@@ -12,7 +12,7 @@ class Procedures extends Component {
   }
 
   render() {
-    const proceduresList = this.props.procedures.proceduresHeads;
+    const proceduresList = this.props.procedures.proceduresList;
     return (
       <Page>
         <Tasks

@@ -14,12 +14,23 @@ import {
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
 import Heading from "../../../common/Heading";
+import Input from "../../../common/Input";
 
 const styles = theme => ({
   gridDisplay: {
     display: "flex",
     [theme.breakpoints.up("xs")]: {
       flexDirection: "column"
+    },
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
+  },
+  input: {
+    margin: "30px 0",
+    [theme.breakpoints.up("xs")]: {
+      flexDirection: "column",
+      alignItems: "center"
     },
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row"
@@ -67,6 +78,16 @@ class EditProcedure extends Component {
     this.props.changeTaskList(newChosenTasks);
   };
 
+  changeProcedureName = value => {
+    const newPeocedureList = this.props.procedures.proceduresList.map(item => {
+      if (item.id === this.props.match.params.id) {
+        item.name = value;
+      }
+      return item;
+    });
+    this.props.editProceduresList(newPeocedureList);
+  };
+
   render() {
     if (this.props.procedures.targetProcedure.length === 0) return null;
     const { classes } = this.props;
@@ -79,6 +100,17 @@ class EditProcedure extends Component {
           background={"pageLabel"}
         />
         <Tabs data={"edit"} id={this.props.match.params.id} />
+        <Grid container className={classes.input}>
+          <Input
+            label={"Change procedure name: "}
+            data={
+              this.props.procedures.proceduresList.find(
+                item => item.id === this.props.match.params.id
+              ).name
+            }
+            action={this.changeProcedureName}
+          />
+        </Grid>
         <Grid className={classes.gridDisplay}>
           <Tasks
             heading={"Types of available tasks"}

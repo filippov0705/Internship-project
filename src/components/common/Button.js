@@ -1,6 +1,7 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
+import mainTheme from "../../style/theme";
 
 const styles = theme => ({
   btn: {
@@ -28,9 +29,10 @@ const styles = theme => ({
     zIndex: "50",
     width: "40px",
     height: "40px",
-    border: "1px solid gray",
+    border: "none",
     borderRadius: "50%",
-    cursor: "pointer"
+    cursor: "pointer",
+    backgroundColor: "yellowgreen"
   },
   applyBtn: {
     width: "85px",
@@ -57,14 +59,22 @@ const styles = theme => ({
     backgroundColor: "white"
   },
   cardRemove: {
+    ...mainTheme.cardColor,
     position: "absolute",
-    backgroundColor: "none",
+    border: "none",
     top: "7px",
     right: "8px",
     width: "28px",
     height: "28px",
     padding: "0",
     borderRadius: "50%"
+  },
+  cardEdit: {
+    ...mainTheme.cardColor,
+    position: "absolute",
+    border: "none",
+    top: 7,
+    right: 48
   },
   schedule: {
     backgroundColor: "#A6A6A6",
@@ -76,10 +86,6 @@ const styles = theme => ({
   hidden: {
     display: "none"
   }
-  // headerButton: {
-  //   backgrondColor: 'red',
-  //   fontSize: '18px'
-  // }
 });
 
 const Button = props => {

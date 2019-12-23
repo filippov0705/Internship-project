@@ -25,7 +25,8 @@ const mainTheme = {
     backgroundColor: "white"
   },
   cardColor: {
-    backgroundColor: "#A6A6A6"
+    backgroundColor: "white",
+    border: "1px solid #A6A6A6"
   },
   headerButton: {
     fontSize: "18px"

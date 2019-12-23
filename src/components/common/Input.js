@@ -29,15 +29,40 @@ const styles = theme => ({
 });
 
 class Input extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: "",
+      timerId: null
+    };
+  }
+
   componentDidMount() {
     this.props.newProcedureName("");
+    if (this.props.data) {
+      this.setState({ value: this.props.data });
+    }
   }
 
   inputTextChange = event => {
+    this.setState({
+      value: event.target.value.substr(0, 25)
+    });
+
+    if (this.props.action) {
+      clearTimeout(this.state.timerId);
+      const timerId = setTimeout(this.props.action, 5000, event.target.value);
+      return this.setState({ timerId: timerId });
+    }
     if (event.target.value.length > 25) {
       return (event.target.value = event.target.value.substr(0, 25));
     }
     this.props.newProcedureName(event.target.value);
+  };
+
+  inputBlur = event => {
+    if (!this.props.action) return;
+    this.props.action(event.target.value);
   };
 
   render() {
@@ -47,7 +72,12 @@ class Input extends Component {
       <label className={classes.label}>
         <span className={classes.labelSpan}>{this.props.label}</span>
         <Tooltip title={"no more than 25 characters"}>
-          <input className={classes.input} onChange={this.inputTextChange} />
+          <input
+            className={classes.input}
+            onChange={this.inputTextChange}
+            value={this.state.value}
+            onBlur={this.inputBlur}
+          />
         </Tooltip>
       </label>
     );

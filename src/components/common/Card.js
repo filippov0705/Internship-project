@@ -7,6 +7,7 @@ import { editProceduresList } from "../../action/ProceduresActions";
 import moment from "moment";
 import mainTheme from "../../style/theme";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
 const styles = theme => ({
   cardWrapper: {
@@ -110,6 +111,13 @@ const Card = props => {
     props.editProceduresList(newProcedureList);
   };
 
+  const editCardAction = event => {
+    document
+      .getElementById("TimePicker")
+      .getElementsByTagName("button")[0]
+      .click();
+  };
+
   return (
     <div className={classes.cardWrapper}>
       <Button
@@ -118,6 +126,13 @@ const Card = props => {
         btnAction={btnAction}
       >
         <DeleteIcon />
+      </Button>
+      <Button
+        linkTo={procedureScheduleUrl(props.id)}
+        looks={"cardEdit"}
+        btnAction={editCardAction}
+      >
+        <EditIcon />
       </Button>
       {getContent()}
     </div>

@@ -18,6 +18,7 @@ const styles = theme => ({
   container: {
     display: "flex",
     flexGrow: "80",
+    flexDirection: "column",
     [theme.breakpoints.down("xs")]: {
       padding: "0"
     }

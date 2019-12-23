@@ -36,7 +36,10 @@ const DatePicker = props => {
       flag ? date.getDate() : `${date}`.split(" ")[0]
     ]);
 
-    document.getElementsByClassName("MuiIconButton-root")[6].click();
+    document
+      .getElementById("TimePicker")
+      .getElementsByTagName("button")[0]
+      .click();
   };
 
   return (

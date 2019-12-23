@@ -63,9 +63,11 @@ class UserMenu extends Component {
         >
           <TransitionsModal data={"YourProfile"} action={this.handleClose} />
           <TransitionsModal data={"Help"} action={this.handleClose} />
-          <MenuItem onClick={this.handleClose}>
-            <FormattedMessage id="userMenu.signOut" />
-          </MenuItem>
+          <a href="https://github.com/login/oauth/authorize?client_id=e8b244bda58bacfbcc88&redirect_uri=http://localhost:3000/user/signin/callback">
+            <MenuItem onClick={this.handleClose}>
+              <FormattedMessage id="userMenu.signOut" />
+            </MenuItem>
+          </a>
         </Menu>
       </div>
     );
