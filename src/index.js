@@ -2,10 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { store } from "./store";
 import { IntlProvider } from "react-intl";
+import { Provider } from "react-redux";
+
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+
 import locale from "./i18n/";
 import AuthHoc from "./auth/AuthHoc";
-import { Provider } from "react-redux";
 
 import registerServiceWorker from "./registerServiceWorker";
 
@@ -16,7 +18,7 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontFamily: ["Open Sans", "Helvetica", "Arial", "sans-serif"].join(",")
   },
-  spacing: 16 //TODO You should check it
+  spacing: 16
 });
 
 const routing = (

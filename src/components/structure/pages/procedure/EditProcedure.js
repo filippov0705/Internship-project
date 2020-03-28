@@ -1,20 +1,28 @@
 import React, { Component } from "react";
-import Tasks from "../task/Tasks";
-import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
+import randomInt from "random-int";
+
+import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
-import {
-  setChosenTasks,
-  editProceduresList,
-  applyTaskForProcedure,
-  getUserData,
-  setTargetProcedure,
-  changeTaskList
-} from "../../../../action/ProceduresActions";
+
+import Heading from "../../../common/Heading";
+import Item from "../../../common/Item";
+import Input from "../../../common/Input";
+import ProcedureList from "../../../common/ProcedureList";
 import ProcedurePage from "./ProcedurePage";
 import Tabs from "../../../common/Tabs";
-import Heading from "../../../common/Heading";
-import Input from "../../../common/Input";
+
+import {
+  addTask,
+  editProcedureName,
+  removeTask,
+  getTargetProcedure,
+  procedureRun
+} from "../../../../action/ProceduresActions";
+import { getPossibleTasks } from "../../../../action/TasksAction";
+
+import { USER } from "../../../../constants/constants";
+import history from "../../../../history";
 
 const styles = theme => ({
   gridDisplay: {
@@ -39,91 +47,145 @@ const styles = theme => ({
 });
 
 class EditProcedure extends Component {
-  componentDidMount() {
-    this.props.setChosenTasks(this.props.match.params.id);
+  constructor() {
+    super();
+    this.state = {
+      selectedTasks: [],
+      name: "",
+      timerId: null
+    };
   }
 
-  applyTask = event => {
-    const task = {
-      name: event.target.innerText,
-      id: (Math.random() * 10000000 + "").split(".")[0]
-    };
-    const newTaskList = this.props.procedures.chosenTasks.concat(task);
-    const newProcedureList = this.props.procedures.proceduresList.map(item => {
-      if (item.id === this.props.match.params.id) {
-        item.tasks = newTaskList;
-      }
-      return item;
-    });
-
-    this.props.editProceduresList(newProcedureList);
-    this.props.changeTaskList(newTaskList);
-  };
-
-  removeTask = event => {
-    const filteredTasks = this.props.procedures.chosenTasks.filter(
-      item => item.id !== event.target.dataset.id
+  componentDidMount() {
+    this.props.getTargetProcedure(
+      this.props.userId,
+      this.props.match.params.id
     );
-    const newPeocedureList = this.props.procedures.proceduresList.map(item => {
-      if (item.id === this.props.match.params.id) {
-        item.tasks = filteredTasks;
-      }
-      return item;
-    });
-    const newChosenTasks = this.props.procedures.chosenTasks.filter(item => {
-      return item.id !== event.target.dataset.id;
-    });
+    this.props.getPossibleTasks();
+  }
 
-    this.props.editProceduresList(newPeocedureList);
-    this.props.changeTaskList(newChosenTasks);
+  componentDidUpdate(prevProps) {
+    if (this.props.targetProcedure !== prevProps.targetProcedure) {
+      this.setState({ name: this.props.targetProcedure.name });
+    }
+  }
+
+  nameChange = value => {
+    if (!this.props.roles.includes(USER)) return;
+    if (this.state.timerId) clearTimeout(this.state.timerId);
+    const name = value.substr(0, 35);
+    this.setState({ name });
+    this.procedureNameChange();
   };
 
-  changeProcedureName = value => {
-    const newPeocedureList = this.props.procedures.proceduresList.map(item => {
-      if (item.id === this.props.match.params.id) {
-        item.name = value;
+  procedureNameChange = () => {
+    const timerId = setTimeout(() => {
+      this.props.editProcedureName(
+        this.props.userId,
+        this.props.match.params.id,
+        this.state.name || `Procedure-${randomInt(10000000, 99999999)}`
+      );
+    }, 5000);
+    this.setState({ timerId });
+  };
+
+  blurAction = () => {
+    if (!this.props.roles.includes(USER)) return;
+    if (this.state.timerId) clearTimeout(this.state.timerId);
+
+    this.props.editProcedureName(
+      this.props.userId,
+      this.props.match.params.id,
+      this.state.name || `Procedure-${randomInt(10000000, 99999999)}`
+    );
+  };
+
+  deleteProcedure = () => {
+    fetch(
+      `http://localhost:3001/api/procedures/${this.props.match.params.id}`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        }
       }
-      return item;
+    ).then(() => {
+      history.replace("/Procedures/");
     });
-    this.props.editProceduresList(newPeocedureList);
+  };
+
+  procedureRun = () => {
+    this.props.procedureRun(null, this.props.match.params.id);
+  };
+
+  applyTask = id => {
+    if (!this.props.roles.includes(USER)) return;
+    this.props.addTask(this.props.userId, this.props.match.params.id, {
+      name: this.props.possible.find(item => item.id === id).name,
+      id: randomInt(10000000, 99999999),
+      settings: this.props.possible.find(item => item.id === id).settings,
+      order: this.props.targetProcedure.tasks.length
+    });
+  };
+
+  removeTask = id => {
+    if (!this.props.roles.includes(USER)) return;
+    this.props.removeTask(this.props.userId, this.props.match.params.id, id);
+  };
+
+  itemCreation = (data, action) => {
+    return data.map((item, i) => {
+      return <Item name={item.name} id={item.id} key={i} action={action} />;
+    });
   };
 
   render() {
-    if (this.props.procedures.targetProcedure.length === 0) return null;
+    if (!this.props.targetProcedure) return null;
     const { classes } = this.props;
 
     return (
       <ProcedurePage>
         <Heading
-          heading={this.props.procedures.targetProcedure[0].name}
-          size={"big"}
-          background={"pageLabel"}
+          heading={this.props.targetProcedure.name}
+          size="big"
+          background="pageLabel"
         />
-        <Tabs data={"edit"} id={this.props.match.params.id} />
+        <Tabs
+          data="edit"
+          id={this.props.match.params.id}
+          deleteProcedure={this.deleteProcedure}
+          procedureRun={this.procedureRun}
+          isDisabled={!this.props.roles.includes(USER)}
+        />
         <Grid container className={classes.input}>
           <Input
-            label={"Change procedure name: "}
-            data={
-              this.props.procedures.proceduresList.find(
-                item => item.id === this.props.match.params.id
-              ).name
-            }
-            action={this.changeProcedureName}
+            label="Change procedure name: "
+            value={this.state.name}
+            clickAction={this.nameChange}
+            blurAction={this.blurAction}
+            className="input"
+            labelClassName="label"
           />
         </Grid>
         <Grid className={classes.gridDisplay}>
-          <Tasks
-            heading={"Types of available tasks"}
-            data={"possibleTasks"}
-            content={"possibleTasks"}
-            action={this.applyTask}
-          />
-          <Tasks
-            heading={"Chosen tasks"}
-            data={"chosenTasks"}
-            content={"chosenTasks"}
-            action={this.removeTask}
-          />
+          <ProcedureList
+            className="smallList"
+            isHeading="Available tasks"
+            background="middle_left"
+          >
+            {this.itemCreation(this.props.possible, this.applyTask)}
+          </ProcedureList>
+          <ProcedureList
+            isHeading="Chosen tasks"
+            className="smallList"
+            background="middle_left"
+          >
+            {this.itemCreation(
+              this.props.targetProcedure.tasks,
+              this.removeTask
+            )}
+          </ProcedureList>
         </Grid>
       </ProcedurePage>
     );
@@ -132,18 +194,26 @@ class EditProcedure extends Component {
 
 const mapStateToProps = store => {
   return {
-    procedures: store.procedures
+    targetProcedure: store.procedures.targetProcedure,
+    userId: store.procedures.userId,
+    possible: store.tasks.possible,
+    roles: store.app.roles
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserData: () => dispatch(getUserData()),
-    setTargetProcedure: id => dispatch(setTargetProcedure(id)),
-    setChosenTasks: id => dispatch(setChosenTasks(id)),
-    changeTaskList: taskList => dispatch(changeTaskList(taskList)),
-    editProceduresList: list => dispatch(editProceduresList(list)),
-    applyTaskForProcedure: task => dispatch(applyTaskForProcedure(task))
+    addTask: (userId, procedureId, newTask) =>
+      dispatch(addTask(userId, procedureId, newTask)),
+    removeTask: (userId, procedureId, taskId) =>
+      dispatch(removeTask(userId, procedureId, taskId)),
+    editProcedureName: (userId, procedureId, newName) =>
+      dispatch(editProcedureName(userId, procedureId, newName)),
+    getTargetProcedure: (userId, procedureId) =>
+      dispatch(getTargetProcedure(userId, procedureId)),
+    getPossibleTasks: () => dispatch(getPossibleTasks()),
+    procedureRun: (userId, procedureId) =>
+      dispatch(procedureRun(userId, procedureId))
   };
 };
 

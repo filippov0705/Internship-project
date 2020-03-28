@@ -1,6 +1,8 @@
 import React from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
+
 import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
+
 import mainTheme from "../../style/theme";
 
 const styles = theme => ({
@@ -26,6 +28,19 @@ const styles = theme => ({
   },
   pageLabel: {
     ...mainTheme.mainBackground
+  },
+  emphasized: {
+    borderBottom: "1px solid rgba(94, 92, 92, 0.225)",
+    height: 50
+  },
+  middle_left: {
+    margin: "10px 0 -30px 30px",
+    [theme.breakpoints.up("xs")]: {
+      fontSize: "0.8em"
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "1.3em"
+    }
   }
 });
 

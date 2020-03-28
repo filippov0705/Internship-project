@@ -1,20 +1,21 @@
 import React from "react";
-import { connect } from "react-redux";
-import { editProcedureDate } from "../../action/ProceduresActions";
-import { useState } from "react";
 import "date-fns";
-import Grid from "@material-ui/core/Grid";
+
 import DateFnsUtils from "@date-io/date-fns";
+import Grid from "@material-ui/core/Grid";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-const styles = theme => ({
+import { SINGLE, DATE_FORMAT } from "../../constants/constants";
+
+const styles = () => ({
   datePicker: {
-    width: "0px",
-    marginRight: "60px"
+    width: 0,
+    marginRight: 60,
+    marginTop: 50
   },
   display: {
     display: "none"
@@ -22,24 +23,20 @@ const styles = theme => ({
 });
 
 const DatePicker = props => {
-  const { classes } = props;
-  const flag = props.procedures.periodicity === "single";
-  const [selectedDate, setSelectedDate] = useState(
-    new Date(`${props.dateNow}T23:55:00`)
-  );
+  const { classes, forwardRef } = props;
 
   const handleDateChange = date => {
-    setSelectedDate(date);
-    props.editProcedureDate([
-      date.getFullYear(),
-      date.getMonth() + 1,
-      flag ? date.getDate() : `${date}`.split(" ")[0]
-    ]);
+    props.dateChange([date.getFullYear(), date.getMonth() + 1, date.getDate()]);
+    if (forwardRef.current)
+      forwardRef.current.getElementsByTagName("button")[0].click();
+  };
 
-    document
-      .getElementById("TimePicker")
-      .getElementsByTagName("button")[0]
-      .click();
+  const getCurrentDate = () => {
+    if (props.date.length) {
+      return `${props.date[0]}/${props.date[1]}/${props.date[2]}`;
+    }
+    return `${new Date().getFullYear()}/${new Date().getMonth() +
+      1}/${new Date().getDate()}`;
   };
 
   return (
@@ -48,15 +45,17 @@ const DatePicker = props => {
         container
         justify="space-around"
         className={
-          flag ? classes.datePicker : `${classes.datePicker} ${classes.display}`
+          props.radio === SINGLE
+            ? classes.datePicker
+            : `${classes.datePicker} ${classes.display}`
         }
       >
         <KeyboardDatePicker
+          onAccept={props.callTimePicker}
           margin="normal"
           id="date-picker-dialog"
-          label=""
-          format="MM/dd/yyyy"
-          value={selectedDate}
+          format={DATE_FORMAT}
+          value={getCurrentDate()}
           onChange={handleDateChange}
           KeyboardButtonProps={{
             "aria-label": "change date"
@@ -67,18 +66,4 @@ const DatePicker = props => {
   );
 };
 
-const mapStateToProps = store => {
-  return {
-    procedures: store.procedures
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    editProcedureDate: date => dispatch(editProcedureDate(date))
-  };
-};
-
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(DatePicker)
-);
+export default withStyles(styles)(DatePicker);

@@ -30,6 +30,21 @@ const mainTheme = {
   },
   headerButton: {
     fontSize: "18px"
+  },
+  listStyle: {
+    minHeight: "590px",
+    backgroundColor: "white",
+    position: "relative",
+    padding: "0 18px"
+  },
+  tasks: {
+    minWidth: "220px",
+    height: "287px",
+    backgroundColor: "white",
+    margin: "20px",
+    border: "1px solid gray",
+    borderRadius: "7px",
+    overflow: "auto"
   }
 };
 

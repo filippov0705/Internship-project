@@ -1,106 +1,127 @@
 import {
-  GET_USER_DATA,
-  APPLY_TASK_FOR_PROCEDURE,
+  ADD_NEW_SCHEDULE,
+  ADD_TASK,
+  CLEAR_TARGET_PROCEDURE,
+  CLEAR_PROCEDURE_HEADS,
+  EDIT_SCHEDULE,
+  EDIT_PROCEDURE_NAME,
+  GET_PROCEDURES_HEADS,
+  GET_PROCEDURE_SCHEDULES,
+  PROCEDURE_DELETE,
+  PROCEDURE_RUN,
+  REMOVE_SCHEDULE,
   REMOVE_CHOSEN_TASK,
-  NEW_PROCEDURE_NAME,
-  SET_PERIODISITY,
-  EDIT_DATE,
-  SET_CHOSEN_TASKS,
-  EDIT_PROCEDURE_LIST,
-  SET_POSSIBLE_TASKS,
-  NEW_PROCEDURE_CREATE,
-  SET_TARGET_PROCEDURE,
-  CHANGE_TASK_LIST,
-  CLEAR_CHOSEN_TASKS
+  NEW_PROCEDURE_CREATE
 } from "../action/ProceduresActions";
 import { mockData } from "./mockData";
 
 const initialState = () => {
   return {
-    proceduresList: mockData.allProcedures,
-    proceduresHeads: mockData.allProceduresHeads,
-    possibleTasks: mockData.possibleTasks,
-    chosenTasks: [],
-    newProcedureName: "",
-    prcedureNewDate: [],
-    periodicity: "single",
-    targetProcedure: [],
-    scheduleEdit: false
+    userId: mockData.user_id,
+    list: null,
+    targetProcedure: null,
+    snackMessage: {},
   };
 };
 
 export function proceduresReducer(state = initialState(), action) {
   switch (action.type) {
-    case GET_USER_DATA:
-      return {
-        ...state,
-        proceduresHeads: mockData.allProceduresHeads,
-        proceduresList: mockData.allProcedures
-      };
-
     case NEW_PROCEDURE_CREATE:
       return {
         ...state,
-        proceduresList: [...state.proceduresList, action.payload],
-        proceduresHeads: [
-          ...state.proceduresHeads,
-          { name: action.payload.name, id: action.payload.id }
+        list: [...state.list, action.payload]
+      };
+
+    case PROCEDURE_RUN:
+      return { ...state, snackMessage: action.payload };
+
+    case CLEAR_PROCEDURE_HEADS:
+      return { ...state, list: [] };
+
+    case REMOVE_SCHEDULE:
+      const newtargetProcedure = state.targetProcedure;
+      newtargetProcedure.schedule = state.targetProcedure.schedule.filter(
+        item => item.schedule_id !== action.payload
+      );
+      return { ...state, targetProcedure: newtargetProcedure };
+
+    case ADD_TASK:
+      const targetProcedureWithAddedTask = {
+        id: state.targetProcedure.id,
+        name: state.targetProcedure.name,
+        schedule: state.targetProcedure.schedule,
+        tasks: [
+          ...state.targetProcedure.tasks,
+          {
+            id: action.payload.id,
+            name: action.payload.name,
+            settings: action.payload.settings
+          }
         ]
       };
 
-    case SET_POSSIBLE_TASKS:
-      return { ...state, possibleTasks: mockData.possibleTasks };
+      return { ...state, targetProcedure: targetProcedureWithAddedTask };
 
-    case SET_TARGET_PROCEDURE:
-      return {
-        ...state,
-        targetProcedure: state.proceduresList.filter(
-          item => item.id === action.payload
+    case REMOVE_CHOSEN_TASK:
+      const targetProcedureWithDeletedTask = {
+        id: state.targetProcedure.id,
+        name: state.targetProcedure.name,
+        schedule: state.targetProcedure.schedule,
+        tasks: state.targetProcedure.tasks.filter(
+          item => item.id !== action.payload
         )
       };
 
-    case APPLY_TASK_FOR_PROCEDURE:
+      return { ...state, targetProcedure: targetProcedureWithDeletedTask };
+
+    case EDIT_PROCEDURE_NAME:
+      const targetProcedureWithNewName = {
+        id: state.targetProcedure.id,
+        name: action.payload,
+        schedule: state.targetProcedure.schedule,
+        tasks: state.targetProcedure.tasks.filter(
+          item => item.id !== action.payload
+        )
+      };
+      return { ...state, targetProcedure: targetProcedureWithNewName };
+
+    case ADD_NEW_SCHEDULE:
+      const procedureWithNewSchedule = {
+        id: state.targetProcedure.id,
+        name: state.targetProcedure.name,
+        schedule: [...state.targetProcedure.schedule, action.payload],
+        tasks: state.targetProcedure.tasks
+      };
+      return { ...state, targetProcedure: procedureWithNewSchedule };
+
+    case EDIT_SCHEDULE:
+      state.targetProcedure.schedule = state.targetProcedure.schedule.map(
+        item => {
+          if (item.schedule_id === action.payload.scheduleId) {
+            item = action.payload.editableSchedule;
+          }
+          return item;
+        }
+      );
+
+      return { ...state, targetProcedure: state.targetProcedure };
+
+    case GET_PROCEDURE_SCHEDULES:
+      return { ...state, targetProcedure: action.payload };
+
+    case PROCEDURE_DELETE: {
       return {
         ...state,
-        chosenTasks: state.chosenTasks.concat(action.payload)
+        list: state.list.filter(item => item.id !== action.payload)
       };
+    }
 
-    case REMOVE_CHOSEN_TASK:
-      return { ...state, chosenTasks: action.payload };
+    case GET_PROCEDURES_HEADS: {
+      return { ...state, list: action.payload };
+    }
 
-    case NEW_PROCEDURE_NAME:
-      return { ...state, newProcedureName: action.payload };
-
-    case EDIT_DATE:
-      return { ...state, prcedureNewDate: action.payload };
-
-    case EDIT_PROCEDURE_LIST:
-      return {
-        ...state,
-        proceduresList: action.payload,
-        prcedureNewDate: []
-      };
-
-    case SET_PERIODISITY:
-      return { ...state, periodicity: action.payload };
-
-    case SET_CHOSEN_TASKS:
-      return {
-        ...state,
-        targetProcedure: state.proceduresList,
-        chosenTasks: state.proceduresList.find(
-          item => item.id === action.payload
-        ).tasks
-      };
-
-    case CLEAR_CHOSEN_TASKS:
-      return { ...state, chosenTasks: [] };
-
-    case CHANGE_TASK_LIST:
-      return {
-        ...state,
-        chosenTasks: action.payload
-      };
+    case CLEAR_TARGET_PROCEDURE:
+      return { ...state, targetProcedure: null };
 
     default:
       return state;

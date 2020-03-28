@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
+
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -6,8 +8,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import ScheduleRoundedIcon from "@material-ui/icons/ScheduleRounded";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import MoreHorizRoundedIcon from "@material-ui/icons/MoreHorizRounded";
-import { FormattedMessage } from "react-intl";
 import MenuItem from "@material-ui/core/MenuItem";
+
 import List from "./List";
 
 const styles = theme => ({
@@ -47,7 +49,6 @@ class TransitionsModal extends Component {
 
   menuItemClick = () => {
     this.handleOpen();
-    this.props.action();
   };
 
   scheduleClick = () => {

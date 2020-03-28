@@ -1,20 +1,21 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
+
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
-import Avatar from "@material-ui/core/Avatar";
-import { deepPurple } from "@material-ui/core/colors";
-import { FormattedMessage } from "react-intl";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+
 import TransitionsModal from "./PopUp";
 
 const styles = theme => ({
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginLeft: theme.spacing(2)
   },
-  purple: {
-    color: "#fff",
-    backgroundColor: deepPurple[500]
+  link: {
+    textDecoration: "none",
+    color: "black"
   }
 });
 
@@ -25,10 +26,20 @@ class UserMenu extends Component {
       anchorEl: null
     };
   }
+
   handleClick = event => {
-    this.setState({
-      anchorEl: event.currentTarget
-    });
+    if (this.props.isLoggedIn) {
+      this.setState({
+        anchorEl: event.currentTarget
+      });
+    }
+  };
+
+  logInAction = () => {
+    if (this.props.isLoggedIn) {
+      this.props.action();
+    }
+    this.handleClose();
   };
 
   handleClose = () => {
@@ -52,7 +63,16 @@ class UserMenu extends Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <Avatar className={classes.purple}>OP</Avatar>
+          {this.props.isLoggedIn ? (
+            <AccountCircleIcon color="action" fontSize="large" />
+          ) : (
+            <a
+              className={classes.link}
+              href="https://github.com/login/oauth/authorize?client_id=e8b244bda58bacfbcc88&redirect_uri=http://localhost:3000/user/signin/callback"
+            >
+              <FormattedMessage id="userMenu.signIn" />
+            </a>
+          )}
         </IconButton>
         <Menu
           id="simple-menu"
@@ -61,13 +81,11 @@ class UserMenu extends Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          <TransitionsModal data={"YourProfile"} action={this.handleClose} />
-          <TransitionsModal data={"Help"} action={this.handleClose} />
-          <a href="https://github.com/login/oauth/authorize?client_id=e8b244bda58bacfbcc88&redirect_uri=http://localhost:3000/user/signin/callback">
-            <MenuItem onClick={this.handleClose}>
-              <FormattedMessage id="userMenu.signOut" />
-            </MenuItem>
-          </a>
+          <TransitionsModal data={"YourProfile"} onClick={this.handleClose} />
+          <TransitionsModal data={"Help"} onClick={this.handleClose} />
+          <MenuItem onClick={this.logInAction}>
+            <FormattedMessage id="userMenu.signOut" />
+          </MenuItem>
         </Menu>
       </div>
     );

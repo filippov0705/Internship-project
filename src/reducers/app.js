@@ -1,15 +1,20 @@
-const initialState = () => {
-    return {
-//TODO: add states of App page
-    }
-}
+import { SET_USER_DATA } from "../action/AppActions";
 
+const initialState = () => {
+  return {
+    roles: [],
+    userLogin: null,
+    isActive: null
+  };
+};
 
 export function appReducer(state = initialState(), action) {
+  switch (action.type) {
+    case SET_USER_DATA:
+      const { login, userRole, isActive } = action.payload;
+      return { ...state, userLogin: login, roles: userRole, isActive };
 
-    switch (action.type) {
-//TODO: add some logic of the App page
-        default:
-            return state
-    }
+    default:
+      return { ...state };
+  }
 }

@@ -1,24 +1,35 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+
 import AppBar from "@material-ui/core/AppBar";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
+import HomeIcon from "@material-ui/icons/Home";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import withStyles from "@material-ui/core/styles/withStyles";
+
 import UserMenu from "./UserMenu";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import { mainPath, ProceduresPath } from "../../utils/BuildPaths";
-import { FormattedMessage } from "react-intl";
-import Search from "./Search";
+
+import {
+  mainPath,
+  ProceduresPath,
+  UsersPath,
+  LogsPath
+} from "../../utils/BuildPaths";
+
 import mainTheme from "../../style/theme";
 
 const styles = theme => ({
   header: {
     ...mainTheme.header
+  },
+  toolbar: {
+    padding: 0
   },
   root: {
     padding: theme.spacing(1),
@@ -31,198 +42,218 @@ const styles = theme => ({
   },
   link: {
     textDecoration: "none",
-    color: "black"
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block"
-    }
+    color: "black",
+    display: "flex"
   },
   sectionDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "flex"
     }
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "none"
     }
-  },
-  appBar: {
-    justifyContent: "center"
   },
   grow: {
     flexGrow: "5"
   },
   headerButton: {
-    ...mainTheme.headerButton
+    ...mainTheme.headerButton,
+    textTransform: "none"
   },
   active: {
     color: "red"
   }
 });
 
-class SearchAppBar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      anchorEl: null,
-      mobileMoreAnchorEl: null
-    };
-  }
+const SearchAppBar = props => {
+  const { classes } = props;
 
-  handleProfileMenuOpen = event => {
-    this.setState({
-      anchorEl: event.currentTarget
-    });
+  const [anchorEl, changeAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, changeMobileMoreAnchorEl] = useState(null);
+
+  const handleMenuClose = () => {
+    changeAnchorEl(null);
+    changeMobileMoreAnchorEl(null);
   };
 
-  handleMobileMenuClose = () => {
-    this.setState({
-      mobileMoreAnchorEl: null
-    });
-  };
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const menuId = "primary-search-account-menu";
+  const mobileMenuId = "primary-search-account-menu-mobile";
 
-  handleMenuClose = () => {
-    this.setState({
-      anchorEl: null
-    });
-    this.handleMobileMenuClose();
-  };
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
 
-  handleMobileMenuOpen = event => {
-    this.setState({
-      mobileMoreAnchorEl: event.currentTarget
-    });
-  };
-
-  render() {
-    const { classes } = this.props,
-      { anchorEl, mobileMoreAnchorEl } = this.state,
-      isMenuOpen = Boolean(anchorEl),
-      isMobileMenuOpen = Boolean(mobileMoreAnchorEl),
-      menuId = "primary-search-account-menu",
-      renderMenu = (
-        <Menu
-          anchorEl={anchorEl}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          id={menuId}
-          keepMounted
-          transformOrigin={{ vertical: "top", horizontal: "right" }}
-          open={isMenuOpen}
-          onClose={this.handleMenuClose}
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMobileMenuOpen}
+      onClose={() => changeMobileMoreAnchorEl(null)}
+      className={classes.root}
+    >
+      <Link to={mainPath()} className={classes.link}>
+        <MenuItem
+          className={
+            props.location === "/"
+              ? `${classes.headerButton} ${classes.active}`
+              : classes.headerButton
+          }
         >
-          <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        </Menu>
-      );
-
-    const mobileMenuId = "primary-search-account-menu-mobile";
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        id={mobileMenuId}
-        keepMounted
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMobileMenuOpen}
-        onClose={this.handleMobileMenuClose}
-        className={classes.root}
-      >
-        <Link to={mainPath()} className={classes.link}>
-          <MenuItem
-            className={
-              this.props.location === "/"
-                ? `${classes.headerButton} ${classes.active}`
-                : classes.headerButton
-            }
-          >
-            <FormattedMessage id="navigation.mainPage" />
-          </MenuItem>
-        </Link>
+          <FormattedMessage id="navigation.mainPage" />
+        </MenuItem>
+      </Link>
+      {props.isLoggedIn && props.isActive ? (
         <Link to={ProceduresPath()} className={classes.link}>
           <MenuItem
             className={
-              this.props.location === "/"
-                ? classes.headerButton
-                : `${classes.headerButton} ${classes.active}`
+              props.location.includes("Procedures")
+                ? `${classes.headerButton} ${classes.active}`
+                : classes.headerButton
             }
           >
             <FormattedMessage id="navigation.procedures" />
           </MenuItem>
         </Link>
-      </Menu>
-    );
+      ) : null}
+      {props.isLoggedIn && props.isActive ? (
+        <Link to={LogsPath()} className={classes.link}>
+          <MenuItem
+            className={
+              props.location.includes("Logs")
+                ? `${classes.headerButton} ${classes.active}`
+                : classes.headerButton
+            }
+          >
+            <FormattedMessage id="navigation.logsPage" />
+          </MenuItem>
+        </Link>
+      ) : null}
+      {props.isAdmin && props.isActive ? (
+        <Link to={UsersPath()} className={classes.link}>
+          <MenuItem
+            className={
+              props.location === "/Users/"
+                ? `${classes.headerButton} ${classes.active}`
+                : classes.headerButton
+            }
+          >
+            <FormattedMessage id="navigation.usersPage" />
+          </MenuItem>
+        </Link>
+      ) : null}
+    </Menu>
+  );
 
-    return (
-      <React.Fragment>
-        <AppBar className={classes.header}>
-          <Toolbar>
-            <UserMenu />
-            <Typography className={classes.title} variant="h6" noWrap>
-              ITechArt
-            </Typography>
-            <Search />
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-              <Link to={mainPath()} className={classes.link}>
-                <Button
-                  className={
-                    this.props.location === "/"
-                      ? `${classes.headerButton} ${classes.active}`
-                      : classes.headerButton
-                  }
-                >
-                  <FormattedMessage id="navigation.mainPage" />
-                </Button>
-              </Link>
+  return (
+    <React.Fragment>
+      <AppBar className={classes.header}>
+        <Toolbar className={classes.toolbar}>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={event => mobileMoreAnchorEl(event.target)}
+              color="inherit"
+            >
+              <MoreIcon color="action" />
+            </IconButton>
+          </div>
+          <div className={classes.sectionDesktop}>
+            <Link to={mainPath()} className={classes.link}>
+              <Button
+                className={
+                  props.location === "/"
+                    ? `${classes.headerButton} ${classes.active}`
+                    : classes.headerButton
+                }
+              >
+                <HomeIcon />
+              </Button>
+            </Link>
+            {props.isLoggedIn && props.isActive ? (
               <Link to={ProceduresPath()} className={classes.link}>
                 <Button
                   className={
-                    this.props.location === "/"
-                      ? classes.headerButton
-                      : `${classes.headerButton} ${classes.active}`
+                    props.location.includes("Procedures")
+                      ? `${classes.headerButton} ${classes.active}`
+                      : classes.headerButton
                   }
                 >
                   <FormattedMessage id="navigation.procedures" />
                 </Button>
               </Link>
-              <IconButton
-                className={classes.root}
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </div>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={this.handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon color="action" />
-              </IconButton>
-            </div>
-          </Toolbar>
-        </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
-      </React.Fragment>
-    );
-  }
-}
+            ) : null}
+            {props.isLoggedIn && props.isActive ? (
+              <Link to={LogsPath()} className={classes.link}>
+                <Button
+                  className={
+                    props.location.includes("Logs")
+                      ? `${classes.headerButton} ${classes.active}`
+                      : classes.headerButton
+                  }
+                >
+                  <FormattedMessage id="navigation.logsPage" />
+                </Button>
+              </Link>
+            ) : null}
+            {props.isAdmin && props.isActive ? (
+              <Link to={UsersPath()} className={classes.link}>
+                <Button
+                  className={
+                    props.location === "/Users/"
+                      ? `${classes.headerButton} ${classes.active}`
+                      : classes.headerButton
+                  }
+                >
+                  <FormattedMessage id="navigation.usersPage" />
+                </Button>
+              </Link>
+            ) : null}
+            <IconButton
+              className={classes.root}
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={event => changeAnchorEl(event.target)}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </div>
+          <div className={classes.grow} />
+          <UserMenu
+            userName={props.userName}
+            isLoggedIn={props.isLoggedIn}
+            action={props.action}
+          />
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </React.Fragment>
+  );
+};
 
 export default withStyles(styles)(SearchAppBar);

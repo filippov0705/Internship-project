@@ -1,64 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { connect } from "react-redux";
-import { setPeriodicity } from "../../action/ProceduresActions";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
     display: "flex",
-    flexDirection: "row"
+    [theme.breakpoints.up("xs")]: {
+      flexDirection: "column"
+    },
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
+  },
+  Manual: {
+    marginBottom: 106
+  },
+  single: {
+    marginBottom: 50
   }
 }));
 
 const RadioBtn = props => {
   const classes = useStyles();
-  const [value, setValue] = useState(props.procedures.periodicity);
 
   const handleChange = event => {
-    props.setPeriodicity(event.target.value);
-    setValue(event.target.value);
+    props.radioBtnClick(event.target.value);
+  };
+
+  const getItems = values => {
+    return values.map((item, i) => {
+      return (
+        <FormControlLabel
+          key={i}
+          value={item}
+          control={<Radio />}
+          label={item}
+          disabled={props.isEdit}
+        />
+      );
+    });
   };
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">Periodicity</FormLabel>
+    <FormControl component="fieldset" className={classes[props.radio]}>
+      <FormLabel component="legend">{props.label}</FormLabel>
       <RadioGroup
         className={classes.formControl}
         aria-label="gender"
         name="gender1"
-        value={value}
+        value={props.radio}
         onChange={handleChange}
       >
-        <FormControlLabel
-          value="single"
-          control={<Radio />}
-          label="Single time"
-        />
-        <FormControlLabel
-          value="periodically"
-          control={<Radio />}
-          label="Periodically"
-        />
+        {getItems(props.values)}
       </RadioGroup>
     </FormControl>
   );
 };
 
-const mapStateToProps = store => {
-  return {
-    procedures: store.procedures
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setPeriodicity: periodicity => dispatch(setPeriodicity(periodicity))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RadioBtn);
+export default RadioBtn;

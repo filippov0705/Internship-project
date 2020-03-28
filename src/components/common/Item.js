@@ -1,29 +1,32 @@
 import React from "react";
-import { connect } from "react-redux";
+
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { editProcedureUrl } from "../../utils/BuildPaths";
-import ItemButtons from "./ItemButtons";
-import { Link } from "react-router-dom";
-import {
-  applyTaskForProcedure,
-  removeChosenTask
-} from "../../action/ProceduresActions";
 
-const styles = theme => ({
+const styles = () => ({
+  bigGrid: {
+    height: 70,
+    display: "flex",
+    alignItems: "center",
+  },
   grid: {
-    maxHeight: "32px",
+    height: 40,
     display: "flex",
     alignItems: "center"
   },
-  item_border: {
-    border: "1px solid rgba(94, 92, 92, 0.225)",
-    borderRadius: 5,
+  itemBorder: {
+    border: "2px solid white",
+    borderBottom: "2px solid rgba(94, 92, 92, 0.225)",
     margin: "0 auto",
-    marginBottom: 5,
     marginTop: 5,
+    marginBottom: 5,
     cursor: "pointer",
-    width: "99%"
+    width: "99%",
+    position: "relative",
+    transition: "0.2s",
+    "&:hover": {
+      border: "2px solid red"
+    }
   },
   gridSpan: {
     marginLeft: "10px",
@@ -31,7 +34,8 @@ const styles = theme => ({
     marginBottom: "2px",
     whiteSpace: "nowrap",
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
+    fontSize: 22
   },
   link: {
     width: "100%",
@@ -40,68 +44,50 @@ const styles = theme => ({
     alignItems: "center",
     textDecoration: "none",
     color: "black"
+  },
+  success: {
+    backgroundColor: "#dcf5e5",
+  },
+  warning: {
+    backgroundColor: "#f5f1dc"
+  },
+  error: {
+    backgroundColor: "#f5e4dc"
+  },
+  gray: {
+    backgroundColor: "#f4f4f4"
   }
+
 });
 
 const Item = props => {
   const { classes } = props;
-  const flag = props.info === "Procedure";
 
-  const getItemName = () => {
-    switch (props.info) {
-      case "Procedure":
-        return (
-          <Link to={editProcedureUrl(props.id)} className={classes.link}>
-            <span className={classes.gridSpan}>{props.name}</span>
-          </Link>
-        );
+  const itemClick = () => {
+    if (props.action) props.action(props.id);
+  };
 
-      default:
-        return (
-          <span data-id={props.id} className={classes.gridSpan}>
-            {props.name.substr(0, 25)}
-          </span>
-        );
-    }
+  const labelClick = () => {
+    if (props.labelAction) props.labelAction(props.id);
   };
 
   return (
-    <Grid
-      container
-      className={classes.item_border}
-      onClick={props.action}
-      data-id={props.id}
-    >
+    <Grid container className={classes.itemBorder} onClick={itemClick}>
       <Grid
         item
-        xs={12}
-        sm={flag ? 8 : 12}
-        md={flag ? 9 : 12}
-        className={classes.grid}
-        data-id={props.id}
+        xs={props.needBtns ? 7 : 12}
+        sm={props.needBtns ? 8 : 12}
+        md={props.needBtns ? 8 : 12}
+        className={props.needBtns ? `${classes.bigGrid} ${classes[props.specificColor || "gray"]}` : classes.grid}
+        onClick={labelClick}
       >
-        {getItemName()}
+        <span data-id={props.id} className={classes.gridSpan}>
+          {props.name.substr(0, 50)}
+        </span>
       </Grid>
-      {flag ? (
-        <ItemButtons flag={props.flag} info={props.info} id={props.id} />
-      ) : null}
+      {props.children}
     </Grid>
   );
 };
 
-const mapStateToProps = store => {
-  return {
-    procedures: store.procedures
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    applyTaskForProcedure: task => dispatch(applyTaskForProcedure(task)),
-    removeChosenTask: newArr => dispatch(removeChosenTask(newArr))
-  };
-};
-
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(Item)
-);
+export default withStyles(styles)(Item);

@@ -1,24 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { menuStateChange } from "../../action/HeaderActions";
+import React from "react";
+
 import SearchAppBar from "./SearchAppBar";
 
-class Header extends Component {
-  render() {
-    return <SearchAppBar location={this.props.location} />;
-  }
-}
+const Header = props => (
+  <SearchAppBar
+    isAdmin={props.isAdmin}
+    isLoggedIn={props.isLoggedIn}
+    location={props.location}
+    action={props.action}
+    isActive={props.isActive}
+  />
+);
 
-const mapStateToProps = store => {
-  return {
-    header: store.header
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    menuStateChange: state => dispatch(menuStateChange(state))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

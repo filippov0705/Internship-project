@@ -1,105 +1,239 @@
-export const GET_USER_DATA = "GET_USER_DATA";
-export const APPLY_TASK_FOR_PROCEDURE = "APPLY_TASK_FOR_PROCEDURE";
-export const REMOVE_CHOSEN_TASK = "REMOVE_CHOSEN_TASK";
-export const NEW_PROCEDURE_NAME = "NEW_PROCEDURE_NAME";
-export const EDIT_DATE = "EDIT_DATE";
-export const EDIT_TIME = "EDIT_TIME";
-export const EDIT_PROCEDURE_LIST = "EDIT_PROCEDURE_LIST";
-export const SET_PERIODISITY = "SET_PERIODISITY";
-export const SET_CHOSEN_TASKS = "SET_CHOSEN_TASKS";
-export const SET_POSSIBLE_TASKS = "SET_POSSIBLE_TASKS";
+export const ADD_TASK = "ADD_TASK";
+export const ADD_NEW_SCHEDULE = "ADD_NEW_SCHEDULE";
+export const CLEAR_TARGET_PROCEDURE = "CLEAR_TARGET_PROCEDURE";
+export const PROCEDURE_DELETE = "PROCEDURE_DELETE";
+export const EDIT_PROCEDURE_NAME = "EDIT_PROCEDURE_NAME";
+export const EDIT_SCHEDULE = "EDIT_SCHEDULE";
+export const GET_PROCEDURES_HEADS = "GET_USER_PROCEDURES_HEADS";
+export const GET_PROCEDURE_SCHEDULES = "GET_PROCEDURE_SCHEDULES";
 export const NEW_PROCEDURE_CREATE = "NEW_PROCEDURE_CREATE";
-export const SET_TARGET_PROCEDURE = "SET_TARGET_PROCEDURE";
-export const CHANGE_TASK_LIST = "CHANGE_TASK_LIST";
-export const CLEAR_CHOSEN_TASKS = "CLEAR_CHOSEN_TASKS";
+export const PROCEDURE_RUN = "PROCEDURE_RUN";
+export const REMOVE_SCHEDULE = "REMOVE_SCHEDULE";
+export const REMOVE_CHOSEN_TASK = "REMOVE_CHOSEN_TASK";
+export const SET_LOG = "SET_LOG";
+export const CLEAR_PROCEDURE_HEADS = "CLEAR_PROCEDURE_HEADS"
 
-export function newProcedureCreate(newProcedure) {
-  return {
-    type: NEW_PROCEDURE_CREATE,
-    payload: newProcedure
+export function getProceduresHeads(filterValue) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures?filter=${filterValue}`, {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(result => result.json())
+      .then(content => {
+        dispatch({
+          type: GET_PROCEDURES_HEADS,
+          payload: content
+        });
+      });
   };
 }
 
-export function getUserData() {
+export function procedureRun(procedureId) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures/${procedureId}/tasks`, {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(result => result.json())
+      .then(content => {
+        dispatch({
+          type: PROCEDURE_RUN,
+          payload: content
+        });
+      });
+  };
+}
+
+export function procedureDelete(procedureId) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures/${procedureId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      }
+    }).then(() => {
+      dispatch({
+        type: PROCEDURE_DELETE,
+        payload: procedureId
+      });
+    });
+  };
+}
+
+export function newProcedureCreate(userID, newProcedure) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(newProcedure)
+    }).then(() =>
+      dispatch({
+        type: NEW_PROCEDURE_CREATE,
+        payload: newProcedure
+      })
+    );
+  };
+}
+
+export function getTargetProcedure(userId, procedureId) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures/${procedureId}`, {
+      method: "GET",
+      credentials: "include"
+    })
+      .then(result => result.json())
+      .then(content => {
+        dispatch({
+          type: GET_PROCEDURE_SCHEDULES,
+          payload: content
+        });
+      });
+  };
+}
+
+export function removeSchedule(userId, procedureId, scheduleId) {
+  return dispatch => {
+    fetch(
+      `http://localhost:3001/api/procedures/${procedureId}/schedules/${scheduleId}`,
+      {
+        method: "DELETE",
+        credentials: "include"
+      }
+    );
+    dispatch({
+      type: REMOVE_SCHEDULE,
+      payload: scheduleId
+    });
+  };
+}
+
+export function addNewSchedule(procedureId, newSchedule) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures/${procedureId}/schedules`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newSchedule)
+    });
+    dispatch({
+      type: ADD_NEW_SCHEDULE,
+      payload: newSchedule
+    });
+  };
+}
+
+export function editSchedule(procedureId, scheduleId, editableSchedule) {
+  return dispatch => {
+    fetch(
+      `http://localhost:3001/api/procedures/${procedureId}/schedules/${scheduleId}`,
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(editableSchedule)
+      }
+    );
+    dispatch({
+      type: EDIT_SCHEDULE,
+      payload: { editableSchedule, scheduleId }
+    });
+  };
+}
+
+export function editProcedureName(userId, procedureId, newName) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures/${procedureId}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ newName })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.text();
+        } else {
+          return;
+        }
+      })
+      .then(content =>
+        dispatch({
+          type: EDIT_PROCEDURE_NAME,
+          payload: content
+        })
+      );
+  };
+}
+
+export function addTask(userId, procedureId, newTask) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures/${procedureId}/tasks`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ newTask })
+    })
+      .then(response => response.json())
+      .then(content =>
+        dispatch({
+          type: ADD_TASK,
+          payload: content
+        })
+      );
+  };
+}
+
+export function removeTask(userId, procedureId, taskId) {
+  return dispatch => {
+    fetch(
+      `http://localhost:3001/api/procedures/${procedureId}/tasks/${taskId}`,
+      {
+        method: "DELETE",
+        credentials: "include"
+      }
+    ).then(response => {
+      if (response.ok) {
+        dispatch({
+          type: REMOVE_CHOSEN_TASK,
+          payload: taskId
+        });
+      }
+    });
+  };
+}
+
+export function setLog() {
   return {
-    type: GET_USER_DATA,
+    type: SET_LOG,
     payload: ""
   };
 }
 
-export function setTargetProcedure(id) {
-  return {
-    type: SET_TARGET_PROCEDURE,
-    payload: id
+export function changeTaskSettings(userId, procedureId, taskId, newSettings) {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/procedures/info`, {
+      method: "PUT",
+      credentials: "include",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ procedureId, userId, taskId, newSettings })
+    });
   };
 }
 
-export function setPossibleTasks(data) {
+export function clearTargetProcedure() {
   return {
-    type: SET_POSSIBLE_TASKS,
-    payload: data
-  };
-}
-
-export function applyTaskForProcedure(task) {
-  return {
-    type: APPLY_TASK_FOR_PROCEDURE,
-    payload: task
-  };
-}
-
-export function removeChosenTask(newArr) {
-  return {
-    type: REMOVE_CHOSEN_TASK,
-    payload: newArr
-  };
-}
-
-export function newProcedureName(name) {
-  return {
-    type: NEW_PROCEDURE_NAME,
-    payload: name
-  };
-}
-
-export function editProcedureDate(date) {
-  return {
-    type: EDIT_DATE,
-    payload: date
-  };
-}
-
-export function editProceduresList(list) {
-  return {
-    type: EDIT_PROCEDURE_LIST,
-    payload: list
-  };
-}
-
-export function setPeriodicity(periodicity) {
-  return {
-    type: SET_PERIODISITY,
-    payload: periodicity
-  };
-}
-
-export function setChosenTasks(id) {
-  return {
-    type: SET_CHOSEN_TASKS,
-    payload: id
-  };
-}
-
-export function changeTaskList(taskList) {
-  return {
-    type: CHANGE_TASK_LIST,
-    payload: taskList
-  };
-}
-
-export function clearChosenTasks() {
-  return {
-    type: CLEAR_CHOSEN_TASKS,
+    type: CLEAR_TARGET_PROCEDURE,
     payload: ""
   };
+}
+
+export function deleteProcedureHeads() {
+  return {
+    type: CLEAR_PROCEDURE_HEADS,
+    payload: ""
+  }
 }

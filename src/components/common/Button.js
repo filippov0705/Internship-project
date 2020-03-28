@@ -1,40 +1,52 @@
 import React from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
+
+import withStyles from "@material-ui/core/styles/withStyles";
+
 import mainTheme from "../../style/theme";
 
-const styles = theme => ({
+const styles = () => ({
   btn: {
+    border: "none",
+    backgroundColor: "#f4f4f4",
+    cursor: "pointer"
+  },
+  btnWhite: {
+    border: "none",
     backgroundColor: "white",
-    border: "none"
+    padding: 0
   },
   Run: {
-    backgroundColor: "white",
     border: "none"
   },
   Add: {
     backgroundColor: "#cfe8fc",
     border: "none"
   },
-  link: {
-    cursole: "none"
-  },
   icon: {
     marginTop: "5px"
   },
   addBtn: {
-    position: "absolute",
-    right: "-15px",
-    top: "-15px",
     zIndex: "50",
-    width: "40px",
-    height: "40px",
+    width: "50px",
+    height: "50px",
     border: "none",
     borderRadius: "50%",
     cursor: "pointer",
     backgroundColor: "yellowgreen"
   },
   applyBtn: {
+    width: "85px",
+    height: "40px",
+    color: "#fff",
+    backgroundColor: "#28a745",
+    backgroundImage: "linear-gradient(-180deg,#34d058,#28a745 90%)",
+    borderRadius: "7px",
+    marginLeft: "20px",
+    marginRight: "20px",
+    cursor: "pointer"
+  },
+  applyBtnDisabled: {
     width: "85px",
     height: "40px",
     border: "1px solid gray",
@@ -58,26 +70,23 @@ const styles = theme => ({
     cursor: "pointer",
     backgroundColor: "white"
   },
-  cardRemove: {
+  itemRemove: {
     ...mainTheme.cardColor,
-    position: "absolute",
     border: "none",
-    top: "7px",
-    right: "8px",
     width: "28px",
     height: "28px",
     padding: "0",
-    borderRadius: "50%"
+    borderRadius: "50%",
+    marginTop: 5,
+    backgroundColor: "#f4f4f4"
   },
-  cardEdit: {
+  itemEdit: {
     ...mainTheme.cardColor,
-    position: "absolute",
     border: "none",
-    top: 7,
-    right: 48
+    marginTop: 5,
+    backgroundColor: "#f4f4f4"
   },
   schedule: {
-    backgroundColor: "#A6A6A6",
     borderRadius: "50%",
     border: "none",
     margin: "16px 0 11px 1px",
@@ -85,6 +94,13 @@ const styles = theme => ({
   },
   hidden: {
     display: "none"
+  },
+  back: {
+    position: "absolute",
+    right: -80,
+    bottom: 10,
+    borderRadius: 5,
+    backgroundColor: "yellowgreen"
   }
 });
 
@@ -92,7 +108,7 @@ const Button = props => {
   const { classes } = props;
 
   return (
-    <Link to={props.linkTo} className={classes.link}>
+    <Link to={props.linkTo}>
       <button
         className={`${classes[props.looks]} button`}
         onClick={props.btnAction}

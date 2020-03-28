@@ -1,75 +1,76 @@
-import React, { Component } from "react";
-import Menu from "@material-ui/core/Menu";
+import React from "react";
+
+import Button from "@material-ui/core/Button";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import MenuItem from "@material-ui/core/MenuItem";
 import withStyles from "@material-ui/core/styles/withStyles";
-import IconButton from "@material-ui/core/IconButton";
-import Avatar from "@material-ui/core/Avatar";
-import { deepPurple } from "@material-ui/core/colors";
-import { FormattedMessage } from "react-intl";
-import TransitionsModal from "./PopUpWindow";
+import Menu from "@material-ui/core/Menu";
 
 const styles = theme => ({
-  menuButton: {
-    marginRight: theme.spacing(2)
+  menuBtn: {
+    [theme.breakpoints.up("xs")]: {
+      flexGrow: 2,
+      display: "flex",
+      justifyContent: "flex-end",
+      alignItems: "center"
+    },
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
   },
-  purple: {
-    color: "#fff",
-    backgroundColor: deepPurple[500]
+  menuStyle: {
+    [theme.breakpoints.up("xs")]: {
+      display: "flex"
+    },
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
   }
 });
 
-class UserMenu extends Component {
-  constructor() {
-    super();
-    this.state = {
-      anchorEl: null
-    };
-  }
-  handleClick = event => {
-    this.setState({
-      anchorEl: event.currentTarget
-    });
+const MenuBar = props => {
+  const { classes } = props;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
   };
 
-  handleClose = () => {
-    this.setState({
-      anchorEl: null
-    });
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
-  render() {
-    const { anchorEl } = this.state;
-    const { classes } = this.props;
-
-    return (
-      <div>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="open drawer"
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={this.handleClick}
+  return (
+    <div className={classes.menuBtn}>
+      <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </Button>
+      <Menu
+        className={classes.menuStyle}
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem
+          onClick={() => {
+            props.toggleItemAppearance(props.id);
+            handleClose();
+          }}
         >
-          <Avatar className={classes.purple}>OP</Avatar>
-        </IconButton>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          <TransitionsModal data={"YourProfile"} action={this.handleClose} />
-          <TransitionsModal data={"Help"} action={this.handleClose} />
-          <MenuItem onClick={this.handleClose}>
-            <FormattedMessage id="userMenu.signOut" />
-          </MenuItem>
-        </Menu>
-      </div>
-    );
-  }
-}
+          Edit user
+        </MenuItem>
+        {!props.isDisabled ? (
+          <MenuItem onClick={handleClose}>Delete user</MenuItem>
+        ) : null}
+      </Menu>
+    </div>
+  );
+};
 
-export default withStyles(styles)(UserMenu);
+export default withStyles(styles)(MenuBar);

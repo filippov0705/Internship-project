@@ -1,9 +1,11 @@
 import React from "react";
+
 import withStyles from "@material-ui/core/styles/withStyles";
 
-const styles = theme => ({
+const styles = () => ({
   main: {
-    marginTop: "65px"
+    marginTop: "65px",
+    fontSize: 18
   }
 });
 

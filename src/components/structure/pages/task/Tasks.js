@@ -18,6 +18,7 @@ class Tasks extends Component {
       >
         <Heading size={"middle"} heading={this.props.heading} />
         <List
+          procedureRun={this.props.procedureRun}
           data={data || []}
           content={this.props.content}
           action={this.props.action}

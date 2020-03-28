@@ -1,90 +1,74 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { editProcedureDate } from "../../action/ProceduresActions";
+import React from "react";
 import "date-fns";
-import Grid from "@material-ui/core/Grid";
+
+import AvTimerIcon from "@material-ui/icons/AvTimer";
 import DateFnsUtils from "@date-io/date-fns";
+import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker
 } from "@material-ui/pickers";
-import withStyles from "@material-ui/core/styles/withStyles";
-import AvTimerIcon from "@material-ui/icons/AvTimer";
-import { procedureScheduleUrl } from "../../utils/BuildPaths";
-import Button from "./Button";
 
-const styles = theme => ({
+import {
+  TIME_PICKER,
+  DEFAULT_TIME,
+  PERIODICALLY
+} from "../../constants/constants";
+
+const styles = () => ({
   datePicker: {
-    width: "0px",
+    width: 0,
+    marginRight: 60,
+    "& .MuiInput-underline:before": {
+      borderBottom: "none",
+      content: "none"
+    },
+    "& .MuiInput-underline:after": {
+      borderBottom: "none"
+    }
+  },
+  hidden: {
     display: "none"
   }
 });
 
 const TimePicker = props => {
-  const { classes } = props;
-  const flag = props.procedures.periodicity === "single";
-  const [selectedDate, setSelectedDate] = useState(
-    new Date(`${props.dateNow}T23:55:00`)
-  );
+  const { classes, forwardRef, radio } = props;
 
   const handleDateChange = date => {
-    setSelectedDate(date);
-    if (props.procedures.prcedureNewDate.length === 0) return;
-    props.addSchedule(date.getHours(), date.getMinutes());
+    props.timeChange([date.getHours(), date.getMinutes()]);
   };
 
-  const btnClick = () => {
-    document
-      .getElementById("TimePicker")
-      .getElementsByTagName("button")[0]
-      .click();
+  const getCurrentTime = () => {
+    if (props.time.length) {
+      return `Wed Jan 08 2020 ${props.time[0]}:${props.time[1]}:00 GMT+0300 (Moscow Standard Time)`;
+    }
+    return DEFAULT_TIME;
   };
 
   return (
-    <React.Fragment>
-      <Button
-        linkTo={procedureScheduleUrl(props.id)}
-        btnAction={btnClick}
-        looks={flag ? "hidden" : "schedule"}
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid
+        container
+        className={radio === PERIODICALLY ? classes.datePicker : classes.hidden}
+        id={TIME_PICKER}
       >
-        <AvTimerIcon />
-      </Button>
-
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid
-          container
-          justify="space-around"
-          className={classes.datePicker}
-          id="TimePicker"
-        >
+        <div ref={forwardRef}>
           <KeyboardTimePicker
-            className="this"
             margin="normal"
-            label=""
-            value={selectedDate}
+            ampm={false}
+            value={getCurrentTime()}
             onChange={handleDateChange}
+            keyboardIcon={<AvTimerIcon />}
             KeyboardButtonProps={{
               "aria-label": "change time"
             }}
           />
-        </Grid>
-      </MuiPickersUtilsProvider>
-    </React.Fragment>
+        </div>
+      </Grid>
+    </MuiPickersUtilsProvider>
   );
 };
 
-const mapStateToProps = store => {
-  return {
-    procedures: store.procedures
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    editProcedureDate: date => dispatch(editProcedureDate(date))
-  };
-};
-
-export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(TimePicker)
-);
+export default withStyles(styles)(TimePicker);

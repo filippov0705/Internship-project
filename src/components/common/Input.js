@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { FormattedMessage } from "react-intl";
+
 import withStyles from "@material-ui/core/styles/withStyles";
-import { newProcedureName } from "../../action/ProceduresActions";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const styles = theme => ({
@@ -10,6 +10,15 @@ const styles = theme => ({
     height: "30px",
     borderRadius: "5px",
     width: "220px"
+  },
+  inner: {
+    width: 160,
+    borderRadius: 5,
+    marginRight: 5
+  },
+  innerLabel: {
+    display: "flex",
+    alignItems: "center"
   },
   label: {
     display: "flex",
@@ -28,66 +37,26 @@ const styles = theme => ({
   }
 });
 
-class Input extends Component {
-  constructor() {
-    super();
-    this.state = {
-      value: "",
-      timerId: null
-    };
-  }
+const Input = props => {
+  const { classes } = props;
 
-  componentDidMount() {
-    this.props.newProcedureName("");
-    if (this.props.data) {
-      this.setState({ value: this.props.data });
-    }
-  }
-
-  inputTextChange = event => {
-    this.setState({
-      value: event.target.value.substr(0, 25)
-    });
-
-    if (this.props.action) {
-      clearTimeout(this.state.timerId);
-      const timerId = setTimeout(this.props.action, 5000, event.target.value);
-      return this.setState({ timerId: timerId });
-    }
-    if (event.target.value.length > 25) {
-      return (event.target.value = event.target.value.substr(0, 25));
-    }
-    this.props.newProcedureName(event.target.value);
+  const inputTextChange = event => {
+    props.clickAction(event.target.value, props.id);
   };
 
-  inputBlur = event => {
-    if (!this.props.action) return;
-    this.props.action(event.target.value);
-  };
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <label className={classes.label}>
-        <span className={classes.labelSpan}>{this.props.label}</span>
-        <Tooltip title={"no more than 25 characters"}>
-          <input
-            className={classes.input}
-            onChange={this.inputTextChange}
-            value={this.state.value}
-            onBlur={this.inputBlur}
-          />
-        </Tooltip>
-      </label>
-    );
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    newProcedureName: name => dispatch(newProcedureName(name))
-  };
+  return (
+    <label className={classes[props.labelClassName]}>
+      <span className={classes.labelSpan}>{props.label}</span>
+      <Tooltip title={<FormattedMessage id="procedure.signRestriction" />}>
+        <input
+          className={classes[props.className]}
+          onChange={inputTextChange}
+          value={props.value}
+          onBlur={props.blurAction}
+        />
+      </Tooltip>
+    </label>
+  );
 };
 
-export default withStyles(styles)(connect(null, mapDispatchToProps)(Input));
+export default withStyles(styles)(Input);

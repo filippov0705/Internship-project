@@ -1,13 +1,11 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Item from "./Item";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "./Button";
-import { newProcedurePath } from "../../utils/BuildPaths";
-import AddIcon from "@material-ui/icons/Add";
-import Search from "./Search";
 
-const styles = theme => ({
+import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+import mainTheme from "../../style/theme";
+
+const styles = () => ({
   list: {
     height: "665px",
     backgroundColor: "white",
@@ -16,23 +14,8 @@ const styles = theme => ({
     borderRadius: "7px",
     overflow: "auto"
   },
-  possibleTasks: {
-    minWidth: "220px",
-    height: "200px",
-    backgroundColor: "white",
-    margin: "20px",
-    border: "1px solid gray",
-    borderRadius: "7px",
-    overflow: "auto"
-  },
-  chosenTasks: {
-    minWidth: "220px",
-    height: "200px",
-    backgroundColor: "white",
-    margin: "20px",
-    border: "1px solid gray",
-    borderRadius: "7px",
-    overflow: "auto"
+  smallList: {
+    ...mainTheme.tasks,
   },
   data: {
     minHeight: "620px",
@@ -42,46 +25,17 @@ const styles = theme => ({
     borderRadius: "7px",
     overflow: "auto"
   },
-  procedures: {
-    minHeight: "620px",
-    backgroundColor: "white",
-    margin: "20px",
-    border: "1px solid gray",
-    borderRadius: "7px",
-    position: "relative"
+  listStyle: {
+    ...mainTheme.listStyle,
   }
 });
 
 const List = props => {
   const { classes } = props;
-
-  const itemCreation = data => {
-    return data.map((item, i) => {
-      return (
-        <Item
-          info={props.info}
-          content={props.content}
-          name={item.name}
-          flag={props.flag || "uneditable"}
-          id={item.id}
-          key={i}
-          action={props.action}
-        />
-      );
-    });
-  };
-
   return (
-    <Grid item className={classes[props.content]}>
-      {props.content === "procedures" ? (
-        <React.Fragment>
-          <Button looks={"addBtn"} linkTo={newProcedurePath()}>
-            <AddIcon />
-          </Button>
-          <Search />
-        </React.Fragment>
-      ) : null}
-      {itemCreation(props.data)}
+    <Grid item className={classes[props.className]}>
+      {props.addBtn}
+      {props.children}
     </Grid>
   );
 };

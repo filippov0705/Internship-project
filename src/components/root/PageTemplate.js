@@ -1,6 +1,9 @@
 import React from "react";
+
 import Header from "../common/Header";
 import Footer from "../common/Footer";
+import PositionedSnackbar from "../common/Notification";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -27,10 +30,16 @@ const styles = theme => ({
 
 const PageTemplate = props => {
   const { classes } = props;
-
   return (
     <React.Fragment>
-      <Header location={props.location} />
+      <PositionedSnackbar snackMessage={props.snackMessage} />
+      <Header
+        isLoggedIn={props.isLoggedIn}
+        action={props.action}
+        location={props.location}
+        isAdmin={props.isAdmin}
+        isActive={props.isActive}
+      />
       <CssBaseline />
       <Container maxWidth="lg" className={classes.container}>
         <Typography component="div" className={classes.proceduresWrapper}>
